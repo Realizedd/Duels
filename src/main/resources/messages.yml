@@ -1,83 +1,83 @@
 Dueling:
   # Placeholder(s): {PLAYER}, {KIT}, {ARENA}
   on-request-send:
-    sender: '&9[Duels] &7Duel request sent to &f{PLAYER} &7with kit &f{KIT}&7 on arena &f{ARENA}&7.'
+    sender: '&9[Duels] &7Demande de duel envoyé a &f{PLAYER} &7avec le kit &f{KIT}&7 sur l'arène &f{ARENA}&7.'
     receiver: '&9[Duels] &7Duel request received from &f{PLAYER} &7with kit &f{KIT}&7 on arena &f{ARENA}&7. Type &f/duel accept {PLAYER} &7to accept. &e[Expires in 30s]'
 
   # Placeholder(s): {PLAYER}, {KIT}, {ARENA}
   on-request-accept:
-    sender: '&9[Duels] &7Your duel request to &f{PLAYER} &7was accepted. Starting match with kit &f{KIT}&7 on arena &f{ARENA}&7.'
-    receiver: '&9[Duels] &7Accepted duel request from &f{PLAYER}&7. Starting match with kit &f{KIT}&7 on arena &f{ARENA}&7.'
+    sender: '&9[Duels] &7Votre demande de duel pour &f{PLAYER} &7a été acceptée. Commence le duel avec le kit &f{KIT}&7 sur l'arène &f{ARENA}&7.'
+    receiver: '&9[Duels] &7demande de duel acceptée venant &f{PLAYER}&7. Commence le duel avec le kit &f{KIT}&7 sur l'arène &f{ARENA}&7.'
 
   # Placeholder(s): {PLAYER}
   on-request-decline:
-    sender: '&9[Duels] &7Your duel request to &f{PLAYER} &7was denied.'
-    receiver: '&9[Duels] &7Denied duel request from &f{PLAYER}&7.'
+    sender: '&9[Duels] &7Votre de demande de duel pour &f{PLAYER} &7a été refusé.'
+    receiver: '&9[Duels] &7La demande de duel venant de &f{PLAYER}&7.a été refusé'
 
   # Placeholder(s): {WINNER}, {LOSER}, {HEALTH}
-  on-match-end: '&9[Duels] &f{WINNER} &7has defeated &f{LOSER} &7with &d&l{HEALTH} ♥'
+  on-match-end: '&9[Duels] &f{WINNER} &7a gagné contre &f{LOSER} &7avec &d&l{HEALTH} ♥'
 
-  max-match-time-reached: '&9[Duels] &7Max match length reached, tie match.'
+  max-match-time-reached: '&9[Duels] &7Le temps max du duel a été etendu finnit le duel.'
 
   # Only displayed if cancel-match-if-moved is enabled in the configuration.
-  do-not-move-warning: '&aRequest sent. Stay still until your opponent accepts the request or the request expires, or the duel will not start.'
+  do-not-move-warning: '&aRequest sent. Rester immobile jusqu'à que le joueur accepte votre demande sinon le duel n'aura pas lieu.'
 
 
 
 Spectating:
   # Placeholder(s): {PLAYER}
-  started-spectating: '&9[Duels] &7You are now spectating &f{PLAYER}&7.'
-  stopped-spectating: '&9[Duels] &7You are no longer spectating &f{PLAYER}&7.'
-  arena-broadcast: '&9[Duels] &f{PLAYER} &7is now spectating the match!'
+  started-spectating: '&9[Duels] &7YTu regardes maintenant &f{PLAYER}&7.'
+  stopped-spectating: '&9[Duels] &7You ne regarde plus &f{PLAYER}&7.'
+  arena-broadcast: '&9[Duels] &f{PLAYER} &7regarde le duel!'
 
-  spectating-match-ended: '&9[Duels] &7The match you were spectating has ended.'
+  spectating-match-ended: '&9[Duels] &7Le duel que tu es en train de visionner est à présent terminé.'
 
 
 
 Stats:
   # Placeholder(s): {NAME}, {WINS}, {LOSSES}, {REQUESTS_ENABLED}
   displayed:
-    - '&7Displaying stats of &f{NAME} &7-'
-    - '&71v1 Wins: &f{WINS}'
-    - '&71v1 Losses: &f{LOSSES}'
-    - '&71v1 Requests: &f{REQUESTS_ENABLED}'
-    - '&7Latest 1v1 matches -'
+    - '&7Montrer les stats de &f{NAME} &7-'
+    - '&71v1 Gagné: &f{WINS}'
+    - '&71v1 Perdu: &f{LOSSES}'
+    - '&71v1 demande: &f{REQUESTS_ENABLED}'
+    - '&7Dernier duel 1V1 -'
 
   # Placeholder(s): {WINNER}, {LOSER}
   match-format: '&a{WINNER} &fvs &c{LOSER} &6[Hover Me!]'
 
   # Placeholder(s): {DURATION}, {TIME}, {HEALTH}
   match-hover:
-    - '&7Duration: &f{DURATION}'
-    - '&7Time: &f{TIME} ago'
-    - '&7Health: &d&l{HEALTH} ♥'
+    - '&7Durée: &f{DURATION}'
+    - '&7Temps: &f{TIME} depuis'
+    - '&7Point de vie: &d&l{HEALTH} ♥'
 
   # Placeholder(s): {PLAYER}, {ACTION}
-  edit: '&9[Duels] &7Action executed (&f{PLAYER}&7): &e{ACTION}'
+  edit: '&9[Duels] &7Action éxécuté par (&f{PLAYER}&7): &e{ACTION}'
 
   # Placeholder(s): {PLAYER}
-  reset: '&9[Duels] &7Stats reset for &f{PLAYER}&7.'
+  reset: '&9[Duels] &7rénitialiser les stats pour &f{PLAYER}&7.'
 
 
 
 Arenas:
   # Placeholder(s): {NAME}
-  created: '&9[Duels] &7Arena &f{NAME} &7was successfully created.'
-  deleted: '&9[Duels] &7Arena &f{NAME} &7was successfully deleted.'
-  enabled: '&9[Duels] &a&lArena {NAME} is now enabled!'
-  disabled: '&9[Duels] &c&lArena {NAME} is now disabled!'
+  created: '&9[Duels] &7L'arène &f{NAME} &7a bien été crée.'
+  deleted: '&9[Duels] &7L'arène &f{NAME} &7a bien été supprimé.'
+  enabled: '&9[Duels] &a&lL'arène {NAME} est maintenant activée!'
+  disabled: '&9[Duels] &c&lL'arène {NAME} est maintenant désactivée!'
 
   # Placeholder(s): {POSITION}, {NAME}
-  set-spawnpoint: '&9[Duels] &7Set spawn position for player &f{POSITION} &7for arena &f{NAME}&7.'
+  set-spawnpoint: '&9[Duels] &7Definir le point de spawn du joueur &f{POSITION} &7pour l'arène &f{NAME}&7.'
 
   # Placeholder(s): {NAME}, {DISABLED}, {IN_USE}, {PLAYERS}, {LOCATIONS}
   info:
     - '&b&m------------------------------------'
-    - '&7Displaying info of arena &f{NAME} &7-'
-    - '&7Disabled: &f{DISABLED}'
-    - '&7In use: &f{IN_USE}'
-    - '&7Players: &f{PLAYERS}'
-    - '&7Locations: &f{LOCATIONS}'
+    - '&7Donner les infos de l'arène &f{NAME} &7-'
+    - '&7Désactiver: &f{DISABLED}'
+    - '&7Utilisé: &f{IN_USE}'
+    - '&7Joueur: &f{PLAYERS}'
+    - '&7Localisation: &f{LOCATIONS}'
     - '&b&m------------------------------------'
 
 
@@ -85,9 +85,9 @@ Arenas:
 Kits:
   # Placeholder(s): {NAME}
   created: '&9[Duels] &7Saved kit &f{NAME}&7!'
-  deleted: '&9[Duels] &7Deleted kit &f{NAME}&7!'
-  loaded: '&9[Duels] &7Loaded kit &f{NAME} &7to your inventory.'
-  set-item: '&9[Duels] &7Kit &f{NAME}&7''s displayed item in Kit Selection GUI was replaced to your held item.'
+  deleted: '&9[Duels] &7Supprimer le kit &f{NAME}&7!'
+  loaded: '&9[Duels] &7Charger le kit &f{NAME} &7to your inventory.'
+  set-item: '&9[Duels] &7le kit &f{NAME}&7''s l'élément affiché dans l'interface graphique de sélection de kit a été remplacé par votre élément.'
 
 
 
@@ -95,30 +95,30 @@ Extra:
   # Placeholder(s): {ARENAS}, {KITS}, {LOBBY}
   list:
     - "&b&m------------------------------------"
-    - "&7Arena name color states:"
-    - "&4DARK RED&7: Arena is disabled."
-    - "&9BLUE&7: Arena without valid spawn positions set."
-    - "&aGREEN&7: Arena available for a match."
-    - "&cRED&7: Arena in use."
+    - "&7Etats de couleur du nom de l'arène:"
+    - "&4DARK RED&7: L'arène est refusée."
+    - "&9BLUE&7: Arène sans point de réeaparition valide ."
+    - "&aGREEN&7: Arène disponible pour un duel."
+    - "&cRED&7: Arène utilisé."
     - "&7Arenas: &r{ARENAS}"
     - "&7Kits: &r{KITS}"
     - "&7Lobby Location: &r{LOBBY}"
     - "&b&m------------------------------------"
 
-  set-lobby: '&9[Duels] &7Lobby set on your current location.'
+  set-lobby: '&9[Duels] &7 Définir l'emplacement du lobby à votre position actuelle.'
 
 
 
 Toggle:
-  enabled: '&a&lOthers may send you duel requests from now on.'
-  disabled: '&c&lOthers may not send you duel requests from now on.'
+  enabled: '&a&lDes personnes peuvent t'envoyer des demandes en duel maintetnant.'
+  disabled: '&c&lDes personnes ne peuvent plus t'envoyer des demandes en duel.'
 
 
 
 Commands:
   duel:
     usage:
-      - 'Send, accept, or deny a duel request.'
+      - 'Envoyer, accepter ou refuser une demande en duel.'
       - '/duel [accept | deny] [player]'
     
     # Placeholder(s): {USAGE}, {DESCRIPTION}
@@ -127,21 +127,21 @@ Commands:
   duels:
     usage:
       - '&b&m------------------------------------------------'
-      - '&e/duels edit [player] [add:remove:set] [wins:losses] [quantity] &7- Edit player''s stats.'
-      - '&e/duels create [name] &7- Create an arena.'
-      - '&e/duels set [name] [1 | 2] &7- Set spawn position for arena.'
-      - '&e/duels delete [name] &7- Remove an arena.'
-      - '&e/duels list &7- Displays the lobby location and lists arenas and kits.'
-      - '&e/duels toggle [name] &7- Enable/Disable an arena.'
-      - '&e/duels info [name] &7- Show arena information.'
-      - '&e/duels savekit [name] &7- Save a new kit with your inventory contents.'
-      - '&e/duels deletekit [name] &7- Delete a kit with the given name.'
-      - '&e/duels loadkit [name] &7- Load a kit with the given name.'
-      - '&e/duels setlobby &7- Set duel lobby on your current location.'
-      - '&e/duels setitem [name] &7- Replaces the displayed item to held item for selected kit.'
-      - '&e/duels reset [player] &7- Completely reset a player''s stats.'
-      - '&e/duels playsound [name] &7- Plays the selected sound if exists in config.'
-      - '&e/duels reload [weak] &7- Reloads the plugin completely. Append ''weak'' to only reload messages file.'
+      - '&e/duels edit [player] [add:remove:set] [wins:losses] [quantity] &7- Modifier les statistiques d'un joueur.'
+      - '&e/duels create [name] &7- Créer une arène.'
+      - '&e/duels set [name] [1 | 2] &7- Mettre le point d'apparition.'
+      - '&e/duels delete [name] &7- Supprimer une arène.'
+      - '&e/duels list &7- Affichage de l'emplacement du hall et répertorié les kits et arènes.'
+      - '&e/duels toggle [name] &7- Activer/Désactiver une arène.'
+      - '&e/duels info [name] &7- Montrer les informations de l'arène.'
+      - '&e/duels savekit [name] &7- créer un kit avec le contenu de ton inventaire.'
+      - '&e/duels deletekit [name] &7- Supprimer un kit avec son nom.'
+      - '&e/duels loadkit [name] &7- Charger un kit avec son nom.'
+      - '&e/duels setlobby &7- Definir le lobby du duel sur votre position actuelle.'
+      - '&e/duels setitem [name] &7- Remplacer l'élément affiché par l'élément en attente pour le kit sélectionné.'
+      - '&e/duels reset [player] &7- Rénitialiser les statistiques d'un joueurs.'
+      - '&e/duels playsound [name] &7- Lis le son sélectionné si il existe dans la configuration.'
+      - '&e/duels reload [weak] &7- Recharger complètement le plugin. Ajouter '' faible '' pour recharger uniquement le fichier de messages.'
       - '&b&m------------------------------------------------'
 
     # Placeholder(s): {USAGE}, {DESCRIPTION}
@@ -149,67 +149,67 @@ Commands:
 
   spectate:
     usage:
-      - 'Spectate a duel.'
+      - 'Pour voir un duel.'
       - '/spectate [player]'
 
 
 
 Errors:
-  no-permission: '&cNo permission.'
-  must-be-alphanumeric: '&cNames must be alphanumeric.'
+  no-permission: '&cTu n'as pas les permissions.'
+  must-be-alphanumeric: '&cLes noms doivent être écrits en alphanumériques.'
 
   # Placeholder(s): {ARGUMENT}
-  invalid-sub-command: '&c{ARGUMENT} is not a valid sub command.'
-  blocked-countdown-action: '&cYou are not allowed to do this before the match starts.'
+  invalid-sub-command: '&c{ARGUMENT} Cette sous commande n'existe pas.'
+  blocked-countdown-action: '&cAttend le début du duel pour le faire.'
 
   # Placeholder(s): {REASON}
-  edit-failed: '&cEdit failed: {REASON}'
+  Echec de l'edition: '&cEdit failed: {Contate le developper}'
 
-  arena-exists: '&cAn arena with that name already exists.'
-  arena-not-found: '&cNon-existing arena.'
-  arena-deletion-failed: '&cThat arena is currently in use. To prevent an arena from being used, disable it using /duels toggle [name].'
-  arena-no-longer-available: '&cThe selected arena is no longer available, please choose a different arena.'
-  no-available-arena-found: '&cNo available arenas were found, please try again later.'
+  arena-exists: '&cUne arène avec ce nom existe déjà.'
+  arena-not-found: '&cL'arène demandé n'existe pas.'
+  arena-deletion-failed: '&cCette arène est déjà utilisé si tu veux la désactiver fait /duels toggle [name].'
+  arena-no-longer-available: '&cL'arène est déjà prise prend en une autre.'
+  no-available-arena-found: '&cDesolé patiente un peu pour avoir une place.'
   invalid-spawnpoint: '&cSpawn positions must be in between range 1 - 2.'
-  match-failed: '&cMatch failed! Reason: {REASON}'
+  match-failed: '&cLe duel a eu un problème! Reason: {Problème sur le pvp}'
 
-  kit-exists: '&cA kit with that name already exists.'
-  kit-not-found: '&cNon-existing kit.'
+  kit-exists: '&cUn kit porte déjà ce nom.'
+  kit-not-found: '&cLe it demandé n'existe pas ou plus.'
 
-  empty-hand: '&cYou must be holding an item to use this command.'
-  sound-not-found: '&cA sound with that name was not found.'
-  player-not-found: '&cPlayer not found.'
-  player-left: '&cThat player is no longer online.'
+  empty-hand: '&cTu dois avoir un objet en main pour executer cette commande.'
+  sound-not-found: '&c Le son avec ce nom n'a pas été trouvé.'
+  player-not-found: '&cCe joueur n'existe pas.'
+  player-left: '&cCe joueur n'est plus en ligne .'
   cannot-duel-yourself: '&cYou cannot duel yourself.'
 
   # Placeholder(s): {REGION}
-  not-in-duelzone: '&cYou must be in region ''{REGION}'' to use duel related commands.'
-  has-requests-disabled: '&cThat player has duel requests disabled!'
+  not-in-duelzone: '&cTu dois être dans la zone prévu ''{LifeArena}'' pour utiliser les commandes duel.'
+  has-requests-disabled: '&cCe joueur n'accepte pas les demandes en duel!'
 
   # Placeholder(s): {PLAYER}
-  already-requested: '&cYou already have a request sent to {PLAYER}.'
-  already-expired: '&cThat request has already expired.'
-  no-request: '&cThat player did not send you a request!'
-  alive-only: '&cCannot send a request to dead players.'
-  empty-inventory-only: '&cYour inventory must be empty to use duel related commands.'
-  is-in-creative: '&cYou cannot duel while in creative mode.'
-  is-combat-tagged: '&cYou cannot duel while in combat.'
+  already-requested: '&cUne personne te demande en duel {PLAYER}.'
+  already-expired: '&cLa demande a perimé.'
+  no-request: '&cCe joueur ne ta pas envoyer de demande en duel!'
+  alive-only: '&cTu ne peux pas envoyer une demande à un joueur mort.'
+  empty-inventory-only: '&cTon inventaire doit être vide pour demander en duel.'
+  is-in-creative: '&cTu as vraiment cru que tu pouvais battre en creatif.'
+  is-combat-tagged: '&cTu ne peux pas combattre en combat.'
   blocked-while-in-match:
-    teleport: '&cYou may not teleport while in a match.'
-    drop-item: '&cYou may not drop items while in duel.'
-    fly: '&cYou may not fly while in duel.'
-    command: '&cYou may not use that command while in duel.'
-    open-inventory: '&cYou may not open other inventories while in duel.'
+    teleport: '&cDésole on accepte pas les fuyards.'
+    drop-item: '&cEt alors tu donne ton stuff à l'ennemi.'
+    fly: '&cHE HO tu recommence ça vas chauffer .'
+    command: '&cTu ne peut pas utiliser ceci en duel .'
+    open-inventory: '&cDésolé mais tu ne peux pas ouvrir d'autre inventaire.'
 
-  already-spectating: '&cYou are already in spectator mode. Type &l/spectate &r&cor right click the redstone to stop spectating.'
-  players-in-match-only: '&cYou may only spectate players who is in a match.'
-  cannot-use-while-spectating: '&cYou cannot do this while spectating. Type &l/spectate &r&cor right click the redstone to stop spectating.'
+  already-spectating: '&tes déjà spectateur. Type &l/spectate &r&cor fais un clique droit sur la restone si tu veux arreter de regarder.'
+  players-in-match-only: '&cTu peux voir que les personnes .'
+  cannot-use-while-spectating: '&cYTu ne peux pas voir ce math. Type &l/fais un clique droit sur la restone si tu veux arreter de regarder.'
 
   is-in-spectator-mode:
-    sender: '&cYou are in spectator mode!'
-    target: '&cThat player is in spectator mode!'
+    sender: '&cTu es spectateur!'
+    target: '&cUn joueur viens de rejoindre le mode spectateur!'
 
   already-in-match:
-    sender: '&cYou are already in a match!'
-    target: '&cThat player is already in a match!'
+    sender: '&cTu es dans un duel!'
+    target: '&un joueur viens de rejoindre le duel!'
 
