@@ -40,12 +40,12 @@ public class PlaceholderHook extends PluginHook<DuelsPlugin> {
         }
 
         @Override
-        public String onPlaceholderRequest(final Player player, final String identifier) {
+        public String onPlaceholderRequest(final OfflinePlayer player, final String identifier) {
             if (player == null) {
                 return "Player is required";
             }
 
-            final UserData user = userDataManager.get(player);
+            final UserData user = userDataManager.get(player.getUniqueId());
 
             if (user == null) {
                 return null;
