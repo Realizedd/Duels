@@ -5,19 +5,6 @@ import org.bukkit.inventory.Inventory;
 
 public final class Inventories extends CompatBase {
 
-    public static String getTitle(final Inventory inventory) {
-        try {
-            if (CompatUtil.isPre1_14()) {
-                return inventory.getTitle();
-            }
-
-            return (String) CB_INVENTORY_TITLE.get(CB_INVENTORY.get(inventory));
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-            return "ERROR LOADING TITLE!";
-        }
-    }
-
     public static void setTitle(final Inventory inventory, final String title) {
         try {
             Object value = title;

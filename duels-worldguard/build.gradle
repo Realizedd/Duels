@@ -8,5 +8,5 @@ version '3.3.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+    compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 }

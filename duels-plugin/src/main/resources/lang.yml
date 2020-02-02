@@ -162,7 +162,7 @@ COMMAND:
         - '&7Kit: &3%kit%'
         - '&7Duration: &a%duration%'
         - '&7Time: &f%time% ago'
-        - '&7Health: &d%health%♥'
+        - '&7Health: &d%health%❤'
         footer: '{LINE}'
     toggle:
       enabled: '{PREFIX} &aYou are now receiving duel requests.'
@@ -297,11 +297,11 @@ DUEL:
     command: '&cYou cannot use ''%command%'' while in a duel.'
     teleportation: '&cYou cannot teleport while in a duel.'
     inventory-open: '&cYou cannot open inventories while in a duel.'
-  projectile-hit-message: '{PREFIX} &f%name% &7is now at &d%health%♥&7!'
+  projectile-hit-message: '{PREFIX} &f%name% &7is now at &d%health%❤&7!'
   on-end:
     tie: '{PREFIX} &7Tie Game!'
     plugin-disable: '{PREFIX} &cPlugin is disabling! Ending match automatically.'
-    opponent-defeat: '{PREFIX} &f%winner% &a(%winner_rating%) (+%change%) &7has defeated &f%loser% &c(%loser_rating%) (-%change%) &7on kit &3%kit% &7with &d%health%♥'
+    opponent-defeat: '{PREFIX} &f%winner% &a(%winner_rating%) (+%change%) &7has defeated &f%loser% &c(%loser_rating%) (-%change%) &7on kit &3%kit% &7with &d%health%❤'
   inventories:
     message: '&7Inventories (click on the name to view): '
     name-color: '&b'
@@ -465,4 +465,4 @@ GUI:
       hunger:
         name: '&6%hunger% bars'
       health:
-        name: '&c%health% ♥'
+        name: '&c%health% ❤'

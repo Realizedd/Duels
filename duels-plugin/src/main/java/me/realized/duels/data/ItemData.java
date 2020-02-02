@@ -164,8 +164,8 @@ public class ItemData {
                 }
             }
 
-            if (!CompatUtil.isPre1_8() && meta.spigot().isUnbreakable()) {
-                unbreakable = meta.spigot().isUnbreakable();
+            if (!CompatUtil.isPre1_8() && meta.isUnbreakable()) {
+                unbreakable = meta.isUnbreakable();
             }
         }
     }
@@ -263,7 +263,7 @@ public class ItemData {
         }
 
         if (!CompatUtil.isPre1_8() && unbreakable) {
-            meta.spigot().setUnbreakable(true);
+            meta.setUnbreakable(true);
         }
 
         item.setItemMeta(meta);

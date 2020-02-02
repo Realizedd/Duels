@@ -18,7 +18,7 @@ processResources {
 
 dependencies {
     compile 'org.projectlombok:lombok:1.16.20'
-    compile 'me.clip:placeholderapi:2.8.4'
+    compile 'me.clip:placeholderapi:2.10.4'
     compile('be.maximvdw:MVdWPlaceholderAPI:2.5.1-SNAPSHOT') { transitive = false }
     compile name: 'Vault-1.6.7'
     compile name: 'EssentialsX'

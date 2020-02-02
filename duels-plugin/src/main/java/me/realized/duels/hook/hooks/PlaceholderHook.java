@@ -5,6 +5,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.data.UserData;
 import me.realized.duels.data.UserManager;
 import me.realized.duels.util.hook.PluginHook;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class PlaceholderHook extends PluginHook<DuelsPlugin> {
@@ -39,13 +40,12 @@ public class PlaceholderHook extends PluginHook<DuelsPlugin> {
             return "1.0";
         }
 
-        @Override
-        public String onPlaceholderRequest(final Player player, final String identifier) {
+        public String onPlaceholderRequest(final OfflinePlayer player, final String identifier) {
             if (player == null) {
                 return "Player is required";
             }
 
-            final UserData user = userDataManager.get(player);
+            final UserData user = userDataManager.get(player.getUniqueId());
 
             if (user == null) {
                 return null;
@@ -58,9 +58,9 @@ public class PlaceholderHook extends PluginHook<DuelsPlugin> {
                     return String.valueOf(user.getLosses());
                 case "can_request":
                     return String.valueOf(user.canRequest());
+                default:
+                    return null;
             }
-
-            return null;
         }
     }
 }

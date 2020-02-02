@@ -37,7 +37,7 @@ public final class Items {
         ON = (CompatUtil.isPre1_13() ? ItemBuilder.of("INK_SACK", 1, (short) 10) : ItemBuilder.of(Material.LIME_DYE)).build();
         MUSHROOM_SOUP = CompatUtil.isPre1_13() ? Material.matchMaterial("MUSHROOM_SOUP") : Material.MUSHROOM_STEW;
         EMPTY_MAP = CompatUtil.isPre1_13() ? Material.matchMaterial("EMPTY_MAP") : Material.MAP;
-        SIGN = CompatUtil.isPre1_14() ? Material.SIGN : Material.matchMaterial("OAK_SIGN");
+        SIGN = CompatUtil.isPre1_14() ? Material.matchMaterial("SIGN") : Material.matchMaterial("OAK_SIGN");
     }
 
     public static boolean equals(final ItemStack item, final ItemStack other) {
