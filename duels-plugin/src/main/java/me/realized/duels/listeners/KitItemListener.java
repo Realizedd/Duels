@@ -97,7 +97,7 @@ public class KitItemListener implements Listener {
 
     @EventHandler
     public void on(final EntityPickupItemEvent event) {
-        if (event.getEntity() instanceof Player) return;
+        if (!(event.getEntity() instanceof Player)) return;
         final Player player = (Player) event.getEntity();
         if (isExcluded(player)) return;
         final Item item = event.getItem();

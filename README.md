@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/Realizedd/Duels.svg)](https://jitpack.io/#Realizedd/Duels)
 
-A 1.1.7+ Fork of Duels. <a href="https://www.spigotmc.org/resources/duels.20171/">Original Spigot Project Page</a>
+A 1.17+ Fork of Duels. <a href="https://www.spigotmc.org/resources/duels.20171/">Original Spigot Project Page</a>
 
 ---
 
