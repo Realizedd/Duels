@@ -4,15 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.api.arena.Arena;
@@ -32,7 +23,6 @@ import me.realized.duels.util.Loadable;
 import me.realized.duels.util.PlayerUtil;
 import me.realized.duels.util.StringUtil;
 import me.realized.duels.util.Teleport;
-import me.realized.duels.util.compat.Collisions;
 import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.inventory.InventoryUtil;
 import me.realized.duels.util.inventory.ItemBuilder;
@@ -46,15 +36,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SpectateManagerImpl implements Loadable, SpectateManager {
 
@@ -147,9 +137,9 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         // Hide from players in match
         if (match != null) {
             match.getAllPlayers()
-                .stream()
-                .filter(arenaPlayer -> arenaPlayer.isOnline() && arenaPlayer.canSee(player))
-                .forEach(arenaPlayer -> arenaPlayer.hidePlayer(player));
+                    .stream()
+                    .filter(arenaPlayer -> arenaPlayer.isOnline() && arenaPlayer.canSee(player))
+                    .forEach(arenaPlayer -> arenaPlayer.hidePlayer(player));
         }
 
         // Remove pet before teleport
@@ -170,13 +160,13 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         player.setFlying(true);
 
         // Ignore collision for spectators. This allows projectiles, such as arrows, to pass through.
-        Collisions.setCollidable(player, false);
+        player.setCollidable(false);
 
         if (config.isSpecAddInvisibilityEffect()) {
             // Particles parameter (last parameter) does not exist in 1.7
             final PotionEffect effect = CompatUtil.isPre1_8() ?
-                new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false) :
-                new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false);
+                    new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false) :
+                    new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false);
             player.addPotionEffect(effect);
         }
 
@@ -191,7 +181,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
     /**
      * Puts player out of spectator mode.
      *
-     * @param player Player to put out of spectator mode
+     * @param player    Player to put out of spectator mode
      * @param spectator {@link SpectatorImpl} instance associated to this player
      */
     public void stopSpectating(final Player player, final SpectatorImpl spectator) {
@@ -201,7 +191,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         PlayerUtil.reset(player);
         player.setFlying(false);
         player.setAllowFlight(false);
-        Collisions.setCollidable(player, true);
+        player.setCollidable(true);
 
         final PlayerInfo info = playerManager.removeAndGet(player);
 
@@ -220,9 +210,9 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         // Show to players in match
         if (match != null) {
             match.getAllPlayers()
-                .stream()
-                .filter(Player::isOnline)
-                .forEach(matchPlayer -> matchPlayer.showPlayer(player));
+                    .stream()
+                    .filter(Player::isOnline)
+                    .forEach(matchPlayer -> matchPlayer.showPlayer(player));
         }
 
         final SpectateEndEvent event = new SpectateEndEvent(player, spectator);
@@ -277,9 +267,9 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
 
     public Collection<Player> getAllSpectators() {
         return spectators.values()
-            .stream()
-            .map(spectator -> plugin.getServer().getPlayer(spectator.getUuid()))
-            .collect(Collectors.toList());
+                .stream()
+                .map(spectator -> plugin.getServer().getPlayer(spectator.getUuid()))
+                .collect(Collectors.toList());
     }
 
     private class SpectateListener implements Listener {

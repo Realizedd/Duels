@@ -1,8 +1,5 @@
 package me.realized.duels.command.commands.duels.subcommands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.kit.Kit;
 import me.realized.duels.api.queue.DQueue;
@@ -12,6 +9,10 @@ import me.realized.duels.queue.sign.QueueSignImpl;
 import me.realized.duels.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListCommand extends BaseCommand {
 
@@ -27,11 +28,11 @@ public class ListCommand extends BaseCommand {
         final String queues = StringUtils.join(queueManager.getQueues().stream().map(DQueue::toString).collect(Collectors.toList()), ", ");
         final String signs = StringUtils.join(queueSignManager.getSigns().stream().map(QueueSignImpl::toString).collect(Collectors.toList()), ", ");
         lang.sendMessage(sender, "COMMAND.duels.list",
-            "arenas", !arenas.isEmpty() ? StringUtils.join(arenas, "&r, &r") : lang.getMessage("GENERAL.none"),
-            "kits", !kits.isEmpty() ? kits : lang.getMessage("GENERAL.none"),
-            "queues", !queues.isEmpty() ? queues : lang.getMessage("GENERAL.none"),
-            "queue_signs", !signs.isEmpty() ? signs : lang.getMessage("GENERAL.none"),
-            "lobby", StringUtil.parse(playerManager.getLobby()));
+                "arenas", !arenas.isEmpty() ? StringUtils.join(arenas, "&r, &r") : lang.getMessage("GENERAL.none"),
+                "kits", !kits.isEmpty() ? kits : lang.getMessage("GENERAL.none"),
+                "queues", !queues.isEmpty() ? queues : lang.getMessage("GENERAL.none"),
+                "queue_signs", !signs.isEmpty() ? signs : lang.getMessage("GENERAL.none"),
+                "lobby", StringUtil.parse(playerManager.getLobby()));
     }
 
     private String getColor(final ArenaImpl arena) {

@@ -1,8 +1,5 @@
 package me.realized.duels.util.gui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import lombok.Getter;
 import me.realized.duels.util.inventory.Slots;
 import org.bukkit.entity.Player;
@@ -11,6 +8,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class AbstractGui<P extends JavaPlugin> {
 
@@ -32,7 +33,8 @@ public abstract class AbstractGui<P extends JavaPlugin> {
 
     public abstract void on(final Player player, final Inventory top, final InventoryClickEvent event);
 
-    public void on(final Player player, final Inventory inventory, final InventoryCloseEvent event) {}
+    public void on(final Player player, final Inventory inventory, final InventoryCloseEvent event) {
+    }
 
     public void on(final Player player, final Set<Integer> rawSlots, final InventoryDragEvent event) {
         event.setCancelled(true);

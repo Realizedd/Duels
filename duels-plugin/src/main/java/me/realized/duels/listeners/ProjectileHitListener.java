@@ -34,8 +34,8 @@ public class ProjectileHitListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void on(final EntityDamageByEntityEvent event) {
         if (!(event.getEntity() instanceof LivingEntity
-            && event.getDamager() instanceof Projectile && config.getProjectileHitMessageTypes().contains(event.getDamager().getType().name())
-            && ((Projectile) event.getDamager()).getShooter() instanceof Player)) {
+                && event.getDamager() instanceof Projectile && config.getProjectileHitMessageTypes().contains(event.getDamager().getType().name())
+                && ((Projectile) event.getDamager()).getShooter() instanceof Player)) {
             return;
         }
 

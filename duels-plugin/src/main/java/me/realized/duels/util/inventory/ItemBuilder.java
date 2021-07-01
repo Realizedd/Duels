@@ -1,7 +1,5 @@
 package me.realized.duels.util.inventory;
 
-import java.util.Arrays;
-import java.util.List;
 import me.realized.duels.util.StringUtil;
 import me.realized.duels.util.compat.Items;
 import org.bukkit.Material;
@@ -12,6 +10,9 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+
+import java.util.Arrays;
+import java.util.List;
 
 public final class ItemBuilder {
 

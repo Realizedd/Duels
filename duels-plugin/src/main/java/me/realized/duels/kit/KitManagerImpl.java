@@ -2,21 +2,6 @@ package me.realized.duels.kit;
 
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.kit.KitCreateEvent;
@@ -35,6 +20,11 @@ import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.*;
+import java.util.*;
 
 public class KitManagerImpl implements Loadable, KitManager {
 
@@ -70,7 +60,8 @@ public class KitManagerImpl implements Loadable, KitManager {
             file.createNewFile();
         } else {
             try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
-                final Map<String, KitData> data = plugin.getGson().fromJson(reader, new TypeToken<LinkedHashMap<String, KitData>>() {}.getType());
+                final Map<String, KitData> data = plugin.getGson().fromJson(reader, new TypeToken<LinkedHashMap<String, KitData>>() {
+                }.getType());
 
                 if (data != null) {
                     for (final Map.Entry<String, KitData> entry : data.entrySet()) {

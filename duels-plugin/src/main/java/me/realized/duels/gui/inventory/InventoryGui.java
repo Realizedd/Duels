@@ -1,11 +1,7 @@
 package me.realized.duels.gui.inventory;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.gui.inventory.buttons.EffectsButton;
-import me.realized.duels.gui.inventory.buttons.HeadButton;
-import me.realized.duels.gui.inventory.buttons.HealthButton;
-import me.realized.duels.gui.inventory.buttons.HungerButton;
-import me.realized.duels.gui.inventory.buttons.PotionCounterButton;
+import me.realized.duels.gui.inventory.buttons.*;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.gui.SinglePageGui;
 import me.realized.duels.util.inventory.Slots;

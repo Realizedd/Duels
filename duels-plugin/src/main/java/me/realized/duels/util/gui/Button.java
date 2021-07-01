@@ -1,12 +1,8 @@
 package me.realized.duels.util.gui;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
 import lombok.Getter;
 import lombok.Setter;
 import me.realized.duels.util.StringUtil;
-import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Material;
@@ -17,6 +13,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 public class Button<P extends JavaPlugin> {
 
@@ -68,22 +68,18 @@ public class Button<P extends JavaPlugin> {
         editMeta(meta -> {
             if (glow) {
                 meta.addEnchant(Enchantment.DURABILITY, 1, false);
-
-                if (CompatUtil.hasItemFlag()) {
-                    meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                }
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             } else {
                 meta.removeEnchant(Enchantment.DURABILITY);
-
-                if (CompatUtil.hasItemFlag()) {
-                    meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-                }
+                meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
         });
     }
 
 
-    public void update(final Player player) {}
+    public void update(final Player player) {
+    }
 
-    public void onClick(final Player player) {}
+    public void onClick(final Player player) {
+    }
 }

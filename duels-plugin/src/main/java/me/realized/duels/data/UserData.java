@@ -1,17 +1,6 @@
 package me.realized.duels.data;
 
 import com.google.common.collect.Lists;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 import me.realized.duels.DuelsPlugin;
@@ -22,8 +11,20 @@ import me.realized.duels.util.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class UserData implements User {
 
+    transient DuelsPlugin plugin;
+    transient File folder;
+    transient int defaultRating;
+    transient int matchesToDisplay;
     @Getter
     private UUID uuid;
     @Getter
@@ -34,17 +35,12 @@ public class UserData implements User {
     @Getter
     private volatile int losses;
     private boolean requests = true;
-
     private ConcurrentHashMap<String, Integer> rating;
     private List<MatchData> matches = new ArrayList<>();
 
-    transient DuelsPlugin plugin;
-    transient File folder;
-    transient int defaultRating;
-    transient int matchesToDisplay;
-
     // for Gson
-    private UserData() {}
+    private UserData() {
+    }
 
     public UserData(final DuelsPlugin plugin, final File folder, final int defaultRating, final int matchesToDisplay, final Player player) {
         this.plugin = plugin;
@@ -193,13 +189,13 @@ public class UserData implements User {
     @Override
     public String toString() {
         return "UserData{" +
-            "uuid=" + uuid +
-            ", name='" + name + '\'' +
-            ", wins=" + wins +
-            ", losses=" + losses +
-            ", requests=" + requests +
-            ", matches=" + matches +
-            ", rating=" + rating +
-            '}';
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", wins=" + wins +
+                ", losses=" + losses +
+                ", requests=" + requests +
+                ", matches=" + matches +
+                ", rating=" + rating +
+                '}';
     }
 }

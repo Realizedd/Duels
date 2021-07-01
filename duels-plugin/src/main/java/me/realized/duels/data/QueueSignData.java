@@ -15,7 +15,8 @@ public class QueueSignData {
     private int bet;
 
     // for Gson
-    private QueueSignData() {}
+    private QueueSignData() {
+    }
 
     public QueueSignData(final QueueSignImpl sign) {
         this.location = new LocationData(sign.getLocation());

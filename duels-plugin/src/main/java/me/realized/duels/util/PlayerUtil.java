@@ -7,7 +7,8 @@ import org.bukkit.inventory.ItemStack;
 
 public final class PlayerUtil {
 
-    private PlayerUtil() {}
+    private PlayerUtil() {
+    }
 
     public static void reset(final Player player) {
         player.setFireTicks(0);

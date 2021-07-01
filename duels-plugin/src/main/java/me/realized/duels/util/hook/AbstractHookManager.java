@@ -1,10 +1,11 @@
 package me.realized.duels.util.hook;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractHookManager<P extends JavaPlugin> {
 

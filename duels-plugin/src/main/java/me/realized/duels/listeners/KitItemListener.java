@@ -12,9 +12,9 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -96,19 +96,12 @@ public class KitItemListener implements Listener {
     }
 
     @EventHandler
-    public void on(final PlayerPickupItemEvent event) {
-        final Player player = event.getPlayer();
-
-        if (isExcluded(player)) {
-            return;
-        }
-
+    public void on(final EntityPickupItemEvent event) {
+        if (event.getEntity() instanceof Player) return;
+        final Player player = (Player) event.getEntity();
+        if (isExcluded(player)) return;
         final Item item = event.getItem();
-
-        if (!isKitItem(item.getItemStack())) {
-            return;
-        }
-
+        if (!isKitItem(item.getItemStack())) return;
         event.setCancelled(true);
         item.remove();
         player.sendMessage(WARNING);

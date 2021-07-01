@@ -1,13 +1,14 @@
 package me.realized.duels.hook.hooks;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Config;
 import me.realized.duels.util.hook.PluginHook;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class McMMOHook extends PluginHook<DuelsPlugin> {
 

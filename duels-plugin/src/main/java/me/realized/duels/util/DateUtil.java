@@ -8,7 +8,8 @@ public final class DateUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
-    private DateUtil() {}
+    private DateUtil() {
+    }
 
     public static String formatDate(final Date date) {
         return DATE_FORMAT.format(date);

@@ -1,16 +1,9 @@
 package me.realized.duels.command.commands.duel;
 
-import java.util.List;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.command.BaseCommand;
-import me.realized.duels.command.commands.duel.subcommands.AcceptCommand;
-import me.realized.duels.command.commands.duel.subcommands.DenyCommand;
-import me.realized.duels.command.commands.duel.subcommands.InventoryCommand;
-import me.realized.duels.command.commands.duel.subcommands.StatsCommand;
-import me.realized.duels.command.commands.duel.subcommands.ToggleCommand;
-import me.realized.duels.command.commands.duel.subcommands.TopCommand;
-import me.realized.duels.command.commands.duel.subcommands.VersionCommand;
+import me.realized.duels.command.commands.duel.subcommands.*;
 import me.realized.duels.data.UserData;
 import me.realized.duels.hook.hooks.CombatLogXHook;
 import me.realized.duels.hook.hooks.CombatTagPlusHook;
@@ -28,6 +21,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class DuelCommand extends BaseCommand {
 
     private final CombatTagPlusHook combatTagPlus;
@@ -39,13 +34,13 @@ public class DuelCommand extends BaseCommand {
     public DuelCommand(final DuelsPlugin plugin) {
         super(plugin, "duel", Permissions.DUEL, true);
         child(
-            new AcceptCommand(plugin),
-            new DenyCommand(plugin),
-            new StatsCommand(plugin),
-            new ToggleCommand(plugin),
-            new TopCommand(plugin),
-            new InventoryCommand(plugin),
-            new VersionCommand(plugin)
+                new AcceptCommand(plugin),
+                new DenyCommand(plugin),
+                new StatsCommand(plugin),
+                new ToggleCommand(plugin),
+                new TopCommand(plugin),
+                new InventoryCommand(plugin),
+                new VersionCommand(plugin)
         );
         this.combatTagPlus = hookManager.getHook(CombatTagPlusHook.class);
         this.pvpManager = hookManager.getHook(PvPManagerHook.class);
@@ -90,8 +85,8 @@ public class DuelCommand extends BaseCommand {
         }
 
         if ((combatTagPlus != null && combatTagPlus.isTagged(player))
-            || (pvpManager != null && pvpManager.isTagged(player))
-            || (combatLogX != null && combatLogX.isTagged(player))) {
+                || (pvpManager != null && pvpManager.isTagged(player))
+                || (combatLogX != null && combatLogX.isTagged(player))) {
             lang.sendMessage(sender, "ERROR.duel.is-tagged");
             return true;
         }
@@ -234,7 +229,8 @@ public class DuelCommand extends BaseCommand {
     }
 
     @Override
-    protected void execute(final CommandSender sender, final String label, final String[] args) {}
+    protected void execute(final CommandSender sender, final String label, final String[] args) {
+    }
 
     // Disables default TabCompleter
     @Override

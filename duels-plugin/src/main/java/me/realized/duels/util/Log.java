@@ -1,10 +1,11 @@
 package me.realized.duels.util;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 public final class Log {
 
@@ -13,7 +14,8 @@ public final class Log {
 
     private static final List<LogSource> sources = new ArrayList<>();
 
-    private Log() {}
+    private Log() {
+    }
 
     public static void addSource(final LogSource source) {
         sources.add(source);

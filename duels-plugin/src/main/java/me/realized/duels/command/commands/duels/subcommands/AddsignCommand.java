@@ -1,7 +1,5 @@
 package me.realized.duels.command.commands.duels.subcommands;
 
-import java.util.Arrays;
-import java.util.List;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.command.BaseCommand;
 import me.realized.duels.kit.KitImpl;
@@ -15,6 +13,9 @@ import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AddsignCommand extends BaseCommand {
 

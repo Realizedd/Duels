@@ -1,13 +1,14 @@
 package me.realized.duels.inventories;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.gui.inventory.InventoryGui;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.gui.GuiListener;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class InventoryManager implements Loadable {
 

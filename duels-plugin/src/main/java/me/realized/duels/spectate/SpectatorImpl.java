@@ -1,11 +1,12 @@
 package me.realized.duels.spectate;
 
-import java.util.Objects;
-import java.util.UUID;
 import lombok.Getter;
 import me.realized.duels.api.spectate.Spectator;
 import me.realized.duels.arena.ArenaImpl;
 import org.bukkit.entity.Player;
+
+import java.util.Objects;
+import java.util.UUID;
 
 public class SpectatorImpl implements Spectator {
 

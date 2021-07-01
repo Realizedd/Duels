@@ -8,7 +8,8 @@ import org.bukkit.inventory.PlayerInventory;
 
 public final class InventoryUtil {
 
-    private InventoryUtil() {}
+    private InventoryUtil() {
+    }
 
     public static boolean hasItem(final Player player) {
         final PlayerInventory inventory = player.getInventory();

@@ -1,6 +1,5 @@
 package me.realized.duels.hook.hooks;
 
-import java.util.Arrays;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.util.Log;
@@ -8,6 +7,8 @@ import me.realized.duels.util.hook.PluginHook;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+
+import java.util.Arrays;
 
 public class VaultHook extends PluginHook<DuelsPlugin> {
 

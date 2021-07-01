@@ -13,8 +13,8 @@ public class QueueCommand extends BaseCommand {
     public QueueCommand(final DuelsPlugin plugin) {
         super(plugin, "queue", Permissions.QUEUE, true);
         child(
-            new JoinCommand(plugin),
-            new LeaveCommand(plugin)
+                new JoinCommand(plugin),
+                new LeaveCommand(plugin)
         );
     }
 

@@ -2,7 +2,8 @@ package me.realized.duels.util;
 
 public final class RatingUtil {
 
-    private RatingUtil() {}
+    private RatingUtil() {
+    }
 
     public static int getChange(final int k, final int winnerRating, final int loserRating) {
         final double wr = r(winnerRating);

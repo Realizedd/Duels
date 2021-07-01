@@ -1,8 +1,5 @@
 package me.realized.duels.command;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaManagerImpl;
 import me.realized.duels.betting.BettingManager;
@@ -21,6 +18,10 @@ import me.realized.duels.setting.SettingsManager;
 import me.realized.duels.spectate.SpectateManagerImpl;
 import me.realized.duels.util.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseCommand extends AbstractCommand<DuelsPlugin> {
 
@@ -45,7 +46,7 @@ public abstract class BaseCommand extends AbstractCommand<DuelsPlugin> {
      * Constructor for a sub command
      */
     protected BaseCommand(final DuelsPlugin plugin, final String name, final String usage, final String description, final String permission, final int length,
-        final boolean playerOnly, final String... aliases) {
+                          final boolean playerOnly, final String... aliases) {
         super(plugin, name, usage, description, permission, length, playerOnly, aliases);
         this.plugin = plugin;
         this.config = plugin.getConfiguration();
@@ -69,7 +70,7 @@ public abstract class BaseCommand extends AbstractCommand<DuelsPlugin> {
      * Constructor for a sub command, inherits parent permission
      */
     protected BaseCommand(final DuelsPlugin plugin, final String name, final String usage, final String description, final int length, final boolean playerOnly,
-        final String... aliases) {
+                          final String... aliases) {
         this(plugin, name, usage, description, null, length, playerOnly, aliases);
     }
 
@@ -100,8 +101,8 @@ public abstract class BaseCommand extends AbstractCommand<DuelsPlugin> {
 
     protected List<String> handleTabCompletion(final String argument, final Collection<String> collection) {
         return collection.stream()
-            .filter(value ->value.toLowerCase().startsWith(argument.toLowerCase()))
-            .map(value -> value.replace(" ", "-"))
-            .collect(Collectors.toList());
+                .filter(value -> value.toLowerCase().startsWith(argument.toLowerCase()))
+                .map(value -> value.replace(" ", "-"))
+                .collect(Collectors.toList());
     }
 }

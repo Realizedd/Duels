@@ -1,11 +1,15 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenLocal()
+        mavenCentral()
     }
+}
 
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
-    }
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version('6.1.0')
 }
 
 allprojects {
@@ -24,8 +28,8 @@ subprojects {
         mavenCentral()
 
         maven {
-            name 'spigot-repo'
-            url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+            name 'nms-repo'
+            url 'https://repo.codemc.io/repository/nms/'
         }
 
         maven {
@@ -35,17 +39,17 @@ subprojects {
 
         maven {
             name 'mvdw-repo'
-            url 'http://repo.mvdw-software.com/content/groups/public/'
+            url 'https://repo.mvdw-software.com/content/groups/public/'
         }
 
         maven {
             name 'clip-repo'
-            url 'http://repo.extendedclip.com/content/repositories/placeholderapi/'
+            url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
         }
 
         maven {
             name 'sk89q-repo'
-            url 'http://maven.sk89q.com/repo/'
+            url 'https://maven.sk89q.com/repo/'
         }
 
         maven {

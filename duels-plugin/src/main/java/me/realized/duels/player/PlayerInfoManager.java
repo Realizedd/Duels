@@ -1,15 +1,5 @@
 package me.realized.duels.player;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Config;
@@ -20,6 +10,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PlayerInfoManager implements Loadable {
 
@@ -51,13 +46,14 @@ public class PlayerInfoManager implements Loadable {
             final World world = Bukkit.getWorlds().get(0);
             this.lobby = world.getSpawnLocation();
             Log.info(this, "Lobby location was not set, using " + world.getName()
-                + "'s spawn location as default. Use the command /duels setlobby in-game to set the lobby location.");
+                    + "'s spawn location as default. Use the command /duels setlobby in-game to set the lobby location.");
         }
     }
 
     // PlayerInfo should remain even on reloads
     @Override
-    public void handleUnload() {}
+    public void handleUnload() {
+    }
 
     public boolean setLobby(final Player player) {
         final Location lobby = player.getLocation().clone();

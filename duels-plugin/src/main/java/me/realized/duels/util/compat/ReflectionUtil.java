@@ -1,9 +1,10 @@
 package me.realized.duels.util.compat;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import me.realized.duels.util.Log;
 import org.bukkit.Bukkit;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public final class ReflectionUtil {
 
@@ -13,7 +14,8 @@ public final class ReflectionUtil {
         VERSION = Bukkit.getServer().getClass().getName().split("\\.")[3];
     }
 
-    private ReflectionUtil() {}
+    private ReflectionUtil() {
+    }
 
     public static Class<?> getClassUnsafe(final String name) {
         try {

@@ -6,7 +6,7 @@ clean.doFirst {
 }
 
 tasks.withType(ShadowJar) {
-    destinationDir = file("$rootDir/out/")
+    destinationDirectory = project.layout.projectDirectory.dir("out")
 }
 
 processResources {
@@ -17,12 +17,19 @@ processResources {
 }
 
 dependencies {
-    compile 'org.projectlombok:lombok:1.16.20'
-    compile 'me.clip:placeholderapi:2.10.5'
-    compile('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
-    compile 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    compileOnly 'me.clip:placeholderapi:2.10.9'
+    compileOnly('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
+    compileOnly 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
+    implementation 'io.github.bananapuncher714:nbteditor:7.17.0', {
+        exclude group: 'org.spigotmc'
+    }
+    implementation 'com.github.cryptomorin:XSeries:8.1.0'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.1-SNAPSHOT'
+
     compile name: 'Vault-1.6.7'
-    compile name: 'EssentialsX'
     compile name: 'CombatTagPlus'
     compile name: 'PvPManager-3.7.16'
     compile name: 'Factions-1.6.9.5-U0.1.14'
@@ -30,31 +37,29 @@ dependencies {
     compile name: 'Factions'
     compile name: 'MyPet-2.3.4'
     compile name: 'BountyHunters-2.2.6'
-    compile name: 'SimpleClans-2.14.4.1'
     compile name: 'LeaderHeadsAPI'
-
     compile project(':duels-worldguard')
     compile project(':duels-worldguard-v6')
     compile project(':duels-worldguard-v7')
     compile project(':duels-api')
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'org.inventivetalent.spiget-update:bukkit:1.4.2-SNAPSHOT'
+    compile 'com.google.code.gson:gson:2.8.7'
+
 }
 
 shadowJar {
-    archiveName = parent.name + '-' + project.version + '.jar'
-
+    archiveFileName.set(parent.name + '-' + project.version + '.jar')
     dependencies {
         include(dependency(':duels-worldguard'))
         include(dependency(':duels-worldguard-v6'))
         include(dependency(':duels-worldguard-v7'))
         include(dependency(':duels-api'))
         include(dependency('com.google.code.gson:.*'))
-        include(dependency('org.inventivetalent.spiget-update:.*'))
+        include(dependency('io.github.bananapuncher714:.*'))
     }
     def group = project.group.toString() + "." + parent.name.toLowerCase() + ".shaded."
-    relocate 'org.inventivetalent.update.spiget', group + 'update.spiget'
+    relocate 'io.github.bananapuncher714.nbteditor', group + 'nbteditor'
     relocate 'com.google.gson', group + 'gson'
+    relocate "com.cryptomorin.xseries", group + 'xseries'
 }
 
 build.dependsOn(shadowJar)

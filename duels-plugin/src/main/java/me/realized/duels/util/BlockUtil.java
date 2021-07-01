@@ -7,7 +7,8 @@ import org.bukkit.util.BlockIterator;
 
 public final class BlockUtil {
 
-    private BlockUtil() {}
+    private BlockUtil() {
+    }
 
     public static <T extends BlockState> T getTargetBlock(final Player player, final Class<T> type, final int range) {
         final BlockIterator iterator = new BlockIterator(player, range);

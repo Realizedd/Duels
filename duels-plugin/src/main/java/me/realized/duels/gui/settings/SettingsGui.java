@@ -1,27 +1,23 @@
 package me.realized.duels.gui.settings;
 
-import java.util.ArrayList;
-import java.util.List;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Config;
 import me.realized.duels.gui.BaseButton;
-import me.realized.duels.gui.settings.buttons.ArenaSelectButton;
-import me.realized.duels.gui.settings.buttons.CancelButton;
-import me.realized.duels.gui.settings.buttons.ItemBettingButton;
-import me.realized.duels.gui.settings.buttons.KitSelectButton;
-import me.realized.duels.gui.settings.buttons.RequestDetailsButton;
-import me.realized.duels.gui.settings.buttons.RequestSendButton;
+import me.realized.duels.gui.settings.buttons.*;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.gui.SinglePageGui;
 import me.realized.duels.util.inventory.Slots;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SettingsGui extends SinglePageGui<DuelsPlugin> {
 
     private static final int[][] PATTERNS = {
-        {13},
-        {12, 14},
-        {12, 13, 14}
+            {13},
+            {12, 14},
+            {12, 13, 14}
     };
 
     public SettingsGui(final DuelsPlugin plugin) {

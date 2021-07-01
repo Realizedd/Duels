@@ -9,8 +9,6 @@ import org.bukkit.potion.PotionType;
 
 public final class Items {
 
-    private static final String PANE = "STAINED_GLASS_PANE";
-
     public static final ItemStack ORANGE_PANE;
     public static final ItemStack BLUE_PANE;
     public static final ItemStack RED_PANE;
@@ -28,6 +26,7 @@ public final class Items {
     public static final ItemStack HEAL_SPLASH_POTION;
     public static final ItemStack WATER_BREATHING_POTION;
     public static final ItemStack ENCHANTED_GOLDEN_APPLE;
+    private static final String PANE = "STAINED_GLASS_PANE";
 
     static {
         ORANGE_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 1) : ItemBuilder.of(Material.ORANGE_STAINED_GLASS_PANE)).name(" ").build();
@@ -43,13 +42,16 @@ public final class Items {
         MUSHROOM_SOUP = CompatUtil.isPre1_13() ? Material.matchMaterial("MUSHROOM_SOUP") : Material.MUSHROOM_STEW;
         EMPTY_MAP = CompatUtil.isPre1_13() ? Material.matchMaterial("EMPTY_MAP") : Material.MAP;
         BARRIER = CompatUtil.isPre1_8() ? Material.matchMaterial("REDSTONE_BLOCK") : Material.BARRIER;
-        SIGN = CompatUtil.isPre1_14() ? Material.SIGN : Material.matchMaterial("OAK_SIGN");
+        SIGN = CompatUtil.isPre1_14() ? Material.matchMaterial("SIGN") : Material.OAK_SIGN;
         HEAL_SPLASH_POTION = (CompatUtil.isPre1_9() ? ItemBuilder.of(Material.POTION, 1, (short) 16421) : ItemBuilder.of(Material.SPLASH_POTION).potion(
-            PotionType.INSTANT_HEAL, false, true)).build();
+                PotionType.INSTANT_HEAL, false, true)).build();
         WATER_BREATHING_POTION = (CompatUtil.isPre1_9() ? ItemBuilder.of(Material.POTION, 1, (short) 8237) : ItemBuilder.of(Material.POTION).potion(
-            PotionType.WATER_BREATHING, false, false)).build();
+                PotionType.WATER_BREATHING, false, false)).build();
         ENCHANTED_GOLDEN_APPLE = CompatUtil.isPre1_13() ?
-            ItemBuilder.of(Material.GOLDEN_APPLE, 1, (short) 1).build() : ItemBuilder.of(Material.ENCHANTED_GOLDEN_APPLE).build();
+                ItemBuilder.of(Material.GOLDEN_APPLE, 1, (short) 1).build() : ItemBuilder.of(Material.ENCHANTED_GOLDEN_APPLE).build();
+    }
+
+    private Items() {
     }
 
     public static boolean equals(final ItemStack item, final ItemStack other) {
@@ -72,6 +74,4 @@ public final class Items {
         final ItemMeta meta;
         return ((meta = item.getItemMeta()) == null) ? 0 : (short) ((Damageable) meta).getDamage();
     }
-
-    private Items() {}
 }

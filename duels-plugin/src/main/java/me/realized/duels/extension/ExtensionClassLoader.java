@@ -1,6 +1,10 @@
 package me.realized.duels.extension;
 
 import com.google.common.io.ByteStreams;
+import lombok.Getter;
+import me.realized.duels.api.extension.DuelsExtension;
+import sun.misc.CompoundEnumeration;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,9 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import lombok.Getter;
-import me.realized.duels.api.extension.DuelsExtension;
-import sun.misc.CompoundEnumeration;
 
 public class ExtensionClassLoader extends URLClassLoader {
 
@@ -28,7 +29,7 @@ public class ExtensionClassLoader extends URLClassLoader {
     private final DuelsExtension extension;
 
     ExtensionClassLoader(final File file, final ExtensionInfo info, final ClassLoader parent) throws Exception {
-        super(new URL[] {file.toURI().toURL()}, parent);
+        super(new URL[]{file.toURI().toURL()}, parent);
         this.jar = new JarFile(file);
         this.manifest = jar.getManifest();
         this.url = file.toURI().toURL();
@@ -100,8 +101,7 @@ public class ExtensionClassLoader extends URLClassLoader {
 
     @Override
     public Enumeration<URL> getResources(final String name) throws IOException {
-        @SuppressWarnings("unchecked")
-        final Enumeration<URL>[] tmp = (Enumeration<URL>[]) new Enumeration<?>[2];
+        @SuppressWarnings("unchecked") final Enumeration<URL>[] tmp = (Enumeration<URL>[]) new Enumeration<?>[2];
         tmp[1] = findResources(name);
         return new CompoundEnumeration<>(tmp);
     }

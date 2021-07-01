@@ -10,9 +10,9 @@ public class HeadButton extends BaseButton {
 
     public HeadButton(final DuelsPlugin plugin, final Player owner) {
         super(plugin, ItemBuilder
-            .of(Items.HEAD.clone())
-            .name(plugin.getLang().getMessage("GUI.inventory-view.buttons.head.name", "name", owner.getName())).head(owner)
-            .build()
+                .of(Items.HEAD.clone())
+                .name(plugin.getLang().getMessage("GUI.inventory-view.buttons.head.name", "name", owner.getName())).head(owner)
+                .build()
         );
     }
 }

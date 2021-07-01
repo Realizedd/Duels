@@ -1,6 +1,5 @@
 package me.realized.duels.gui.bind.buttons;
 
-import java.util.stream.Collectors;
 import lombok.Setter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
@@ -12,12 +11,14 @@ import me.realized.duels.util.inventory.ItemBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
 
+import java.util.stream.Collectors;
+
 public class BindButton extends BaseButton {
 
-    @Setter
-    private BindGui gui;
     private final KitImpl kit;
     private final ArenaImpl arena;
+    @Setter
+    private BindGui gui;
 
     public BindButton(final DuelsPlugin plugin, final KitImpl kit, final ArenaImpl arena) {
         super(plugin, ItemBuilder.of(Items.EMPTY_MAP).build());

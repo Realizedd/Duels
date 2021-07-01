@@ -1,11 +1,5 @@
 package me.realized.duels.gui.betting;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.duel.DuelManager;
 import me.realized.duels.gui.betting.buttons.CancelButton;
@@ -31,11 +25,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.*;
+
 public class BettingGui extends AbstractGui<DuelsPlugin> {
 
     private final Section[] sections = {
-        new Section(9, 13, 4),
-        new Section(14, 18, 4)
+            new Section(9, 13, 4),
+            new Section(14, 18, 4)
     };
     private final GuiListener<DuelsPlugin> guiListener;
     private final DuelManager duelManager;

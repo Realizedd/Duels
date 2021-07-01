@@ -1,22 +1,16 @@
 package me.realized.duels.arena;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import me.realized.duels.api.match.Match;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.queue.Queue;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class MatchImpl implements Match {
 
@@ -31,12 +25,10 @@ public class MatchImpl implements Match {
     private final int bet;
     @Getter
     private final Queue source;
-
-    @Getter
-    private boolean finished;
-
     // Default value for players is false, which is set to true if player is killed in the match.
     private final Map<Player, Boolean> players = new HashMap<>();
+    @Getter
+    private boolean finished;
 
     MatchImpl(final ArenaImpl arena, final KitImpl kit, final Map<UUID, List<ItemStack>> items, final int bet, final Queue source) {
         this.arena = arena;

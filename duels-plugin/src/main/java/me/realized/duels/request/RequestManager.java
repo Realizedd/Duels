@@ -1,8 +1,5 @@
 package me.realized.duels.request;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.request.RequestSendEvent;
 import me.realized.duels.config.Config;
@@ -16,6 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class RequestManager implements Loadable, Listener {
 
@@ -32,7 +33,8 @@ public class RequestManager implements Loadable, Listener {
     }
 
     @Override
-    public void handleLoad() {}
+    public void handleLoad() {
+    }
 
     @Override
     public void handleUnload() {
@@ -66,21 +68,21 @@ public class RequestManager implements Loadable, Listener {
         final String itemBetting = settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
 
         lang.sendMessage(sender, "COMMAND.duel.request.send.sender",
-            "name", target.getName(), "kit", kit, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
+                "name", target.getName(), "kit", kit, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
         lang.sendMessage(target, "COMMAND.duel.request.send.receiver",
-            "name", sender.getName(), "kit", kit, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
+                "name", sender.getName(), "kit", kit, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
 
         final String path = "COMMAND.duel.request.send.clickable-text.";
 
         TextBuilder
-            .of(lang.getMessage(path + "info.text"), null, null, Action.SHOW_TEXT, lang.getMessage(path + "info.hover-text"))
-            .add(lang.getMessage(path + "accept.text"),
-                ClickEvent.Action.RUN_COMMAND, "/duel accept " + sender.getName(),
-                Action.SHOW_TEXT, lang.getMessage(path + "accept.hover-text"))
-            .add(lang.getMessage(path + "deny.text"),
-                ClickEvent.Action.RUN_COMMAND, "/duel deny " + sender.getName(),
-                Action.SHOW_TEXT, lang.getMessage(path + "deny.hover-text"))
-            .send(target);
+                .of(lang.getMessage(path + "info.text"), null, null, Action.SHOW_TEXT, lang.getMessage(path + "info.hover-text"))
+                .add(lang.getMessage(path + "accept.text"),
+                        ClickEvent.Action.RUN_COMMAND, "/duel accept " + sender.getName(),
+                        Action.SHOW_TEXT, lang.getMessage(path + "accept.hover-text"))
+                .add(lang.getMessage(path + "deny.text"),
+                        ClickEvent.Action.RUN_COMMAND, "/duel deny " + sender.getName(),
+                        Action.SHOW_TEXT, lang.getMessage(path + "deny.hover-text"))
+                .send(target);
         TextBuilder.of(lang.getMessage(path + "extra.text"), null, null, Action.SHOW_TEXT, lang.getMessage(path + "extra.hover-text")).send(target);
     }
 

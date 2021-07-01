@@ -1,7 +1,5 @@
 package me.realized.duels.gui.options;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.gui.options.buttons.OptionButton;
@@ -15,6 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class OptionsGui extends SinglePageGui<DuelsPlugin> {
 

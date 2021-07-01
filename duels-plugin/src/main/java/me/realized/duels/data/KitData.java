@@ -1,14 +1,11 @@
 package me.realized.duels.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.kit.KitImpl.Characteristic;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.*;
 
 public class KitData {
 
@@ -20,7 +17,8 @@ public class KitData {
     private Map<String, Map<Integer, ItemData>> items = new HashMap<>();
 
     // for Gson
-    private KitData() {}
+    private KitData() {
+    }
 
     public KitData(final KitImpl kit) {
         this.name = kit.getName();
@@ -32,8 +30,8 @@ public class KitData {
         for (final Map.Entry<String, Map<Integer, ItemStack>> entry : kit.getItems().entrySet()) {
             final Map<Integer, ItemData> data = new HashMap<>();
             entry.getValue().entrySet().stream()
-                .filter(value -> Objects.nonNull(value.getValue()))
-                .forEach(value -> data.put(value.getKey(), new ItemData(value.getValue())));
+                    .filter(value -> Objects.nonNull(value.getValue()))
+                    .forEach(value -> data.put(value.getKey(), new ItemData(value.getValue())));
             items.put(entry.getKey(), data);
         }
     }

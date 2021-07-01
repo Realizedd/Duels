@@ -9,7 +9,8 @@ public class QueueData {
     private int bet;
 
     // for Gson
-    private QueueData() {}
+    private QueueData() {
+    }
 
     public QueueData(final Queue queue) {
         this.kit = queue.getKit() != null ? queue.getKit().getName() : null;

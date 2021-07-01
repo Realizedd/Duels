@@ -11,8 +11,8 @@ public class HealthButton extends BaseButton {
 
     public HealthButton(final DuelsPlugin plugin, final Player player) {
         super(plugin, ItemBuilder
-            .of(player.isDead() ? Items.SKELETON_HEAD : Material.GOLDEN_APPLE)
-            .name(plugin.getLang().getMessage("GUI.inventory-view.buttons.health.name", "health", player.isDead() ? 0 : Math.ceil(player.getHealth()) * 0.5))
-            .build());
+                .of(player.isDead() ? Items.SKELETON_HEAD : Material.GOLDEN_APPLE)
+                .name(plugin.getLang().getMessage("GUI.inventory-view.buttons.health.name", "health", player.isDead() ? 0 : Math.ceil(player.getHealth()) * 0.5))
+                .build());
     }
 }

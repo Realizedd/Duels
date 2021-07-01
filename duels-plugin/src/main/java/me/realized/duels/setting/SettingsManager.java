@@ -1,14 +1,15 @@
 package me.realized.duels.setting;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.util.Loadable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class SettingsManager implements Loadable, Listener {
 
@@ -21,7 +22,8 @@ public class SettingsManager implements Loadable, Listener {
     }
 
     @Override
-    public void handleLoad() {}
+    public void handleLoad() {
+    }
 
     @Override
     public void handleUnload() {

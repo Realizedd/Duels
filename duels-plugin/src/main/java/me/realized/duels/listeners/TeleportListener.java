@@ -1,6 +1,5 @@
 package me.realized.duels.listeners;
 
-import java.util.Set;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.arena.ArenaManagerImpl;
@@ -13,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+
+import java.util.Set;
 
 /**
  * Prevents players teleporting to players in a match or in spectator mode.
@@ -42,7 +43,7 @@ public class TeleportListener implements Listener {
         final Player player = event.getPlayer();
 
         if (player.isOp() || player.isDead() || player.hasPermission(Permissions.ADMIN) || player.hasPermission(Permissions.TP_BYPASS) ||
-            player.hasMetadata(Teleport.METADATA_KEY) || arenaManager.isInMatch(player) || spectateManager.isSpectating(player)) {
+                player.hasMetadata(Teleport.METADATA_KEY) || arenaManager.isInMatch(player) || spectateManager.isSpectating(player)) {
             return;
         }
 

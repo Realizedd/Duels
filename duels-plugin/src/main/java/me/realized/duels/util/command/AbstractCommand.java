@@ -1,12 +1,6 @@
 package me.realized.duels.util.command;
 
 import com.google.common.collect.Lists;
-import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.Getter;
 import me.realized.duels.api.command.SubCommand;
 import me.realized.duels.util.StringUtil;
@@ -16,6 +10,13 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class AbstractCommand<P extends JavaPlugin> implements TabCompleter {
 
@@ -39,7 +40,7 @@ public abstract class AbstractCommand<P extends JavaPlugin> implements TabComple
     private Map<String, AbstractCommand<P>> children;
 
     protected AbstractCommand(final P plugin, final String name, final String usage, final String description, final String permission, final int length,
-        final boolean playerOnly, final String... aliases) {
+                              final boolean playerOnly, final String... aliases) {
         this.plugin = plugin;
         this.name = name;
         this.usage = usage;
@@ -168,11 +169,11 @@ public abstract class AbstractCommand<P extends JavaPlugin> implements TabComple
 
         if (args.length == 1 && children != null) {
             return children.values().stream()
-                .filter(child -> child.getName().startsWith(args[0].toLowerCase()))
-                .map(AbstractCommand::getName)
-                .distinct()
-                .sorted(String::compareTo)
-                .collect(Collectors.toList());
+                    .filter(child -> child.getName().startsWith(args[0].toLowerCase()))
+                    .map(AbstractCommand::getName)
+                    .distinct()
+                    .sorted(String::compareTo)
+                    .collect(Collectors.toList());
         }
 
         return null;

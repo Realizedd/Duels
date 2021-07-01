@@ -1,6 +1,5 @@
 package me.realized.duels.hook.hooks;
 
-import java.util.Arrays;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Config;
 import me.realized.duels.data.UserData;
@@ -9,6 +8,8 @@ import me.realized.duels.util.hook.PluginHook;
 import me.robin.leaderheads.datacollectors.OnlineDataCollector;
 import me.robin.leaderheads.objects.BoardType;
 import org.bukkit.entity.Player;
+
+import java.util.Arrays;
 
 public class LeaderHeadsHook extends PluginHook<DuelsPlugin> {
 

@@ -32,7 +32,8 @@ public class BettingManager implements Loadable, Listener {
     }
 
     @Override
-    public void handleUnload() {}
+    public void handleUnload() {
+    }
 
     public void open(final Settings settings, final Player first, final Player second) {
         final BettingGui gui = new BettingGui(plugin, settings, first, second);

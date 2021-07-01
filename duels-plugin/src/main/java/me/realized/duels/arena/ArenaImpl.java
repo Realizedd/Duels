@@ -1,16 +1,6 @@
 package me.realized.duels.arena;
 
 import com.google.common.collect.Lists;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,16 +22,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+
 public class ArenaImpl extends BaseButton implements Arena {
 
     @Getter
     private final String name;
     @Getter
-    private boolean disabled;
-    @Getter
     private final Set<KitImpl> kits = new HashSet<>();
     @Getter
     private final Map<Integer, Location> positions = new HashMap<>();
+    @Getter
+    private boolean disabled;
     @Getter
     private MatchImpl match;
     @Getter(value = AccessLevel.PACKAGE)
@@ -53,10 +47,10 @@ public class ArenaImpl extends BaseButton implements Arena {
 
     public ArenaImpl(final DuelsPlugin plugin, final String name) {
         super(plugin, ItemBuilder
-            .of(Items.EMPTY_MAP)
-            .name(plugin.getLang().getMessage("GUI.arena-selector.buttons.arena.name", "name", name))
-            .lore(plugin.getLang().getMessage("GUI.arena-selector.buttons.arena.lore-unavailable").split("\n"))
-            .build()
+                .of(Items.EMPTY_MAP)
+                .name(plugin.getLang().getMessage("GUI.arena-selector.buttons.arena.name", "name", name))
+                .lore(plugin.getLang().getMessage("GUI.arena-selector.buttons.arena.lore-unavailable").split("\n"))
+                .build()
         );
         this.name = name;
     }
@@ -212,9 +206,9 @@ public class ArenaImpl extends BaseButton implements Arena {
     public void broadcast(final String message) {
         final List<Player> receivers = Lists.newArrayList(getPlayers());
         spectateManager.getSpectatorsImpl(this)
-            .stream()
-            .map(spectator -> plugin.getServer().getPlayer(spectator.getUuid()))
-            .forEach(receivers::add);
+                .stream()
+                .map(spectator -> plugin.getServer().getPlayer(spectator.getUuid()))
+                .forEach(receivers::add);
         receivers.forEach(player -> player.sendMessage(message));
     }
 
@@ -238,8 +232,12 @@ public class ArenaImpl extends BaseButton implements Arena {
 
     @Override
     public boolean equals(final Object other) {
-        if (this == other) { return true; }
-        if (other == null || getClass() != other.getClass()) { return false; }
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
         final ArenaImpl arena = (ArenaImpl) other;
         return Objects.equals(name, arena.name);
     }

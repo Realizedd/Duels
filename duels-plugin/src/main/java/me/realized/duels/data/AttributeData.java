@@ -18,7 +18,8 @@ public class AttributeData {
     private String slot;
 
     // for Gson
-    private AttributeData() {}
+    private AttributeData() {
+    }
 
     public AttributeData(String name, String attrName, int operation, double amount) {
         this.name = name;

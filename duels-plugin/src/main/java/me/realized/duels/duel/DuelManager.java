@@ -1,15 +1,6 @@
 package me.realized.duels.duel;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import com.cryptomorin.xseries.messages.Titles;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.match.MatchEndEvent.Reason;
@@ -22,13 +13,7 @@ import me.realized.duels.config.Lang;
 import me.realized.duels.data.MatchData;
 import me.realized.duels.data.UserData;
 import me.realized.duels.data.UserManagerImpl;
-import me.realized.duels.hook.hooks.CombatLogXHook;
-import me.realized.duels.hook.hooks.CombatTagPlusHook;
-import me.realized.duels.hook.hooks.EssentialsHook;
-import me.realized.duels.hook.hooks.McMMOHook;
-import me.realized.duels.hook.hooks.MyPetHook;
-import me.realized.duels.hook.hooks.PvPManagerHook;
-import me.realized.duels.hook.hooks.VaultHook;
+import me.realized.duels.hook.hooks.*;
 import me.realized.duels.hook.hooks.worldguard.WorldGuardHook;
 import me.realized.duels.inventories.InventoryManager;
 import me.realized.duels.kit.KitImpl;
@@ -37,22 +22,10 @@ import me.realized.duels.player.PlayerInfoManager;
 import me.realized.duels.queue.Queue;
 import me.realized.duels.queue.QueueManager;
 import me.realized.duels.setting.Settings;
-import me.realized.duels.util.Loadable;
-import me.realized.duels.util.Log;
-import me.realized.duels.util.PlayerUtil;
-import me.realized.duels.util.RatingUtil;
-import me.realized.duels.util.StringUtil;
-import me.realized.duels.util.Teleport;
-import me.realized.duels.util.TextBuilder;
+import me.realized.duels.util.*;
 import me.realized.duels.util.compat.CompatUtil;
-import me.realized.duels.util.compat.Players;
-import me.realized.duels.util.compat.Titles;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -63,16 +36,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerItemDamageEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+
+import java.util.*;
 
 public class DuelManager implements Loadable {
 
@@ -92,7 +61,6 @@ public class DuelManager implements Loadable {
     private PvPManagerHook pvpManager;
     private CombatLogXHook combatLogX;
     private VaultHook vault;
-    private EssentialsHook essentials;
     private McMMOHook mcMMO;
     private WorldGuardHook worldGuard;
     private MyPetHook myPet;
@@ -117,7 +85,6 @@ public class DuelManager implements Loadable {
         this.pvpManager = plugin.getHookManager().getHook(PvPManagerHook.class);
         this.combatLogX = plugin.getHookManager().getHook(CombatLogXHook.class);
         this.vault = plugin.getHookManager().getHook(VaultHook.class);
-        this.essentials = plugin.getHookManager().getHook(EssentialsHook.class);
         this.mcMMO = plugin.getHookManager().getHook(McMMOHook.class);
         this.worldGuard = plugin.getHookManager().getHook(WorldGuardHook.class);
         this.myPet = plugin.getHookManager().getHook(MyPetHook.class);
@@ -177,7 +144,7 @@ public class DuelManager implements Loadable {
             arena.endMatch(null, null, Reason.PLUGIN_DISABLE);
         }
 
-        Players.getOnlinePlayers().stream().filter(Player::isDead).forEach(player -> {
+        Bukkit.getOnlinePlayers().stream().filter(Player::isDead).forEach(player -> {
             final PlayerInfo info = playerManager.removeAndGet(player);
 
             if (info != null) {
@@ -255,7 +222,7 @@ public class DuelManager implements Loadable {
             final String title = lang.getMessage("DUEL.reward.money.title", "name", opponent != null ? opponent.getName() : lang.getMessage("GENERAL.none"), "money", amount);
 
             if (title != null) {
-                Titles.send(player, title, null, 0, 20, 50);
+                Titles.sendTitle(player, 0, 20, 50, StringUtil.color(title), null);
             }
         }
 
@@ -412,8 +379,8 @@ public class DuelManager implements Loadable {
 
     private boolean isTagged(final Player player) {
         return (combatTagPlus != null && combatTagPlus.isTagged(player))
-            || (pvpManager != null && pvpManager.isTagged(player))
-            || (combatLogX != null && combatLogX.isTagged(player));
+                || (pvpManager != null && pvpManager.isTagged(player))
+                || (combatLogX != null && combatLogX.isTagged(player));
     }
 
     private boolean notInLoc(final Player player, final Location location) {
@@ -478,9 +445,7 @@ public class DuelManager implements Loadable {
                 myPet.removePet(player);
             }
 
-            if (essentials != null) {
-                essentials.tryUnvanish(player);
-            }
+            //UNVANISH?
 
             if (mcMMO != null) {
                 mcMMO.disableSkills(player);
@@ -532,14 +497,14 @@ public class DuelManager implements Loadable {
             }
 
             final String message = lang.getMessage("DUEL.on-end.opponent-defeat",
-                "winner", winner.getName(),
-                "loser", loser.getName(),
-                "health", matchData.getHealth(),
-                "kit", matchData.getKit(),
-                "arena", match.getArena().getName(),
-                "winner_rating", winnerRating,
-                "loser_rating", loserRating,
-                "change", change
+                    "winner", winner.getName(),
+                    "loser", loser.getName(),
+                    "health", matchData.getHealth(),
+                    "kit", matchData.getKit(),
+                    "arena", match.getArena().getName(),
+                    "winner_rating", winnerRating,
+                    "loser_rating", loserRating,
+                    "change", change
             );
 
             if (message == null) {
@@ -549,7 +514,7 @@ public class DuelManager implements Loadable {
             if (config.isArenaOnlyEndMessage()) {
                 match.getArena().broadcast(message);
             } else {
-                Players.getOnlinePlayers().forEach(player -> player.sendMessage(message));
+                Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(message));
             }
         }
     }
@@ -667,9 +632,9 @@ public class DuelManager implements Loadable {
                         try {
                             for (final String command : config.getEndCommands()) {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
-                                    .replace("%winner%", winner.getName()).replace("%loser%", player.getName())
-                                    .replace("%kit%", kitName).replace("%arena%", arena.getName())
-                                    .replace("%bet_amount%", String.valueOf(match.getBet()))
+                                        .replace("%winner%", winner.getName()).replace("%loser%", player.getName())
+                                        .replace("%kit%", kitName).replace("%arena%", arena.getName())
+                                        .replace("%bet_amount%", String.valueOf(match.getBet()))
                                 );
                             }
                         } catch (Exception ex) {
@@ -690,9 +655,7 @@ public class DuelManager implements Loadable {
             if (info != null) {
                 event.setRespawnLocation(info.getLocation());
 
-                if (essentials != null) {
-                    essentials.setBackLocation(player, event.getRespawnLocation());
-                }
+                //TODO: CMI SETBACKLOCATION
 
                 plugin.doSyncAfter(() -> {
                     if (!player.isOnline()) {
@@ -755,7 +718,7 @@ public class DuelManager implements Loadable {
             final String command = event.getMessage().substring(1).split(" ")[0].toLowerCase();
 
             if (!arenaManager.isInMatch(event.getPlayer()) || (config.isBlockAllCommands() ? config.getWhitelistedCommands().contains(command)
-                : !config.getBlacklistedCommands().contains(command))) {
+                    : !config.getBlacklistedCommands().contains(command))) {
                 return;
             }
 

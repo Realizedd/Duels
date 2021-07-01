@@ -1,11 +1,8 @@
 package me.realized.duels.util.gui;
 
 import com.google.common.collect.Lists;
-import java.util.Collection;
-import java.util.function.Consumer;
 import lombok.Getter;
 import lombok.Setter;
-import me.realized.duels.util.compat.Inventories;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.inventory.InventoryBuilder;
 import me.realized.duels.util.inventory.Slots;
@@ -15,6 +12,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Collection;
+import java.util.function.Consumer;
 
 public class MultiPageGui<P extends JavaPlugin> extends AbstractGui<P> {
 
@@ -98,7 +98,7 @@ public class MultiPageGui<P extends JavaPlugin> extends AbstractGui<P> {
                     last = last.next;
                 }
 
-                last.setTitle(title + " (" + pageNum + "/" + totalPages + ")");
+                //last.setTitle(title + " (" + pageNum + "/" + totalPages + ")");
                 last.clear();
 
                 if (prev != null) {
@@ -124,9 +124,9 @@ public class MultiPageGui<P extends JavaPlugin> extends AbstractGui<P> {
 
     private PageNode createPage(final int page, final int total) {
         return new PageNode(InventoryBuilder
-            .of(title + " (" + page + "/" + total + ")", size)
-            .fillRange(prevPageSlot, nextPageSlot + 1, getSpaceFiller())
-            .build());
+                .of(title + " (" + page + "/" + total + ")", size)
+                .fillRange(prevPageSlot, nextPageSlot + 1, getSpaceFiller())
+                .build());
     }
 
     private ItemStack getSpaceFiller() {
@@ -192,7 +192,7 @@ public class MultiPageGui<P extends JavaPlugin> extends AbstractGui<P> {
         }
 
         void setEmpty() {
-            setTitle(title);
+            //setTitle(title);
 
             final ItemStack item = inventory.getItem(4);
 
@@ -224,9 +224,10 @@ public class MultiPageGui<P extends JavaPlugin> extends AbstractGui<P> {
             next = null;
         }
 
-        void setTitle(final String title) {
-            Inventories.setTitle(inventory, title);
-        }
+        //void setTitle(final String title) {
+        //    inventory.getViewers().forEach();
+        //    Inventories.setTitle(inventory, title);
+        //}
 
         void clear() {
             remove(inventory);

@@ -1,11 +1,5 @@
 package me.realized.duels.kit;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import javax.annotation.Nonnull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +14,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class KitImpl extends BaseButton implements Kit {
 
@@ -40,12 +37,12 @@ public class KitImpl extends BaseButton implements Kit {
     private boolean removed;
 
     public KitImpl(final DuelsPlugin plugin, final String name, final ItemStack displayed, final boolean usePermission, final boolean arenaSpecific,
-        final Set<Characteristic> characteristics) {
+                   final Set<Characteristic> characteristics) {
         super(plugin, displayed != null ? displayed : ItemBuilder
-            .of(Material.DIAMOND_SWORD)
-            .name("&7&l" + name)
-            .lore("&aClick to send", "&aa duel request", "&awith this kit!")
-            .build());
+                .of(Material.DIAMOND_SWORD)
+                .name("&7&l" + name)
+                .lore("&aClick to send", "&aa duel request", "&awith this kit!")
+                .build());
         this.name = name;
         this.usePermission = usePermission;
         this.arenaSpecific = arenaSpecific;

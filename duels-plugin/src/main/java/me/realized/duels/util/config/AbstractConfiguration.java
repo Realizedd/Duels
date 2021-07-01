@@ -3,30 +3,18 @@ package me.realized.duels.util.config;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.config.convert.Converter;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class AbstractConfiguration<P extends JavaPlugin> implements Loadable {
 
@@ -60,7 +48,8 @@ public abstract class AbstractConfiguration<P extends JavaPlugin> implements Loa
     }
 
     @Override
-    public void handleUnload() {}
+    public void handleUnload() {
+    }
 
     protected abstract void loadValues(final FileConfiguration configuration) throws Exception;
 

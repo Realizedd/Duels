@@ -1,13 +1,14 @@
 package me.realized.duels.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.kit.KitImpl;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ArenaData {
 
@@ -18,14 +19,15 @@ public class ArenaData {
     private Map<Integer, LocationData> positions = new HashMap<>();
 
     // for Gson
-    private ArenaData() {}
+    private ArenaData() {
+    }
 
     public ArenaData(final ArenaImpl arena) {
         this.name = arena.getName();
         this.disabled = arena.isDisabled();
         arena.getKits().forEach(kit -> this.kits.add(kit.getName()));
         arena.getPositions().entrySet()
-            .stream().filter(entry -> entry.getValue().getWorld() != null).forEach(entry -> positions.put(entry.getKey(), new LocationData(entry.getValue())));
+                .stream().filter(entry -> entry.getValue().getWorld() != null).forEach(entry -> positions.put(entry.getKey(), new LocationData(entry.getValue())));
     }
 
     public ArenaImpl toArena(final DuelsPlugin plugin) {

@@ -4,7 +4,8 @@ import java.util.OptionalInt;
 
 public final class NumberUtil {
 
-    private NumberUtil() {}
+    private NumberUtil() {
+    }
 
     /**
      * Copy of {@link Integer#parseInt(String)} (String)} but returns an empty {@link OptionalInt} instead of throwing a {@link NumberFormatException}.

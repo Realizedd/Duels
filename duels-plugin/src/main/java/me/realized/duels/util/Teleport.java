@@ -1,10 +1,8 @@
 package me.realized.duels.util;
 
-import java.util.function.Consumer;
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.hook.hooks.EssentialsHook;
-import me.realized.duels.util.compat.Players;
 import me.realized.duels.util.metadata.MetadataUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+
+import java.util.function.Consumer;
 
 /**
  * Handles force teleporting of players.
@@ -22,29 +22,26 @@ public final class Teleport implements Loadable, Listener {
 
     private final DuelsPlugin plugin;
 
-    private EssentialsHook essentials;
-
     public Teleport(final DuelsPlugin plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public void handleLoad() {
-        this.essentials = plugin.getHookManager().getHook(EssentialsHook.class);
-
         // Late-register the listener to override previously registered listeners
         plugin.doSyncAfter(() -> plugin.registerListener(this), 1L);
     }
 
     @Override
-    public void handleUnload() {}
+    public void handleUnload() {
+    }
 
     /**
      * Attempts to force-teleport a player by storing a metadata value in the player before teleportation
      * and uncancelling the teleport by the player in a MONITOR-priority listener if cancelled by other plugins.
      *
-     * @param player Player to force-teleport to a location
-     * @param location Location to force-teleport the player
+     * @param player      Player to force-teleport to a location
+     * @param location    Location to force-teleport the player
      * @param failHandler Called when teleportation has failed -- being when Player#teleport returns false.
      */
     public void tryTeleport(final Player player, final Location location, final Consumer<Player> failHandler) {
@@ -57,9 +54,7 @@ public final class Teleport implements Loadable, Listener {
             return;
         }
 
-        if (essentials != null) {
-            essentials.setBackLocation(player, location);
-        }
+        //TODO: CMI SETBACKLOCATION
 
         final Chunk chunk = location.getChunk();
 
@@ -81,7 +76,7 @@ public final class Teleport implements Loadable, Listener {
             return;
         }
 
-        plugin.doSyncAfter(() -> Players.getOnlinePlayers().forEach(online -> {
+        plugin.doSyncAfter(() -> Bukkit.getOnlinePlayers().forEach(online -> {
             if (player.canSee(online) && online.canSee(player)) {
                 player.hidePlayer(online);
                 online.hidePlayer(player);

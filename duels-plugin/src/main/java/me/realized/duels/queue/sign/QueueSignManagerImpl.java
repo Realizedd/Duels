@@ -2,22 +2,6 @@ package me.realized.duels.queue.sign;
 
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.api.event.queue.sign.QueueSignCreateEvent;
@@ -39,6 +23,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.*;
+import java.util.*;
 
 public class QueueSignManagerImpl implements Loadable, QueueSignManager, Listener {
 
@@ -68,7 +57,8 @@ public class QueueSignManagerImpl implements Loadable, QueueSignManager, Listene
             file.createNewFile();
         } else {
             try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
-                final List<QueueSignData> data = plugin.getGson().fromJson(reader, new TypeToken<List<QueueSignData>>() {}.getType());
+                final List<QueueSignData> data = plugin.getGson().fromJson(reader, new TypeToken<List<QueueSignData>>() {
+                }.getType());
 
                 if (data != null) {
                     data.forEach(queueSignData -> {

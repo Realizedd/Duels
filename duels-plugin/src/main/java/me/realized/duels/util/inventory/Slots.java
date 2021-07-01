@@ -4,7 +4,8 @@ import java.util.function.Consumer;
 
 public final class Slots {
 
-    private Slots() {}
+    private Slots() {
+    }
 
     public static void run(final int from, final int to, final int height, final Consumer<Integer> action) {
         for (int h = 0; h < height; h++) {

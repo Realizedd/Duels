@@ -1,11 +1,12 @@
 package me.realized.duels.command.commands.duels.subcommands;
 
-import java.util.List;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.command.BaseCommand;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import java.util.List;
 
 public class DeletekitCommand extends BaseCommand {
 

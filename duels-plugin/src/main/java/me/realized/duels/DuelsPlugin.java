@@ -3,16 +3,6 @@ package me.realized.duels;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import me.realized.duels.api.Duels;
 import me.realized.duels.api.command.SubCommand;
@@ -31,20 +21,13 @@ import me.realized.duels.extension.ExtensionManager;
 import me.realized.duels.hook.HookManager;
 import me.realized.duels.inventories.InventoryManager;
 import me.realized.duels.kit.KitManagerImpl;
-import me.realized.duels.listeners.DamageListener;
-import me.realized.duels.listeners.EnderpearlListener;
-import me.realized.duels.listeners.KitItemListener;
-import me.realized.duels.listeners.KitOptionsListener;
-import me.realized.duels.listeners.PotionListener;
-import me.realized.duels.listeners.ProjectileHitListener;
-import me.realized.duels.listeners.TeleportListener;
+import me.realized.duels.listeners.*;
 import me.realized.duels.logging.LogManager;
 import me.realized.duels.player.PlayerInfoManager;
 import me.realized.duels.queue.QueueManager;
 import me.realized.duels.queue.sign.QueueSignManagerImpl;
 import me.realized.duels.request.RequestManager;
 import me.realized.duels.setting.SettingsManager;
-import me.realized.duels.shaded.bstats.Metrics;
 import me.realized.duels.spectate.SpectateManagerImpl;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.Log;
@@ -58,15 +41,15 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.inventivetalent.update.spiget.SpigetUpdate;
-import org.inventivetalent.update.spiget.UpdateCallback;
-import org.inventivetalent.update.spiget.comparator.VersionComparator;
+
+import javax.annotation.Nonnull;
+import java.io.IOException;
+import java.lang.reflect.Modifier;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
-
-    private static final int BSTATS_ID = 2696;
-    private static final int RESOURCE_ID = 20171;
-    private static final String SPIGOT_INSTALLATION_URL = "https://www.spigotmc.org/wiki/spigot-installation/";
 
     @Getter
     private static DuelsPlugin instance;
@@ -74,8 +57,9 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     @Getter
     private final Gson gson = new GsonBuilder().excludeFieldsWithModifiers(Modifier.TRANSIENT).setPrettyPrinting().create();
     private final List<Loadable> loadables = new ArrayList<>();
+    private final Map<String, AbstractCommand<DuelsPlugin>> commands = new HashMap<>();
+    private final List<Listener> registeredListeners = new ArrayList<>();
     private int lastLoad;
-
     @Getter
     private LogManager logManager;
     @Getter
@@ -114,9 +98,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     private Teleport teleport;
     @Getter
     private ExtensionManager extensionManager;
-
-    private final Map<String, AbstractCommand<DuelsPlugin>> commands = new HashMap<>();
-    private final List<Listener> registeredListeners = new ArrayList<>();
     @Getter
     private boolean disabling;
 
@@ -143,18 +124,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
 
         Log.addSource(logManager);
         logManager.debug("onEnable start -> " + System.currentTimeMillis() + "\n");
-
-        try {
-            Class.forName("org.spigotmc.SpigotConfig");
-        } catch (ClassNotFoundException ex) {
-            Log.error("================= *** DUELS LOAD FAILURE *** =================");
-            Log.error("Duels requires a spigot server to run, but this server was not running on spigot!");
-            Log.error("To run your server on spigot, follow this guide: " + SPIGOT_INSTALLATION_URL);
-            Log.error("Spigot is compatible with CraftBukkit/Bukkit plugins.");
-            Log.error("================= *** DUELS LOAD FAILURE *** =================");
-            getPluginLoader().disablePlugin(this);
-            return;
-        }
 
         loadables.add(configuration = new Config(this));
         loadables.add(lang = new Lang(this));
@@ -188,31 +157,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
         new EnderpearlListener(this);
         new KitOptionsListener(this);
 
-        new Metrics(this, BSTATS_ID);
-
-        if (!configuration.isCheckForUpdates()) {
-            return;
-        }
-
-        final SpigetUpdate updateChecker = new SpigetUpdate(this, RESOURCE_ID);
-        updateChecker.setVersionComparator(VersionComparator.SEM_VER_SNAPSHOT);
-        updateChecker.checkForUpdate(new UpdateCallback() {
-            @Override
-            public void updateAvailable(final String newVersion, final String downloadUrl, final boolean hasDirectDownload) {
-                DuelsPlugin.this.updateAvailable = true;
-                DuelsPlugin.this.newVersion = newVersion;
-                Log.info("===============================================");
-                Log.info("An update for " + getName() + " is available!");
-                Log.info("Download " + getName() + " v" + newVersion + " here:");
-                Log.info(getDescription().getWebsite());
-                Log.info("===============================================");
-            }
-
-            @Override
-            public void upToDate() {
-                Log.info("No updates were available. You are on the latest version!");
-            }
-        });
     }
 
     @Override
@@ -236,10 +180,10 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
      */
     private boolean load() {
         registerCommands(
-            new DuelCommand(this),
-            new QueueCommand(this),
-            new SpectateCommand(this),
-            new DuelsCommand(this)
+                new DuelCommand(this),
+                new QueueCommand(this),
+                new SpectateCommand(this),
+                new DuelsCommand(this)
         );
 
         for (final Loadable loadable : loadables) {
@@ -273,9 +217,9 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
         registeredListeners.clear();
         // Unregister all extension listeners that isn't using the method Duels#registerListener
         HandlerList.getRegisteredListeners(this)
-            .stream()
-            .filter(listener -> listener.getListener().getClass().getClassLoader().getClass().isAssignableFrom(ExtensionClassLoader.class))
-            .forEach(listener -> HandlerList.unregisterAll(listener.getListener()));
+                .stream()
+                .filter(listener -> listener.getListener().getClass().getClassLoader().getClass().isAssignableFrom(ExtensionClassLoader.class))
+                .forEach(listener -> HandlerList.unregisterAll(listener.getListener()));
         commands.clear();
 
         for (final Loadable loadable : Lists.reverse(loadables)) {
@@ -358,8 +302,8 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
             return true;
         } catch (Exception ex) {
             Log.error("There was an error while " + (unloaded ? "loading " : "unloading ")
-                + loadable.getClass().getSimpleName()
-                + "! If you believe this is an issue from the plugin, please contact the developer.", ex);
+                    + loadable.getClass().getSimpleName()
+                    + "! If you believe this is an issue from the plugin, please contact the developer.", ex);
             return false;
         }
     }
@@ -442,9 +386,9 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
 
     public List<String> getReloadables() {
         return loadables.stream()
-            .filter(loadable -> loadable instanceof Reloadable)
-            .map(loadable -> loadable.getClass().getSimpleName())
-            .collect(Collectors.toList());
+                .filter(loadable -> loadable instanceof Reloadable)
+                .map(loadable -> loadable.getClass().getSimpleName())
+                .collect(Collectors.toList());
     }
 
     @Override

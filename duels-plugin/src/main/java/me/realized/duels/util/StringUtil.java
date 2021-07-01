@@ -1,12 +1,13 @@
 package me.realized.duels.util;
 
 import com.google.common.collect.Lists;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+
 import java.util.List;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 
 public final class StringUtil {
 
@@ -29,7 +30,8 @@ public final class StringUtil {
         ROMAN_NUMERALS.put(1, "I");
     }
 
-    private StringUtil() {}
+    private StringUtil() {
+    }
 
     // Source: https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java
     public static String toRoman(final int number) {

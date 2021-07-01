@@ -1,8 +1,5 @@
 package me.realized.duels.setting;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import me.realized.duels.DuelsPlugin;
@@ -12,6 +9,10 @@ import me.realized.duels.kit.KitImpl;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Settings {
 

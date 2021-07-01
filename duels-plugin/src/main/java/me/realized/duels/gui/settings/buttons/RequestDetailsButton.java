@@ -27,11 +27,11 @@ public class RequestDetailsButton extends BaseButton {
         }
 
         final String lore = lang.getMessage("GUI.settings.buttons.details.lore",
-            "opponent", target.getName(),
-            "kit", settings.getKit() != null ? settings.getKit().getName() : lang.getMessage("GENERAL.not-selected"),
-            "arena", settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random"),
-            "item_betting", settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled"),
-            "bet_amount", settings.getBet()
+                "opponent", target.getName(),
+                "kit", settings.getKit() != null ? settings.getKit().getName() : lang.getMessage("GENERAL.not-selected"),
+                "arena", settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random"),
+                "item_betting", settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled"),
+                "bet_amount", settings.getBet()
         );
         setLore(lore.split("\n"));
     }

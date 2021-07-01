@@ -1,15 +1,16 @@
 package me.realized.duels.arena;
 
+import com.cryptomorin.xseries.messages.Titles;
 import com.google.common.collect.Lists;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Config;
 import me.realized.duels.duel.DuelManager.OpponentInfo;
 import me.realized.duels.util.StringUtil;
-import me.realized.duels.util.compat.Titles;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 class Countdown extends BukkitRunnable {
 
@@ -48,17 +49,17 @@ class Countdown extends BukkitRunnable {
 
             if (info != null) {
                 player.sendMessage(message
-                    .replace("%opponent%", info.getName())
-                    .replace("%opponent_rating%", String.valueOf(info.getRating()))
-                    .replace("%kit%", kit)
-                    .replace("%arena%", arena.getName())
+                        .replace("%opponent%", info.getName())
+                        .replace("%opponent_rating%", String.valueOf(info.getRating()))
+                        .replace("%kit%", kit)
+                        .replace("%arena%", arena.getName())
                 );
             } else {
                 player.sendMessage(message);
             }
 
             if (title != null) {
-                Titles.send(player, title, null, 0, 20, 50);
+                Titles.sendTitle(player, 0, 20, 50, StringUtil.color(title), null);
             }
         });
 

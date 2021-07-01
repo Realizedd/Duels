@@ -19,5 +19,6 @@ public final class Permissions {
     public static final String SETTING_ALL = "duels.use.*";
     public static final String QUEUE = "duels.queue";
 
-    private Permissions() {}
+    private Permissions() {
+    }
 }

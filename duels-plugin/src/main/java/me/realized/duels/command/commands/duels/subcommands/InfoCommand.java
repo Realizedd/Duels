@@ -1,7 +1,5 @@
 package me.realized.duels.command.commands.duels.subcommands;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.command.BaseCommand;
@@ -11,6 +9,9 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InfoCommand extends BaseCommand {
 
@@ -34,8 +35,8 @@ public class InfoCommand extends BaseCommand {
         final String positions = StringUtils.join(arena.getPositions().values().stream().map(StringUtil::parse).collect(Collectors.toList()), ", ");
         final String players = StringUtils.join(arena.getPlayers().stream().map(Player::getName).collect(Collectors.toList()), ", ");
         lang.sendMessage(sender, "COMMAND.duels.info", "name", name, "in_use", inUse, "disabled", disabled, "kits",
-            !kits.isEmpty() ? kits : lang.getMessage("GENERAL.none"), "positions", !positions.isEmpty() ? positions : lang.getMessage("GENERAL.none"), "players",
-            !players.isEmpty() ? players : lang.getMessage("GENERAL.none"));
+                !kits.isEmpty() ? kits : lang.getMessage("GENERAL.none"), "positions", !positions.isEmpty() ? positions : lang.getMessage("GENERAL.none"), "players",
+                !players.isEmpty() ? players : lang.getMessage("GENERAL.none"));
     }
 
     @Override
