@@ -1,19 +1,12 @@
-<h1>Duels</h1> 
+<h1>Duels | 1.17+ Fork</h1> 
 
 [![](https://jitpack.io/v/Realizedd/Duels.svg)](https://jitpack.io/#Realizedd/Duels)
 
-A duel plugin for spigot. <a href="https://www.spigotmc.org/resources/duels.20171/">Spigot Project Page</a>
+A 1.1.7+ Fork of Duels. <a href="https://www.spigotmc.org/resources/duels.20171/">Original Spigot Project Page</a>
 
 ---
 
-* **[Wiki](https://github.com/Realizedd/Duels/wiki)**
-* **[Commands](https://github.com/Realizedd/Duels/wiki/commands)**
-* **[Permissions](https://github.com/Realizedd/Duels/wiki/permissions)**
-* **[Placeholders](https://github.com/Realizedd/Duels/wiki/placeholders)**
-* **[Extensions](https://github.com/Realizedd/Duels/wiki/extensions)**
-* **[config.yml](https://github.com/Realizedd/Duels/blob/master/duels-plugin/src/main/resources/config.yml)**
-* **[lang.yml](https://github.com/Realizedd/Duels/blob/master/duels-plugin/src/main/resources/lang.yml)**
-* **[Support Discord](https://discord.gg/RNy45sg)**
+* **[Original Project](https://github.com/Realizedd/Duels)**
 
 
 ### Getting the dependency
