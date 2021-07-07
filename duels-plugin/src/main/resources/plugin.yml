@@ -4,9 +4,9 @@ version: @VERSION@
 softdepend: [BountyHunters, CombatLogX, CombatTagPlus, Factions, LeaderHeads, mcMMO, MVdWPlaceholderAPI, MyPet, PlaceholderAPI, ProtocolLib, PvPManager, Vault, WorldGuard, Multiverse-Core]
 # Multiverse-Core added as soft-depend due to locations being null when Duels is loaded first.
 # Add any world management plugins to softdepend list if arena doesn't load properly in the generated world.
-api-version: 1.13
+api-version: 1.16
 
-author: Realized
+authors: [Realized, Valentina_pro]
 website: https://www.spigotmc.org/resources/duels.20171/
 description: An ultimate solution to server owners wanting to create a duel system.
 
