@@ -52,7 +52,7 @@ public class TeleportListener implements Listener {
         players.addAll(spectateManager.getAllSpectators());
 
         for (final Player target : players) {
-            if (target == null || player.equals(target) || !target.isOnline() || !isSimilar(target.getLocation(), to)) {
+            if (target == null || player.equals(target) || !target.isOnline() || (to != null && !isSimilar(target.getLocation(), to))) {
                 continue;
             }
 

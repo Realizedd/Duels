@@ -97,11 +97,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     @Getter
     private boolean disabling;
 
-    @Getter
-    private volatile boolean updateAvailable;
-    @Getter
-    private volatile String newVersion;
-
     @Override
     public void onEnable() {
         instance = this;

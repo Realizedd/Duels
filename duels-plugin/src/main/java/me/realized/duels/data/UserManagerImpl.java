@@ -278,11 +278,6 @@ public class UserManagerImpl implements Loadable, Listener, UserManager {
     @EventHandler
     public void on(final PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-
-        if (plugin.isUpdateAvailable() && (player.isOp() || player.hasPermission(Permissions.ADMIN))) {
-            player.sendMessage(StringUtil.color(String.format(ADMIN_UPDATE_MESSAGE, plugin.getNewVersion(), plugin.getDescription().getWebsite())));
-        }
-
         final PlayerInfo info;
 
         if (!player.isDead() && (info = plugin.getPlayerManager().get(player)) != null && info.isGiveOnLogin()) {

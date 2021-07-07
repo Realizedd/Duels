@@ -1,10 +1,10 @@
 dependencies {
-    compile 'com.google.code.findbugs:jsr305:3.0.2'
-    compile 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
 }
 
 shadowJar {
-    archiveName = project.name + '-' + project.version + '.jar'
+    archiveFileName = project.name + '-' + project.version + '.jar'
 }
 
 build.dependsOn(shadowJar)

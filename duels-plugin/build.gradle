@@ -20,30 +20,32 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
     compileOnly 'me.clip:placeholderapi:2.10.9'
     compileOnly('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
     compileOnly 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.1-SNAPSHOT'
+
     implementation 'io.github.bananapuncher714:nbteditor:7.17.0', {
         exclude group: 'org.spigotmc'
     }
     implementation 'com.github.cryptomorin:XSeries:8.1.0'
-    compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.1-SNAPSHOT'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
-    compile name: 'Vault-1.6.7'
-    compile name: 'CombatTagPlus'
-    compile name: 'PvPManager-3.7.16'
-    compile name: 'Factions-1.6.9.5-U0.1.14'
-    compile name: 'MassiveCore'
-    compile name: 'Factions'
-    compile name: 'MyPet-2.3.4'
-    compile name: 'BountyHunters-2.2.6'
-    compile name: 'LeaderHeadsAPI'
-    compile project(':duels-worldguard')
-    compile project(':duels-worldguard-v6')
-    compile project(':duels-worldguard-v7')
-    compile project(':duels-api')
-    compile 'com.google.code.gson:gson:2.8.7'
-
+    compileOnly name: 'Vault-1.6.7'
+    compileOnly name: 'CombatTagPlus'
+    compileOnly name: 'PvPManager-3.7.16'
+    compileOnly name: 'Factions-1.6.9.5-U0.1.14'
+    compileOnly name: 'MassiveCore'
+    compileOnly name: 'Factions'
+    compileOnly name: 'MyPet-2.3.4'
+    compileOnly name: 'BountyHunters-2.2.6'
+    compileOnly name: 'LeaderHeadsAPI'
+    compileOnly project(':duels-worldguard')
+    compileOnly project(':duels-worldguard-v6')
+    compileOnly project(':duels-worldguard-v7')
+    compileOnly project(':duels-api')
 }
 
 shadowJar {

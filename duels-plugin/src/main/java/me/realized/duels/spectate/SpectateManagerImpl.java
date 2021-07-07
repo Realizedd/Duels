@@ -34,6 +34,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.*;
@@ -139,7 +140,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
             match.getAllPlayers()
                     .stream()
                     .filter(arenaPlayer -> arenaPlayer.isOnline() && arenaPlayer.canSee(player))
-                    .forEach(arenaPlayer -> arenaPlayer.hidePlayer(player));
+                    .forEach(arenaPlayer -> arenaPlayer.hidePlayer(plugin, player));
         }
 
         // Remove pet before teleport
@@ -212,7 +213,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
             match.getAllPlayers()
                     .stream()
                     .filter(Player::isOnline)
-                    .forEach(matchPlayer -> matchPlayer.showPlayer(player));
+                    .forEach(matchPlayer -> matchPlayer.showPlayer(plugin, player));
         }
 
         final SpectateEndEvent event = new SpectateEndEvent(player, spectator);
@@ -357,8 +358,8 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         }
 
         @EventHandler(ignoreCancelled = true)
-        public void on(PlayerPickupItemEvent event) {
-            if (!isSpectating(event.getPlayer())) {
+        public void on(EntityPickupItemEvent event) {
+            if (!(event.getEntity() instanceof Player) || !isSpectating((Player) event.getEntity())) {
                 return;
             }
 
@@ -394,8 +395,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
             } else {
                 return;
             }
-
-            if (!isSpectating(player)) {
+            if (player == null || !isSpectating(player)) {
                 return;
             }
 

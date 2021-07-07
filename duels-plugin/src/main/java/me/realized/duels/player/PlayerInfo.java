@@ -3,6 +3,7 @@ package me.realized.duels.player;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -42,7 +43,8 @@ public class PlayerInfo {
 
     public void restore(final Player player) {
         player.addPotionEffects(effects);
-        player.setHealth(health > player.getMaxHealth() ? player.getMaxHealth() : health);
+        double maxHealth = Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+        player.setHealth(Math.min(health, maxHealth));
         player.setFoodLevel(hunger);
 
         if (armor.length > 0) {

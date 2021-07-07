@@ -20,7 +20,7 @@ public class VersionCommand extends BaseCommand {
     protected void execute(final CommandSender sender, final String label, final String[] args) {
         final PluginDescriptionFile info = plugin.getDescription();
         TextBuilder
-                .of(StringUtil.color("&b" + info.getFullName() + " by " + info.getAuthors().get(0) + " &l[Click]"))
+                .of(StringUtil.color("&b" + info.getFullName() + " by " + info.getAuthors() + " &l[Click]"))
                 .setClickEvent(Action.OPEN_URL, info.getWebsite())
                 .send((Player) sender);
     }

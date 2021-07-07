@@ -34,6 +34,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
@@ -96,7 +97,7 @@ public class DuelManager implements Loadable {
                 for (final ArenaImpl arena : arenaManager.getArenasImpl()) {
                     final MatchImpl match = arena.getMatch();
 
-                    if (match == null || now - match.getStart() < (config.getMaxDuration() * 60 * 1000) || arena.size() <= 1) {
+                    if (match == null || now - match.getStart() < (config.getMaxDuration() * 60 * 1000L) || arena.size() <= 1) {
                         continue;
                     }
 
@@ -701,8 +702,9 @@ public class DuelManager implements Loadable {
         }
 
         @EventHandler(ignoreCancelled = true)
-        public void on(final PlayerPickupItemEvent event) {
-            if (!config.isPreventItemPickup() || !arenaManager.isInMatch(event.getPlayer())) {
+        public void on(final EntityPickupItemEvent event) {
+            if (!(event.getEntity() instanceof Player)) return;
+            if (!config.isPreventItemPickup() || !arenaManager.isInMatch((Player) event.getEntity())) {
                 return;
             }
 

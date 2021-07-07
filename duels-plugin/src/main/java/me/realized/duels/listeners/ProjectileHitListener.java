@@ -41,7 +41,7 @@ public class ProjectileHitListener implements Listener {
 
         final Player player = (Player) ((Projectile) event.getDamager()).getShooter();
 
-        if (!arenaManager.isInMatch(player)) {
+        if (player == null || !arenaManager.isInMatch(player)) {
             return;
         }
 
