@@ -16,8 +16,6 @@ import me.realized.duels.config.Config;
 import me.realized.duels.config.Lang;
 import me.realized.duels.data.UserManagerImpl;
 import me.realized.duels.duel.DuelManager;
-import me.realized.duels.extension.ExtensionClassLoader;
-import me.realized.duels.extension.ExtensionManager;
 import me.realized.duels.hook.HookManager;
 import me.realized.duels.inventories.InventoryManager;
 import me.realized.duels.kit.KitManagerImpl;
@@ -97,8 +95,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     @Getter
     private Teleport teleport;
     @Getter
-    private ExtensionManager extensionManager;
-    @Getter
     private boolean disabling;
 
     @Getter
@@ -142,7 +138,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
         loadables.add(requestManager = new RequestManager(this));
         hookManager = new HookManager(this);
         loadables.add(teleport = new Teleport(this));
-        loadables.add(extensionManager = new ExtensionManager(this));
 
         if (!load()) {
             getPluginLoader().disablePlugin(this);
@@ -215,11 +210,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     private boolean unload() {
         registeredListeners.forEach(HandlerList::unregisterAll);
         registeredListeners.clear();
-        // Unregister all extension listeners that isn't using the method Duels#registerListener
-        HandlerList.getRegisteredListeners(this)
-                .stream()
-                .filter(listener -> listener.getListener().getClass().getClassLoader().getClass().isAssignableFrom(ExtensionClassLoader.class))
-                .forEach(listener -> HandlerList.unregisterAll(listener.getListener()));
         commands.clear();
 
         for (final Loadable loadable : Lists.reverse(loadables)) {
