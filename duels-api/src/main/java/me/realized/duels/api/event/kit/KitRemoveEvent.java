@@ -1,11 +1,12 @@
 package me.realized.duels.api.event.kit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.kit.Kit;
 import me.realized.duels.api.kit.KitManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Called when a {@link Kit} is removed.

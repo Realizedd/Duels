@@ -1,9 +1,10 @@
 package me.realized.duels.api.queue.sign;
 
-import javax.annotation.Nonnull;
 import me.realized.duels.api.event.queue.sign.QueueSignRemoveEvent;
 import me.realized.duels.api.queue.DQueue;
 import org.bukkit.Location;
+
+import javax.annotation.Nonnull;
 
 /**
  * Represents a QueueSign loaded on the server.

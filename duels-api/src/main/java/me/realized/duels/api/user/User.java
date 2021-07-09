@@ -1,9 +1,10 @@
 package me.realized.duels.api.user;
 
+import me.realized.duels.api.kit.Kit;
+
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.UUID;
-import javax.annotation.Nonnull;
-import me.realized.duels.api.kit.Kit;
 
 /**
  * Represents a User loaded on the server.

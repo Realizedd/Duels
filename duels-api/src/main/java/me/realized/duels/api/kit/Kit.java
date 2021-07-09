@@ -1,10 +1,11 @@
 package me.realized.duels.api.kit;
 
-import javax.annotation.Nonnull;
 import me.realized.duels.api.event.kit.KitEquipEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 /**
  * Represents an Kit loaded on the server.

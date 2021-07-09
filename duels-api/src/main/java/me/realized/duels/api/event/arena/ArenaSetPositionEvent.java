@@ -1,14 +1,15 @@
 package me.realized.duels.api.event.arena;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.arena.Arena;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Called when a new spawnpoint is set for an {@link Arena}.
@@ -28,6 +29,10 @@ public class ArenaSetPositionEvent extends ArenaEvent implements Cancellable {
         Objects.requireNonNull(location, "location");
         this.pos = pos;
         this.location = location;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -74,10 +79,6 @@ public class ArenaSetPositionEvent extends ArenaEvent implements Cancellable {
     @Override
     public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

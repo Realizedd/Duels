@@ -1,9 +1,10 @@
 package me.realized.duels.api.event.match;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import me.realized.duels.api.match.Match;
 import org.bukkit.event.Event;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Represents an event caused by a {@link Match}.

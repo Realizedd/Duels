@@ -61,7 +61,7 @@ supported-plugins:
       enabled: false
 
       # List of regions to allow dueling.
-      regions: [spawn, lobby]
+      regions: [ spawn, lobby ]
   MyPet:
     # If set to 'true', player's pet will despawn when entering a duel.
     # default: false
@@ -162,7 +162,7 @@ duel:
       # Available placeholders:
       # %player% - Name of the player entering the match
       commands:
-      - 'broadcast %player% is entering a duel!'
+        - 'broadcast %player% is entering a duel!'
 
     end-commands:
       # If set to 'true', the commands listed below will run at the end of a match.
@@ -173,8 +173,8 @@ duel:
       # %winner% - Name of the winner of the match
       # %loser% - Name of the loser of the match
       commands:
-      - 'give %winner% diamond 1'
-      - 'give %loser% dirt 1'
+        - 'give %winner% diamond 1'
+        - 'give %loser% dirt 1'
 
   projectile-hit-message:
     # If set to 'true', a message from lang.yml will be sent to the shooter of the projectile.
@@ -182,7 +182,7 @@ duel:
     enabled: true
 
     # Projectile types to display the message.
-    types: [ARROW, TIPPED_ARROW, SPECTRAL_ARROW, TRIDENT]
+    types: [ ARROW, TIPPED_ARROW, SPECTRAL_ARROW, TRIDENT ]
 
   # If set to 'true', players in duel will not be able to open any kind of inventories except their own.
   # default: true
@@ -278,74 +278,74 @@ duel:
   # List of commands to block while in a duel.
   # NOTE: Only active if 'block-all-commands' is disabled!
   blacklisted-commands:
-  - 'heal'
-  - 'eheal'
-  - 'essentials:heal'
-  - 'essentials:eheal'
-  - 'kit'
-  - 'ekit'
-  - 'kits'
-  - 'ekits'
-  - 'essentials:kit'
-  - 'essentials:ekit'
-  - 'essentials:kits'
-  - 'essentials:ekits'
-  - 'enderchest'
-  - 'echest'
-  - 'eechest'
-  - 'eenderchest'
-  - 'endersee'
-  - 'eendersee'
-  - 'ec'
-  - 'eec'
-  - 'essentials:enderchest'
-  - 'essentials:echest'
-  - 'essentials:eechest'
-  - 'essentials:eenderchest'
-  - 'essentials:endersee'
-  - 'essentials:eendersee'
-  - 'essentials:ec'
-  - 'essentials:eec'
-  - 'tpaccept'
-  - 'etpaccept'
-  - 'tpyes'
-  - 'etpyes'
-  - 'essentials:tpaccept'
-  - 'essentials:etpaccept'
-  - 'essentials:tpyes'
-  - 'essentials:etpyes'
-  - 'tpahere'
-  - 'etpahere'
-  - 'essentials:tpahere'
-  - 'essentials:etpahere'
-  - 'back'
-  - 'eback'
-  - 'return'
-  - 'ereturn'
-  - 'essentials:back'
-  - 'essentials:eback'
-  - 'essentials:return'
-  - 'essentials:ereturn'
-  - 'sethome'
-  - 'esethome'
-  - 'createhome'
-  - 'ecreatehome'
-  - 'essentials:sethome'
-  - 'essentials:esethome'
-  - 'essentials:createhome'
-  - 'essentials:ecreatehome'
-  - 'spawn'
-  - 'espawn'
-  - 'essentials:spawn'
-  - 'essentials:espawn'
-  - 'vault'
-  - 'chest'
-  - 'pv'
-  - 'playervaults'
-  - 'playervaults:vault'
-  - 'playervaults:chest'
-  - 'playervaults:pv'
-  - 'playervaults:playervaults'
+    - 'heal'
+    - 'eheal'
+    - 'essentials:heal'
+    - 'essentials:eheal'
+    - 'kit'
+    - 'ekit'
+    - 'kits'
+    - 'ekits'
+    - 'essentials:kit'
+    - 'essentials:ekit'
+    - 'essentials:kits'
+    - 'essentials:ekits'
+    - 'enderchest'
+    - 'echest'
+    - 'eechest'
+    - 'eenderchest'
+    - 'endersee'
+    - 'eendersee'
+    - 'ec'
+    - 'eec'
+    - 'essentials:enderchest'
+    - 'essentials:echest'
+    - 'essentials:eechest'
+    - 'essentials:eenderchest'
+    - 'essentials:endersee'
+    - 'essentials:eendersee'
+    - 'essentials:ec'
+    - 'essentials:eec'
+    - 'tpaccept'
+    - 'etpaccept'
+    - 'tpyes'
+    - 'etpyes'
+    - 'essentials:tpaccept'
+    - 'essentials:etpaccept'
+    - 'essentials:tpyes'
+    - 'essentials:etpyes'
+    - 'tpahere'
+    - 'etpahere'
+    - 'essentials:tpahere'
+    - 'essentials:etpahere'
+    - 'back'
+    - 'eback'
+    - 'return'
+    - 'ereturn'
+    - 'essentials:back'
+    - 'essentials:eback'
+    - 'essentials:return'
+    - 'essentials:ereturn'
+    - 'sethome'
+    - 'esethome'
+    - 'createhome'
+    - 'ecreatehome'
+    - 'essentials:sethome'
+    - 'essentials:esethome'
+    - 'essentials:createhome'
+    - 'essentials:ecreatehome'
+    - 'spawn'
+    - 'espawn'
+    - 'essentials:spawn'
+    - 'essentials:espawn'
+    - 'vault'
+    - 'chest'
+    - 'pv'
+    - 'playervaults'
+    - 'playervaults:vault'
+    - 'playervaults:chest'
+    - 'playervaults:pv'
+    - 'playervaults:playervaults'
 
 
 rating:
@@ -546,33 +546,33 @@ sounds:
     pitch: 0.95
     volume: 1.0
     trigger-messages:
-    - '&7Starting in &f5 &7seconds!'
-    - '&7Starting in &f4 &7seconds!'
-    - '&7Starting in &f3 &7seconds!'
-    - '&7Starting in &f2 &7seconds!'
-    - '&7Starting in &f1 &7second!'
+      - '&7Starting in &f5 &7seconds!'
+      - '&7Starting in &f4 &7seconds!'
+      - '&7Starting in &f3 &7seconds!'
+      - '&7Starting in &f2 &7seconds!'
+      - '&7Starting in &f1 &7second!'
   # Remove this sound if your server version is 1.8 or lower!
   countdown-ongoing-sound-1-9:
     type: BLOCK_NOTE_PLING
     pitch: 0.95
     volume: 1.0
     trigger-messages:
-    - '&7Starting in &f5 &7seconds!'
-    - '&7Starting in &f4 &7seconds!'
-    - '&7Starting in &f3 &7seconds!'
-    - '&7Starting in &f2 &7seconds!'
-    - '&7Starting in &f1 &7second!'
+      - '&7Starting in &f5 &7seconds!'
+      - '&7Starting in &f4 &7seconds!'
+      - '&7Starting in &f3 &7seconds!'
+      - '&7Starting in &f2 &7seconds!'
+      - '&7Starting in &f1 &7second!'
   # Remove this sound if your server version is above 1.8!
   countdown-end-sound-1-8:
     type: NOTE_PIANO
     pitch: 1.9
     volume: 1.0
     trigger-messages:
-    - '&7Now in a match against &f%opponent%&7(&a%opponent_rating%&7) with kit &3%kit% &7in arena &e%arena%&7.'
+      - '&7Now in a match against &f%opponent%&7(&a%opponent_rating%&7) with kit &3%kit% &7in arena &e%arena%&7.'
   # Remove this sound if your server version is 1.8 or lower!
   countdown-end-sound-1-9:
     type: BLOCK_NOTE_PLING
     pitch: 1.9
     volume: 1.0
     trigger-messages:
-    - '&7Now in a match against &f%opponent%&7(&a%opponent_rating%&7) with kit &3%kit% &7in arena &e%arena%&7.'
+      - '&7Now in a match against &f%opponent%&7(&a%opponent_rating%&7) with kit &3%kit% &7in arena &e%arena%&7.'

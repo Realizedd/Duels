@@ -1,11 +1,12 @@
 package me.realized.duels.api.event.kit;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import me.realized.duels.api.kit.Kit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Called when a {@link Player} equips a {@link Kit}.
@@ -23,6 +24,10 @@ public class KitEquipEvent extends KitEvent implements Cancellable {
         super(source, kit);
         Objects.requireNonNull(source, "source");
         this.source = source;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -44,10 +49,6 @@ public class KitEquipEvent extends KitEvent implements Cancellable {
     @Override
     public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

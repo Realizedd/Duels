@@ -1,12 +1,13 @@
 package me.realized.duels.api.kit;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.event.kit.KitCreateEvent;
 import me.realized.duels.api.event.kit.KitRemoveEvent;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Represents the KitManager singleton used by Duels.
@@ -28,7 +29,7 @@ public interface KitManager {
      * Note: Calls {@link KitCreateEvent} on successful creation.
      *
      * @param creator {@link Player} who is the creator of this kit.
-     * @param name Name of the newly created {@link Kit}. Requires to be alphanumeric (underscore is allowed).
+     * @param name    Name of the newly created {@link Kit}. Requires to be alphanumeric (underscore is allowed).
      * @return The newly created {@link Kit} or null if a kit with given name already exists.
      */
     @Nullable
@@ -40,7 +41,7 @@ public interface KitManager {
      * Note: Calls {@link KitRemoveEvent} on successful removal.
      *
      * @param source {@link CommandSender} who is the source of this call.
-     * @param name Name of the kit to remove.
+     * @param name   Name of the kit to remove.
      * @return The removed {@link Kit} or null if no {@link Kit} was found with the given name.
      */
     @Nullable

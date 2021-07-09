@@ -1,9 +1,10 @@
 package me.realized.duels.api.event.queue.sign;
 
-import javax.annotation.Nonnull;
 import me.realized.duels.api.queue.sign.QueueSign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
 
 /**
  * Called when a {@link QueueSign} is removed.

@@ -8,11 +8,12 @@ A 1.17+ Fork of Duels. <a href="https://www.spigotmc.org/resources/duels.20171/"
 
 * **[Original Project](https://github.com/Realizedd/Duels)**
 
-
 ### Getting the dependency
 
 #### Repository
+
 Gradle:
+
 ```groovy
 maven {
     name 'jitpack-repo'
@@ -21,23 +22,29 @@ maven {
 ```
 
 Maven:
+
 ```xml
+
 <repository>
-  <id>jitpack-repo</id>
-  <url>https://jitpack.io</url>
+    <id>jitpack-repo</id>
+    <url>https://jitpack.io</url>
 </repository>
 ```
 
 #### Dependency
+
 Gradle:
+
 ```groovy
-compile (group: 'com.github.Drc-DEV.Duels', name: 'duels-api', version: '3.4.2') {
+compile(group: 'com.github.Drc-DEV.Duels', name: 'duels-api', version: '3.4.2') {
     transitive = false
 }
 ```  
 
 Maven:
+
 ```xml
+
 <dependency>
     <groupId>com.github.Drc-DEV.Duels</groupId>
     <artifactId>duels-api</artifactId>
@@ -47,16 +54,18 @@ Maven:
 ```
 
 ### plugin.yml
+
 Add Duels as a soft-depend to ensure Duels is fully loaded before your plugin.
+
 ```yaml
-soft-depend: [Duels]
+soft-depend: [ Duels ]
 ```
 
 ### Getting the API instance
 
 ```java
 @Override
-public void onEnable() {
-  Duels api = (Duels) Bukkit.getServer().getPluginManager().getPlugin("Duels");
-}
+public void onEnable(){
+        Duels api=(Duels)Bukkit.getServer().getPluginManager().getPlugin("Duels");
+        }
 ```

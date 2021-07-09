@@ -1,11 +1,12 @@
 package me.realized.duels.api.event.arena;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.arena.Arena;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Called when an {@link Arena} is enabled or disabled.
@@ -22,6 +23,10 @@ public class ArenaStateChangeEvent extends ArenaEvent implements Cancellable {
     public ArenaStateChangeEvent(@Nullable final CommandSender source, @Nonnull final Arena arena, final boolean disabled) {
         super(source, arena);
         this.disabled = disabled;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -50,10 +55,6 @@ public class ArenaStateChangeEvent extends ArenaEvent implements Cancellable {
     @Override
     public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

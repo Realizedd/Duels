@@ -1,15 +1,16 @@
 package me.realized.duels.api.event.match;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.match.Match;
 import org.bukkit.event.HandlerList;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
  * Called when a {@link Match} is ending.
- *
+ * <p>
  * Note: {@link Match#isFinished()} will return true only after this event is called.
  */
 public class MatchEndEvent extends MatchEvent {
@@ -25,6 +26,10 @@ public class MatchEndEvent extends MatchEvent {
         this.winner = winner;
         this.loser = loser;
         this.reason = reason;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -55,10 +60,6 @@ public class MatchEndEvent extends MatchEvent {
     @Nonnull
     public Reason getReason() {
         return reason;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

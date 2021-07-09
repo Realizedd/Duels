@@ -1,11 +1,12 @@
 package me.realized.duels.api.event.arena;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.arena.Arena;
 import me.realized.duels.api.event.SourcedEvent;
 import org.bukkit.command.CommandSender;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Represents an event caused by a {@link Arena}.

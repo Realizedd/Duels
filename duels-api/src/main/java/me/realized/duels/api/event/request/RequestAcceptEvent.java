@@ -1,10 +1,11 @@
 package me.realized.duels.api.event.request;
 
-import javax.annotation.Nonnull;
 import me.realized.duels.api.request.Request;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
 
 /**
  * Called when a {@link Player} accepts a {@link Request} from a {@link Player}.
@@ -18,12 +19,16 @@ public class RequestAcceptEvent extends RequestEvent implements Cancellable {
     private boolean cancelled;
 
     /**
-     * @param source {@link Player} who is accepting this {@link Request}.
-     * @param target {@link Player} who sent this {@link Request}.
+     * @param source  {@link Player} who is accepting this {@link Request}.
+     * @param target  {@link Player} who sent this {@link Request}.
      * @param request {@link Request} that is being handled.
      */
     public RequestAcceptEvent(@Nonnull final Player source, @Nonnull final Player target, @Nonnull final Request request) {
         super(source, target, request);
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -49,10 +54,6 @@ public class RequestAcceptEvent extends RequestEvent implements Cancellable {
 
     @Override
     public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
         return handlers;
     }
 }

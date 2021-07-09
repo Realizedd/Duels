@@ -1,7 +1,5 @@
 package me.realized.duels.api.arena;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.event.arena.ArenaRemoveEvent;
 import me.realized.duels.api.event.arena.ArenaSetPositionEvent;
 import me.realized.duels.api.event.arena.ArenaStateChangeEvent;
@@ -9,6 +7,9 @@ import me.realized.duels.api.match.Match;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Represents an Arena loaded on the server.
@@ -37,7 +38,7 @@ public interface Arena {
      * Disables this arena which prevents it from being used in duels.
      * Note: Calls {@link ArenaStateChangeEvent}.
      *
-     * @param source {@link CommandSender} that will be the source of the {@link ArenaStateChangeEvent} called. May be null!
+     * @param source   {@link CommandSender} that will be the source of the {@link ArenaStateChangeEvent} called. May be null!
      * @param disabled True to disable the arena, False to enable.
      * @return True if arena was disabled successfully. False if called {@link ArenaStateChangeEvent} was cancelled by a plugin.
      */
@@ -67,8 +68,8 @@ public interface Arena {
      * Sets a spawnpoint with the given position and location.
      * Note: Calls {@link ArenaSetPositionEvent}.
      *
-     * @param source {@link Player} that will be the source of the {@link ArenaSetPositionEvent} called. May be null!
-     * @param pos Position number for the spawnpoint.
+     * @param source   {@link Player} that will be the source of the {@link ArenaSetPositionEvent} called. May be null!
+     * @param pos      Position number for the spawnpoint.
      * @param location Location to be the spawnpoint. Should not be null!
      * @return True if the spawnpoint was set successfully. False if called {@link ArenaSetPositionEvent} was cancelled by a plugin.
      */

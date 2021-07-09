@@ -1,8 +1,8 @@
 package me.realized.duels.api.user;
 
-import java.util.GregorianCalendar;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.GregorianCalendar;
 
 /**
  * Represents the data of a match that had occured in the past.

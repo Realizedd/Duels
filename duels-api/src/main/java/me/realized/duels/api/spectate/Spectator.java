@@ -1,8 +1,9 @@
 package me.realized.duels.api.spectate;
 
-import java.util.UUID;
-import javax.annotation.Nonnull;
 import me.realized.duels.api.arena.Arena;
+
+import javax.annotation.Nonnull;
+import java.util.UUID;
 
 /**
  * Represents a Spectator spectating a match.

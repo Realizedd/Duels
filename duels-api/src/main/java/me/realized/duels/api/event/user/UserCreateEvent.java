@@ -1,10 +1,11 @@
 package me.realized.duels.api.event.user;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import me.realized.duels.api.user.User;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Called when a new {@link User} is created.
@@ -20,6 +21,10 @@ public class UserCreateEvent extends Event {
         this.user = user;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     /**
      * The {@link User} that was created.
      *
@@ -28,10 +33,6 @@ public class UserCreateEvent extends Event {
     @Nonnull
     public User getUser() {
         return user;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

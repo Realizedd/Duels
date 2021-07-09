@@ -1,12 +1,13 @@
 package me.realized.duels.api.event.queue;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import me.realized.duels.api.queue.DQueue;
 import me.realized.duels.api.queue.DQueueManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Called when a player is joining a {@link DQueue}.
@@ -25,6 +26,10 @@ public class QueueJoinEvent extends QueueEvent implements Cancellable {
         super(source, queue);
         Objects.requireNonNull(source, "source");
         this.source = source;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**
@@ -46,10 +51,6 @@ public class QueueJoinEvent extends QueueEvent implements Cancellable {
     @Override
     public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

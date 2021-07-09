@@ -1,8 +1,9 @@
 package me.realized.duels.api.event;
 
-import javax.annotation.Nullable;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Event;
+
+import javax.annotation.Nullable;
 
 /**
  * Represents an event that may have a source.

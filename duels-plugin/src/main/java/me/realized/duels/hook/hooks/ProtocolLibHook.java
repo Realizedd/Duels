@@ -36,13 +36,13 @@ public class ProtocolLibHook extends PluginHook<DuelsPlugin> {
     public void setInventoryTitle(Player player, Inventory inventory, String title) {
         PacketContainer container = new PacketContainer(PacketType.Play.Server.OPEN_WINDOW);
         container.getModifier().writeDefaults();
-        container.getIntegers().write(1, inventory.getSize()*9);
+        container.getIntegers().write(1, inventory.getSize() * 9);
         container.getChatComponents().write(0, WrappedChatComponent.fromText(StringUtil.color(title)));
         sendPacket(container, player);
 
         PacketContainer container2 = new PacketContainer(PacketType.Play.Server.WINDOW_ITEMS);
         container.getModifier().writeDefaults();
-        container.getIntegers().write(1, inventory.getSize()*9);
+        container.getIntegers().write(1, inventory.getSize() * 9);
         container.getChatComponents().write(0, WrappedChatComponent.fromText(StringUtil.color(title)));
         sendPacket(container, player);
     }

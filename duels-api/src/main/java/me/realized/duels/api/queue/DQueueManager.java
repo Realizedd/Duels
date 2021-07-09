@@ -1,8 +1,5 @@
 package me.realized.duels.api.queue;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.event.queue.QueueCreateEvent;
 import me.realized.duels.api.event.queue.QueueJoinEvent;
 import me.realized.duels.api.event.queue.QueueLeaveEvent;
@@ -10,6 +7,10 @@ import me.realized.duels.api.event.queue.QueueRemoveEvent;
 import me.realized.duels.api.kit.Kit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Represents the QueueManager singleton used by Duels.
@@ -96,7 +97,7 @@ public interface DQueueManager {
      * Note: Calls {@link QueueJoinEvent}.
      *
      * @param player {@link Player} to add to {@link DQueue}.
-     * @param queue {@link DQueue} to add the {@link Player}.
+     * @param queue  {@link DQueue} to add the {@link Player}.
      * @return True if {@link Player} was successfully queued. False otherwise.
      */
     boolean addToQueue(@Nonnull final Player player, @Nonnull final DQueue queue);

@@ -1,9 +1,10 @@
 package me.realized.duels.api.arena;
 
-import java.util.List;
+import org.bukkit.entity.Player;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.bukkit.entity.Player;
+import java.util.List;
 
 /**
  * Represents the ArenaManager singleton used by Duels.

@@ -1,12 +1,13 @@
 package me.realized.duels.api.user;
 
+import me.realized.duels.api.kit.Kit;
+import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import me.realized.duels.api.kit.Kit;
-import org.bukkit.entity.Player;
 
 /**
  * Represents the UserManager singleton used by Duels.

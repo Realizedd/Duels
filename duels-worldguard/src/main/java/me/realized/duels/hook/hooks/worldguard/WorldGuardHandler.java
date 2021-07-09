@@ -1,7 +1,8 @@
 package me.realized.duels.hook.hooks.worldguard;
 
-import java.util.Collection;
 import org.bukkit.entity.Player;
+
+import java.util.Collection;
 
 public interface WorldGuardHandler {
 

@@ -1,10 +1,11 @@
 package me.realized.duels.api.event.spectate;
 
-import javax.annotation.Nonnull;
 import me.realized.duels.api.spectate.Spectator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
 
 /**
  * Called before a player starts spectating.

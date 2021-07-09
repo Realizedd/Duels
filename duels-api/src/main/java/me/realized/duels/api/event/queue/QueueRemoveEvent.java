@@ -1,12 +1,13 @@
 package me.realized.duels.api.event.queue;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import me.realized.duels.api.kit.Kit;
 import me.realized.duels.api.queue.DQueue;
 import me.realized.duels.api.queue.DQueueManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.HandlerList;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Called when a {@link DQueue} is removed.
