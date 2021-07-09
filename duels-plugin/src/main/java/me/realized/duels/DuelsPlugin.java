@@ -138,7 +138,7 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
             getPluginLoader().disablePlugin(this);
             return;
         }
-
+        
         new KitItemListener(this);
         new DamageListener(this);
         new PotionListener(this);
