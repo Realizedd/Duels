@@ -58,6 +58,7 @@ shadowJar {
         include(dependency(':duels-worldguard-v7'))
         include(dependency(':duels-api'))
         include(dependency('com.google.code.gson:.*'))
+        include(dependency('com.github.cryptomorin:.*'))
         include(dependency('io.github.bananapuncher714:.*'))
     }
     def group = project.group.toString() + "." + parent.name.toLowerCase() + ".shaded."

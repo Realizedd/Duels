@@ -37,31 +37,32 @@ class Countdown extends BukkitRunnable {
         if (finished) {
             return;
         }
+        if (!messages.isEmpty()) {
+            final String rawMessage = messages.remove(0);
+            final String message = StringUtil.color(rawMessage);
+            final String title = !titles.isEmpty() ? titles.remove(0) : null;
 
-        final String rawMessage = messages.remove(0);
-        final String message = StringUtil.color(rawMessage);
-        final String title = !titles.isEmpty() ? titles.remove(0) : null;
+            arena.getPlayers().forEach(player -> {
+                config.playSound(player, rawMessage);
 
-        arena.getPlayers().forEach(player -> {
-            config.playSound(player, rawMessage);
+                final OpponentInfo info = this.info.get(player.getUniqueId());
 
-            final OpponentInfo info = this.info.get(player.getUniqueId());
+                if (info != null) {
+                    player.sendMessage(message
+                            .replace("%opponent%", info.getName())
+                            .replace("%opponent_rating%", String.valueOf(info.getRating()))
+                            .replace("%kit%", kit)
+                            .replace("%arena%", arena.getName())
+                    );
+                } else {
+                    player.sendMessage(message);
+                }
 
-            if (info != null) {
-                player.sendMessage(message
-                        .replace("%opponent%", info.getName())
-                        .replace("%opponent_rating%", String.valueOf(info.getRating()))
-                        .replace("%kit%", kit)
-                        .replace("%arena%", arena.getName())
-                );
-            } else {
-                player.sendMessage(message);
-            }
-
-            if (title != null) {
-                Titles.sendTitle(player, 0, 20, 50, StringUtil.color(title), null);
-            }
-        });
+                if (title != null) {
+                    Titles.sendTitle(player, 0, 20, 50, StringUtil.color(title), null);
+                }
+            });
+        }
 
         if (!arena.isUsed() || messages.isEmpty()) {
             arena.setCountdown(null);
