@@ -38,6 +38,11 @@ subprojects {
         }
 
         maven {
+            name 'dmulloy2-repo'
+            url 'https://repo.dmulloy2.net/repository/public/'
+        }
+
+        maven {
             name 'mvdw-repo'
             url 'https://repo.mvdw-software.com/content/groups/public/'
         }
@@ -66,4 +71,22 @@ subprojects {
             dirs "$rootDir/libs/"
         }
     }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = 'Duels'
+            version = project.version
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+build {
+    dependsOn publish
 }
