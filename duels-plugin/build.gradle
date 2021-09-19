@@ -1,18 +1,10 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.apache.tools.ant.filters.ReplaceTokens
-
-clean.doFirst {
-    delete "$rootDir/out/"
-}
-
-tasks.withType(ShadowJar) {
-    destinationDirectory = project.layout.projectDirectory.dir("out")
-}
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.yml'
         filter(ReplaceTokens, tokens: [VERSION: project.version])
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
 
@@ -21,11 +13,14 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    compileOnly 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
 
     compileOnly 'me.clip:placeholderapi:2.10.10'
     compileOnly('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
-    compileOnly 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
+    compileOnly 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT', {
+        exclude group: 'org.spigotmc'
+        exclude group: 'org.bukkit'
+    }
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.7.0'
 
     implementation 'io.github.bananapuncher714:nbteditor:7.17.0', {
@@ -34,7 +29,11 @@ dependencies {
     implementation 'com.github.cryptomorin:XSeries:8.4.0'
     implementation 'com.google.code.gson:gson:2.8.8'
 
-    compileOnly name: 'Vault-1.6.7'
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7", {
+        exclude group: 'org.spigotmc'
+        exclude group: 'org.bukkit'
+    }
+
     compileOnly name: 'CombatTagPlus'
     compileOnly name: 'PvPManager-3.7.16'
     compileOnly name: 'Factions-1.6.9.5-U0.1.14'
@@ -44,10 +43,10 @@ dependencies {
     compileOnly name: 'BountyHunters-2.2.6'
     compileOnly name: 'LeaderHeadsAPI'
 
-    compile project(':duels-worldguard')
-    compile project(':duels-worldguard-v6')
-    compile project(':duels-worldguard-v7')
-    compile project(':duels-api')
+    implementation project(':duels-worldguard')
+    implementation project(':duels-worldguard-v6')
+    implementation project(':duels-worldguard-v7')
+    implementation project(':duels-api')
 }
 
 shadowJar {

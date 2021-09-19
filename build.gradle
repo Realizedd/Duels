@@ -9,7 +9,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
-    id "com.github.johnrengelman.shadow" version('6.1.0')
+    id "com.github.johnrengelman.shadow" version('7.0.0')
 }
 
 allprojects {
@@ -25,48 +25,16 @@ subprojects {
     targetCompatibility = 1.8
 
     repositories {
+        mavenLocal()
         mavenCentral()
-
-        maven {
-            name 'nms-repo'
-            url 'https://repo.codemc.io/repository/nms/'
-        }
-
-        maven {
-            name 'bungeecord-repo'
-            url 'https://oss.sonatype.org/content/repositories/snapshots/'
-        }
-
-        maven {
-            name 'dmulloy2-repo'
-            url 'https://repo.dmulloy2.net/repository/public/'
-        }
-
-        maven {
-            name 'mvdw-repo'
-            url 'https://repo.mvdw-software.com/content/groups/public/'
-        }
-
-        maven {
-            name 'clip-repo'
-            url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
-        }
-
-        maven {
-            name 'sk89q-repo'
-            url 'https://maven.sk89q.com/repo/'
-        }
-
-        maven {
-            name 'inventive-repo'
-            url 'https://repo.inventivetalent.org/content/groups/public/'
-        }
-
-        maven {
-            name 'codemc-repo'
-            url 'https://repo.codemc.io/repository/maven-public/'
-        }
-
+        maven { url = 'https://repo.codemc.io/repository/nms/' }
+        maven { url = 'https://repo.codemc.io/repository/maven-public/' }
+        maven { url = 'https://repo.dmulloy2.net/nexus/repository/public/' }
+        maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+        maven { url = 'https://jitpack.io' }
+        maven { url = 'https://repo.mvdw-software.com/content/groups/public/' }
+        maven { url = 'https://maven.sk89q.com/repo/' }
+        maven { url = 'https://repo.inventivetalent.org/content/groups/public/' }
         flatDir {
             dirs "$rootDir/libs/"
         }

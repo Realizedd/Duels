@@ -8,10 +8,10 @@ version '3.3.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 dependencies {
-    compile 'org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT'
-    compile 'com.sk89q.worldguard:worldguard-bukkit:7.0.0', {
+    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.0', {
         exclude group: 'org.spigotmc'
         exclude group: 'org.bukkit'
     }
-    compile project(':duels-worldguard')
+    implementation project(':duels-worldguard')
 }
