@@ -9,11 +9,11 @@ processResources {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
 
     compileOnly 'me.clip:placeholderapi:2.10.10'
     compileOnly('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
@@ -23,11 +23,11 @@ dependencies {
     }
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.7.0'
 
-    implementation 'io.github.bananapuncher714:nbteditor:7.17.0', {
+    implementation 'io.github.bananapuncher714:nbteditor:7.18.0', {
         exclude group: 'org.spigotmc'
     }
-    implementation 'com.github.cryptomorin:XSeries:8.4.0'
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.github.cryptomorin:XSeries:8.5.0.1'
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     compileOnly "com.github.MilkBowl:VaultAPI:1.7", {
         exclude group: 'org.spigotmc'
