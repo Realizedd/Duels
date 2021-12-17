@@ -13,7 +13,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    compileOnly 'org.spigotmc:spigot-api:1.18-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
 
     compileOnly 'me.clip:placeholderapi:2.10.10'
     compileOnly('be.maximvdw:MVdWPlaceholderAPI:3.0.1-SNAPSHOT') { transitive = false }
@@ -22,7 +22,7 @@ dependencies {
         exclude group: 'org.bukkit'
     }
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.7.0'
-
+    // https://github.com/BananaPuncher714/NBTEditor
     implementation 'io.github.bananapuncher714:nbteditor:7.18.0', {
         exclude group: 'org.spigotmc'
     }
