@@ -41,6 +41,6 @@ public class OwnInventoryButton extends BaseButton {
 
         final Settings settings = settingManager.getSafely(player);
         settings.setOwnInventory(!settings.isOwnInventory());
-        settings.updateGui(player);
+        settings.gui.updateGui(player, settings);
     }
 }

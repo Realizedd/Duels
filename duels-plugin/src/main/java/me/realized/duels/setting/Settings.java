@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 public class Settings {
 
     private final DuelsPlugin plugin;
-    private final SettingsGui gui;
+    public final SettingsGui gui;
 
     @Getter
     private UUID target;
@@ -61,16 +61,6 @@ public class Settings {
         }
 
         this.target = target.getUniqueId();
-    }
-
-    public void updateGui(final Player player) {
-        if (gui != null) {
-            gui.update(player);
-        }
-    }
-
-    public void openGui(final Player player) {
-        gui.open(player);
     }
 
     public void setBaseLoc(final Player player) {

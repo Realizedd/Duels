@@ -251,7 +251,7 @@ public class ArenaImpl extends BaseButton implements Arena {
         }
 
         settings.setArena(this);
-        settings.openGui(player);
+        settings.gui.openGui(player, settings);
     }
 
     @Override

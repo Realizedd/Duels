@@ -12,9 +12,11 @@ import me.realized.duels.gui.settings.buttons.KitSelectButton;
 import me.realized.duels.gui.settings.buttons.OwnInventoryButton;
 import me.realized.duels.gui.settings.buttons.RequestDetailsButton;
 import me.realized.duels.gui.settings.buttons.RequestSendButton;
+import me.realized.duels.setting.Settings;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.gui.SinglePageGui;
 import me.realized.duels.util.inventory.Slots;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class SettingsGui extends SinglePageGui<DuelsPlugin> {
@@ -63,5 +65,15 @@ public class SettingsGui extends SinglePageGui<DuelsPlugin> {
 
         set(0, 2, 3, new RequestSendButton(plugin));
         set(7, 9, 3, new CancelButton(plugin));
+    }
+
+    public void updateGui(final Player player, Settings settings) {
+        if (this != null) {
+            update(player);
+        }
+    }
+
+    public void openGui(final Player player, Settings settings) {
+        open(player);
     }
 }

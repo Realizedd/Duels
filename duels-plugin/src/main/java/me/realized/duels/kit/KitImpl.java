@@ -126,7 +126,7 @@ public class KitImpl extends BaseButton implements Kit {
         }
 
         settings.setKit(this);
-        settings.openGui(player);
+        settings.gui.openGui(player, settings);
     }
 
     @Override

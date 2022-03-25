@@ -241,7 +241,7 @@ public class DuelCommand extends BaseCommand {
             requestManager.send(player, target, settings);
         } else if (config.isOwnInventoryEnabled()) {
             // If own inventory is enabled, prompt request settings GUI.
-            settings.openGui(player);
+            settings.gui.openGui(player, settings);
         } else {
             // Maintain old behavior: If own inventory is disabled, prompt kit selector first instead of request settings GUI.
             kitManager.getGui().open(player);

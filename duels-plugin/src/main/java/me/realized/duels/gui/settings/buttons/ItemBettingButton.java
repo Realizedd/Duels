@@ -36,6 +36,6 @@ public class ItemBettingButton extends BaseButton {
 
         final Settings settings = settingManager.getSafely(player);
         settings.setItemBetting(!settings.isItemBetting());
-        settings.updateGui(player);
+        settings.gui.updateGui(player, settings);
     }
 }
