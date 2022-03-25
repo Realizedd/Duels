@@ -403,13 +403,13 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
             }
 
             for (final SpectatorImpl spectator : getSpectatorsImpl(arena)) {
-                final Player specPlayer = spectator.getPlayer();
+                final Player spectatorPlayer = spectator.getPlayer();
 
-                if (specPlayer == null) {
+                if (spectatorPlayer == null) {
                     continue;
                 }
 
-                if (BlockUtil.near(specPlayer, event.getBlock(), 1, 2)) {
+                if (BlockUtil.near(spectatorPlayer, event.getBlock(), 1, 2)) {
                     event.setBuildable(true);
                     break;
                 }
