@@ -11,8 +11,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MatchStartEvent extends MatchEvent {
 
-    private static final HandlerList handlers = new HandlerList();
-
     private final Player[] players;
 
     public MatchStartEvent(@NotNull final Match match, @NotNull final Player... players) {
@@ -31,12 +29,8 @@ public class MatchStartEvent extends MatchEvent {
         return players;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
     @Override
     public HandlerList getHandlers() {
-        return handlers;
+        return getHandlerList();
     }
 }

@@ -3,6 +3,7 @@ package me.realized.duels.api.event.match;
 import java.util.Objects;
 import me.realized.duels.api.match.Match;
 import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,11 +11,16 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class MatchEvent extends Event {
 
+    protected static final HandlerList handlers = new HandlerList();
     private final Match match;
 
     MatchEvent(@NotNull final Match match) {
         Objects.requireNonNull(match, "match");
         this.match = match;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     /**

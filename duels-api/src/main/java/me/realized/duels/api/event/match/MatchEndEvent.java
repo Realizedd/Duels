@@ -14,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MatchEndEvent extends MatchEvent {
 
-    private static final HandlerList handlers = new HandlerList();
-
     private final UUID winner, loser;
     private final Reason reason;
 
@@ -57,13 +55,9 @@ public class MatchEndEvent extends MatchEvent {
         return reason;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
-
     @Override
     public HandlerList getHandlers() {
-        return handlers;
+        return getHandlerList();
     }
 
     public enum Reason {
