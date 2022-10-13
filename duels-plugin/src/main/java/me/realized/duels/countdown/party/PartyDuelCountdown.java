@@ -9,7 +9,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.countdown.DuelCountdown;
 import me.realized.duels.match.party.PartyDuelMatch;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.util.StringUtil;
 import me.realized.duels.util.compat.Titles;
 

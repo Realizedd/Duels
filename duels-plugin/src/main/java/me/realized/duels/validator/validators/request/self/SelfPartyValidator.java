@@ -1,11 +1,12 @@
 package me.realized.duels.validator.validators.request.self;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import org.bukkit.entity.Player;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.validator.BaseTriValidator;
 
 public class SelfPartyValidator extends BaseTriValidator<Player, Party, Collection<Player>> {
@@ -21,12 +22,12 @@ public class SelfPartyValidator extends BaseTriValidator<Player, Party, Collecti
             return true;
         }
 
-        if (!party.isOwner(sender)) {
+        if (!Objects.equals(party.getLeader(), sender.getUniqueId())) {
             lang.sendMessage(sender, "ERROR.party.is-not-owner");
             return false;
         }
 
-        if (players.size() != party.size()) {
+        if (players.size() != party.getMembers().size()) {
             lang.sendMessage(sender, "ERROR.party.is-not-online.sender");
             return false;
         }

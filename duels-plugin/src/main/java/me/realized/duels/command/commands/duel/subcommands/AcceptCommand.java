@@ -11,7 +11,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.request.RequestAcceptEvent;
 import me.realized.duels.command.BaseCommand;
 import me.realized.duels.hook.hooks.worldguard.WorldGuardHook;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.request.RequestImpl;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.function.Pair;
@@ -30,7 +30,7 @@ public class AcceptCommand extends BaseCommand {
     protected void execute(final CommandSender sender, final String label, final String[] args) {
         final Player player = (Player) sender;
         final Party party = partyManager.get(player);
-        final Collection<Player> players = party == null ? Collections.singleton(player) : party.getOnlineMembers();
+        final Collection<Player> players = party == null ? Collections.singleton(player) : partyManager.getOnlinePlayers(party);
 
         if (!ValidatorUtil.validate(validatorManager.getDuelAcceptSelfValidators(), player, party, players)) {
             return;
@@ -44,7 +44,7 @@ public class AcceptCommand extends BaseCommand {
         }
 
         final Party targetParty = partyManager.get(target);
-        final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : targetParty.getOnlineMembers();
+        final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : partyManager.getOnlinePlayers(targetParty);
 
         if (!ValidatorUtil.validate(validatorManager.getDuelAcceptTargetValidators(), new Pair<>(player, target), targetParty, targetPlayers)) {
             return;
@@ -64,8 +64,8 @@ public class AcceptCommand extends BaseCommand {
         final String arena = settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random");
 
         if (request.isPartyDuel()) {
-            final Collection<Player> senderPartyMembers = request.getSenderParty().getOnlineMembers();
-            final Collection<Player> targetPartyMembers = request.getTargetParty().getOnlineMembers();
+            final Collection<Player> senderPartyMembers = partyManager.getOnlinePlayers(request.getSenderParty());
+            final Collection<Player> targetPartyMembers = partyManager.getOnlinePlayers(request.getTargetParty());
             lang.sendMessage(senderPartyMembers, "COMMAND.duel.party-request.accept.receiver-party",
             "owner", player.getName(), "name", target.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena);
             lang.sendMessage(targetPartyMembers, "COMMAND.duel.party-request.accept.sender-party",

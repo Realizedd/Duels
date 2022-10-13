@@ -17,7 +17,6 @@ import me.realized.duels.betting.BettingManager;
 import me.realized.duels.command.commands.SpectateCommand;
 import me.realized.duels.command.commands.duel.DuelCommand;
 import me.realized.duels.command.commands.duels.DuelsCommand;
-import me.realized.duels.command.commands.party.PartyCommand;
 import me.realized.duels.command.commands.queue.QueueCommand;
 import me.realized.duels.config.Config;
 import me.realized.duels.config.Lang;
@@ -165,7 +164,6 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
         loadables.add(lang = new Lang(this));
         loadables.add(userManager = new UserManagerImpl(this));
         loadables.add(guiListener = new GuiListener<>(this));
-        loadables.add(partyManager = new PartyManagerImpl(this));
         loadables.add(kitManager = new KitManagerImpl(this));
         loadables.add(arenaManager = new ArenaManagerImpl(this));
         loadables.add(settingManager = new SettingsManager(this));
@@ -173,11 +171,12 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
         loadables.add(spectateManager = new SpectateManagerImpl(this));
         loadables.add(bettingManager = new BettingManager(this));
         loadables.add(inventoryManager = new InventoryManager(this));
-        loadables.add(duelManager = new DuelManager(this));
         loadables.add(queueManager = new QueueManager(this));
         loadables.add(queueSignManager = new QueueSignManagerImpl(this));
-        loadables.add(requestManager = new RequestManager(this));
         hookManager = new HookManager(this);
+        loadables.add(partyManager = new PartyManagerImpl(this));
+        loadables.add(requestManager = new RequestManager(this));
+        loadables.add(duelManager = new DuelManager(this));
         loadables.add(validatorManager = new ValidatorManager(this));
         loadables.add(teleport = new Teleport(this));
         loadables.add(extensionManager = new ExtensionManager(this));
@@ -238,7 +237,7 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     private boolean load() {
         registerCommands(
             new DuelCommand(this),
-            new PartyCommand(this),
+//            new PartyCommand(this),
             new QueueCommand(this),
             new SpectateCommand(this),
             new DuelsCommand(this)

@@ -20,7 +20,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.match.DuelMatch;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.queue.Queue;
 
 public class PartyDuelMatch extends DuelMatch {

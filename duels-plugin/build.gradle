@@ -14,6 +14,7 @@ processResources {
 }
 
 dependencies {
+    compileOnly 'com.alessiodp.parties:parties-api:3.2.6'
     compileOnly 'org.jetbrains:annotations-java5:22.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'

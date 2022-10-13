@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.data.UserData;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.util.function.Pair;
 import me.realized.duels.validator.BaseTriValidator;
 

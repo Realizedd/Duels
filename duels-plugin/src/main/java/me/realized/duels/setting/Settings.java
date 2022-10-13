@@ -9,7 +9,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.gui.settings.SettingsGui;
 import me.realized.duels.kit.KitImpl;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

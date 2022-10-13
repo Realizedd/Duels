@@ -31,7 +31,7 @@ import me.realized.duels.config.Lang;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.match.DuelMatch;
 import me.realized.duels.match.party.PartyDuelMatch;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.util.DateUtil;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.Log;

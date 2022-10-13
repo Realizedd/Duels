@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.bukkit.entity.Player;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.util.function.Pair;
 import me.realized.duels.validator.BaseTriValidator;
 
@@ -39,12 +39,12 @@ public class TargetPartyValidator extends BaseTriValidator<Pair<Player, Player>,
             return false;
         }
         
-        if (config.isPartySameSizeOnly() && senderParty.size() != party.size()) {
+        if (config.isPartySameSizeOnly() && senderParty.getMembers().size() != party.getMembers().size()) {
             lang.sendMessage(pair.getKey(), "ERROR.party.is-not-same-size");
             return false;
         }
 
-        if (players.size() != party.size()) {
+        if (players.size() != party.getMembers().size()) {
             lang.sendMessage(pair.getKey(), "ERROR.party.is-not-online.target", "name", pair.getValue().getName());
             return false;
         }

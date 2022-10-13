@@ -2,7 +2,7 @@ package me.realized.duels.gui.settings.buttons;
 
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.gui.BaseButton;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.inventory.ItemBuilder;
@@ -43,7 +43,7 @@ public class RequestSendButton extends BaseButton {
         final Party senderParty = settings.getSenderParty();
         final Party targetParty = settings.getTargetParty();
 
-        if ((senderParty != null && senderParty.isRemoved()) || (targetParty != null && targetParty.isRemoved())) {
+        if (senderParty == null || targetParty == null) {
             player.closeInventory();
             lang.sendMessage(player, "ERROR.party.not-found");
             return;

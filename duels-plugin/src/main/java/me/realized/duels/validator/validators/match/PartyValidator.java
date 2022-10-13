@@ -20,8 +20,8 @@ public class PartyValidator extends BaseBiValidator<Collection<Player>, Settings
             return true;
         }
 
-        int senderPartySize = settings.getSenderParty().size();
-        int targetPartySize = settings.getTargetParty().size();
+        int senderPartySize = settings.getSenderParty().getMembers().size();
+        int targetPartySize = settings.getTargetParty().getMembers().size();
 
         if (config.isPartySameSizeOnly() && senderPartySize != targetPartySize) {
             lang.sendMessage(players, "DUEL.party-start-failure.is-not-same-size");
