@@ -2,7 +2,7 @@
 
 [![](https://jitpack.io/v/Realizedd/Duels.svg)](https://jitpack.io/#Realizedd/Duels)
 
-A duel plugin for spigot. <a href="https://www.spigotmc.org/resources/duels.20171/">Spigot Project Page</a>
+A duel plugin for auscpvp.org. <a href="https://www.spigotmc.org/resources/duels.20171/">Spigot Project Page</a>
 
 ---
 
