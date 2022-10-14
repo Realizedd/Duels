@@ -1,6 +1,7 @@
 package me.realized.duels.party;
 
 import com.alessiodp.parties.api.interfaces.PartiesAPI;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.config.Lang;
 import me.realized.duels.hook.hooks.PartiesHook;
@@ -38,7 +39,7 @@ public class PartyManagerImpl implements Loadable, Listener {
 
     }
 
-    public com.alessiodp.parties.api.interfaces.Party get(final Player player) {
+    public Party get(final Player player) {
         return partiesAPI.getPartyOfPlayer(player.getUniqueId());
     }
 
@@ -47,9 +48,10 @@ public class PartyManagerImpl implements Loadable, Listener {
     }
 
     public boolean canDamage(final Player damager, final Player damaged) {
-        final com.alessiodp.parties.api.interfaces.Party party = get(damager);
+        final Party party = get(damager);
+        final Party party1 = get(damaged);
 
-        if (party == null || !party.equals(get(damaged))) {
+        if (party == null || !party.equals(party1) || damager == damaged) {
             return true;
         }
 

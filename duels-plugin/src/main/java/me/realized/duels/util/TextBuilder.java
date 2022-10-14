@@ -45,7 +45,6 @@ public final class TextBuilder {
     public static TextBuilder of(final String base) {
         return of(base, null, null, null, null);
     }
-
     public TextBuilder add(final String text) {
         if (text == null) {
             return this;
@@ -130,5 +129,16 @@ public final class TextBuilder {
 
     public void send(final Player... players) {
         send(Arrays.asList(players));
+    }
+
+    @Override
+    public String toString() {
+        final BaseComponent[] message = list.toArray(new BaseComponent[0]);
+        final StringBuilder stringBuilder = new StringBuilder();
+        Arrays.stream(message).forEach(baseComponent -> stringBuilder
+                .append(baseComponent.toLegacyText())
+                .append("\n"));
+        final String s = stringBuilder.toString();
+        return s.endsWith("\n") ? s.substring(0, s.length() - 1) : s;
     }
 }

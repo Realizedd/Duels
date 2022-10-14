@@ -281,8 +281,8 @@ public class UserManagerImpl implements Loadable, Listener, UserManager {
             final Party winnerParty = partyMatch.getPlayerToParty().get(winner);
             final Party loserParty = match.getArena().getOpponent(winnerParty);
             message = lang.getMessage("DUEL.on-end.party-opponent-defeat",
-                "winners", StringUtil.join(partyMatch.getNames(winnerParty), ", "),
-                "losers", StringUtil.join(partyMatch.getNames(loserParty), ", "),
+                "winner", StringUtil.join(partyMatch.getNames(winnerParty), ", "),
+                "loser", StringUtil.join(partyMatch.getNames(loserParty), ", "),
                 "kit", kitName,
                 "arena", match.getArena().getName()
             );

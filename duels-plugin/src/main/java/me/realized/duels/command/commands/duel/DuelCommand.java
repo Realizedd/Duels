@@ -80,18 +80,19 @@ public class DuelCommand extends BaseCommand {
             return true;
         }
 
-        final Player target = Bukkit.getPlayerExact(args[0]);
+        Player target = Bukkit.getPlayerExact(args[0]);
+        final com.alessiodp.parties.api.interfaces.Party targetParty = target == null ? parties.getApi().getParty(args[0]) : parties.getApi().getPartyOfPlayer(target.getUniqueId());
+
+        if (target == null && targetParty != null && targetParty.getLeader() != null) {
+            target = Bukkit.getPlayer(targetParty.getLeader());
+        }
 
         if (target == null || !player.canSee(target)) {
             lang.sendMessage(sender, "ERROR.player.not-found", "name", args[0]);
             return true;
         }
 
-        final com.alessiodp.parties.api.interfaces.Party targetParty = parties.getApi().getPartyOfPlayer(target.getUniqueId());
         final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : partyManager.getOnlinePlayers(targetParty);
-
-//        final Party targetParty = partyManager.get(target);
-//        final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : targetParty.getOnlineMembers();
 
         if (!ValidatorUtil.validate(validatorManager.getDuelTargetValidators(), new Pair<>(player, target), targetParty, targetPlayers)) {
             return true;

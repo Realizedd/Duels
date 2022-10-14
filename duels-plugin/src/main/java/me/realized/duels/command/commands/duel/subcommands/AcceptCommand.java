@@ -3,6 +3,10 @@ package me.realized.duels.command.commands.duel.subcommands;
 import java.util.Collection;
 import java.util.Collections;
 
+import com.alessiodp.parties.api.interfaces.PartyPlayer;
+import me.realized.duels.util.TextBuilder;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -64,19 +68,40 @@ public class AcceptCommand extends BaseCommand {
         final String arena = settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random");
 
         if (request.isPartyDuel()) {
-            final Collection<Player> senderPartyMembers = partyManager.getOnlinePlayers(request.getSenderParty());
-            final Collection<Player> targetPartyMembers = partyManager.getOnlinePlayers(request.getTargetParty());
+            final Party senderParty = request.getSenderParty();
+            final Party targetParty1 = request.getTargetParty();
+
+            final Collection<Player> senderPartyMembers = partyManager.getOnlinePlayers(senderParty);
+            final Collection<Player> targetPartyMembers = partyManager.getOnlinePlayers(targetParty1);
+
             lang.sendMessage(senderPartyMembers, "COMMAND.duel.party-request.accept.receiver-party",
-            "owner", player.getName(), "name", target.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena);
+                    "name", targetParty1.getName(),
+                    "kit", kit,
+                    "own_inventory", ownInventory,
+                    "arena", arena);
+
             lang.sendMessage(targetPartyMembers, "COMMAND.duel.party-request.accept.sender-party",
-            "owner", target.getName(), "name", player.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena);
+                    "name", targetParty1.getName(),
+                    "kit", kit,
+                    "own_inventory", ownInventory,
+                    "arena", arena);
         } else {
             final double bet = settings.getBet();
             final String itemBetting = settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
+
             lang.sendMessage(player, "COMMAND.duel.request.accept.receiver",
-                "name", target.getName(), "kit", kit, "arena", arena, "bet_amount", bet, "item_betting", itemBetting);
+                "name", target.getName(),
+                    "kit", kit,
+                    "arena", arena,
+                    "bet_amount", bet,
+                    "item_betting", itemBetting);
+
             lang.sendMessage(target, "COMMAND.duel.request.accept.sender",
-                "name", player.getName(), "kit", kit, "arena", arena, "bet_amount", bet, "item_betting", itemBetting);
+                "name", player.getName(),
+                    "kit", kit,
+                    "arena", arena,
+                    "bet_amount", bet,
+                    "item_betting", itemBetting);
         }
 
         if (settings.isItemBetting()) {
