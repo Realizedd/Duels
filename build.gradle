@@ -61,6 +61,11 @@ subprojects {
             url 'https://repo.essentialsx.net/releases/'
         }
 
+        maven {
+            name = 'alessiodp-repo'
+            url = 'https://repo.alessiodp.com/releases/'
+        }
+
         flatDir {
             dirs "$rootDir/libs/"
         }

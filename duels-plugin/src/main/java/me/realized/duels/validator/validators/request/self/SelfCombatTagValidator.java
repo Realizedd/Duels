@@ -8,7 +8,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.hook.hooks.CombatLogXHook;
 import me.realized.duels.hook.hooks.CombatTagPlusHook;
 import me.realized.duels.hook.hooks.PvPManagerHook;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.validator.BaseTriValidator;
 
 public class SelfCombatTagValidator extends BaseTriValidator<Player, Party, Collection<Player>> {

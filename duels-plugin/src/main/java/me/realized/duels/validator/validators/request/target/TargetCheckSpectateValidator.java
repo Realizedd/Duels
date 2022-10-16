@@ -2,10 +2,10 @@ package me.realized.duels.validator.validators.request.target;
 
 import java.util.Collection;
 
+import com.alessiodp.parties.api.interfaces.Party;
 import org.bukkit.entity.Player;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
 import me.realized.duels.util.function.Pair;
 import me.realized.duels.validator.BaseTriValidator;
 
@@ -20,7 +20,7 @@ public class TargetCheckSpectateValidator extends BaseTriValidator<Pair<Player, 
 
     @Override
     public boolean validate(final Pair<Player, Player> pair, final Party party, final Collection<Player> players) {
-        if (players.stream().anyMatch(player -> spectateManager.isSpectating(player))) {
+        if (players.stream().anyMatch(spectateManager::isSpectating)) {
             lang.sendMessage(pair.getKey(), party != null ? PARTY_MESSAGE_KEY : MESSAGE_KEY);
             return false;
         }

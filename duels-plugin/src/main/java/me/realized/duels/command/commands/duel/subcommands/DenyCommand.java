@@ -39,8 +39,8 @@ public class DenyCommand extends BaseCommand {
         Bukkit.getPluginManager().callEvent(event);
 
         if (request.isPartyDuel()) {
-            final Collection<Player> senderPartyMembers = request.getSenderParty().getOnlineMembers();
-            final Collection<Player> targetPartyMembers = request.getTargetParty().getOnlineMembers();
+            final Collection<Player> senderPartyMembers = partyManager.getOnlinePlayers(request.getSenderParty());
+            final Collection<Player> targetPartyMembers = partyManager.getOnlinePlayers(request.getTargetParty());
             lang.sendMessage(senderPartyMembers, "COMMAND.duel.party-request.deny.receiver-party", "owner", player.getName(), "name", target.getName());
             lang.sendMessage(targetPartyMembers, "COMMAND.duel.party-request.deny.sender-party", "owner", target.getName(), "name", player.getName());
         } else {

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.hook.hooks.worldguard.WorldGuardHook;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.validator.BaseTriValidator;
 
 public class SelfDuelZoneValidator extends BaseTriValidator<Player, Party, Collection<Player>> {

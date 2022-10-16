@@ -23,7 +23,7 @@ import me.realized.duels.hook.hooks.VaultHook;
 import me.realized.duels.inventories.InventoryManager;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.match.DuelMatch;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.party.PartyManagerImpl;
 import me.realized.duels.player.PlayerInfo;
 import me.realized.duels.player.PlayerInfoManager;
@@ -318,7 +318,7 @@ public class DuelManager implements Loadable {
                 return false;
             }
 
-            return startMatch(settings.getSenderParty().getOnlineMembers(), settings.getTargetParty().getOnlineMembers(), settings, items, source);
+            return startMatch(partyManager.getOnlinePlayers(settings.getSenderParty()), partyManager.getOnlinePlayers(settings.getTargetParty()), settings, items, source);
         } else if (senderParty != null || targetParty != null) {
             lang.sendMessage(Arrays.asList(sender, target), "DUEL.party-start-failure.party-changed");
             return false;

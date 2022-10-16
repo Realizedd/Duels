@@ -5,17 +5,22 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import com.alessiodp.parties.api.interfaces.PartyPlayer;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.request.RequestSendEvent;
 import me.realized.duels.config.Config;
 import me.realized.duels.config.Lang;
+import me.realized.duels.party.PartyManagerImpl;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.Loadable;
+import me.realized.duels.util.StringUtil;
 import me.realized.duels.util.TextBuilder;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,13 +28,17 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class RequestManager implements Loadable, Listener {
 
+    private final DuelsPlugin plugin;
+    private final PartyManagerImpl partyManager;
     private final Config config;
     private final Lang lang;
     private final Map<UUID, Map<UUID, RequestImpl>> requests = new HashMap<>();
 
     public RequestManager(final DuelsPlugin plugin) {
+        this.plugin = plugin;
         this.config = plugin.getConfiguration();
         this.lang = plugin.getLang();
+        this.partyManager = plugin.getPartyManager();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
@@ -62,19 +71,31 @@ public class RequestManager implements Loadable, Listener {
         }
 
         final boolean isParty = request.isPartyDuel();
-        get(sender, true).put(isParty ? request.getTargetParty().getOwner().getUuid() : target.getUniqueId(), request);
+        get(sender, true).put(isParty ? request.getTargetParty().getLeader() : target.getUniqueId(), request);
         
         final String kit = settings.getKit() != null ? settings.getKit().getName() : lang.getMessage("GENERAL.not-selected");
         final String ownInventory = settings.isOwnInventory() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
         final String arena = settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random");
 
-        if (request.isPartyDuel()) {
-            final Collection<Player> senderPartyMembers = request.getSenderParty().getOnlineMembers();
-            final Collection<Player> targetPartyMembers = request.getTargetParty().getOnlineMembers();
+        if (isParty) {
+            final Collection<Player> senderPartyMembers = partyManager.getOnlinePlayers(request.getSenderParty());
+            final Collection<Player> targetPartyMembers = partyManager.getOnlinePlayers(request.getTargetParty());
+
+
             lang.sendMessage(senderPartyMembers, "COMMAND.duel.party-request.send.sender-party",
-            "owner", sender.getName(), "name", target.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena);
+                    "opponents", StringUtil.join(targetPartyMembers.stream().map(HumanEntity::getName).collect(Collectors.toList()), ", "),
+                    "name", request.getTargetParty().getName(),
+                    "kit", kit,
+                    "own_inventory", ownInventory,
+                    "arena", arena);
+
             lang.sendMessage(targetPartyMembers, "COMMAND.duel.party-request.send.receiver-party",
-            "name", sender.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena);
+                    "opponents", StringUtil.join(senderPartyMembers.stream().map(HumanEntity::getName).collect(Collectors.toList()), ", "),
+                    "name", request.getSenderParty().getName(),
+                    "kit", kit,
+                    "own_inventory", ownInventory,
+                    "arena", arena);
+
             sendClickableMessage("COMMAND.duel.party-request.send.clickable-text.", sender, targetPartyMembers);
         } else {
             final int betAmount = settings.getBet();

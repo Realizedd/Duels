@@ -3,6 +3,10 @@ package me.realized.duels.command.commands.duel;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import com.alessiodp.parties.api.interfaces.PartyPlayer;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.Permissions;
 import me.realized.duels.command.BaseCommand;
@@ -13,10 +17,11 @@ import me.realized.duels.command.commands.duel.subcommands.StatsCommand;
 import me.realized.duels.command.commands.duel.subcommands.ToggleCommand;
 import me.realized.duels.command.commands.duel.subcommands.TopCommand;
 import me.realized.duels.command.commands.duel.subcommands.VersionCommand;
+import me.realized.duels.hook.hooks.PartiesHook;
 import me.realized.duels.hook.hooks.VaultHook;
 import me.realized.duels.hook.hooks.worldguard.WorldGuardHook;
 import me.realized.duels.kit.KitImpl;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.StringUtil;
@@ -32,6 +37,7 @@ public class DuelCommand extends BaseCommand {
 
     private final WorldGuardHook worldGuard;
     private final VaultHook vault;
+    private final PartiesHook parties;
 
     public DuelCommand(final DuelsPlugin plugin) {
         super(plugin, "duel", Permissions.DUEL, true);
@@ -46,6 +52,7 @@ public class DuelCommand extends BaseCommand {
         );
         this.worldGuard = hookManager.getHook(WorldGuardHook.class);
         this.vault = hookManager.getHook(VaultHook.class);
+        this.parties = hookManager.getHook(PartiesHook.class);
     }
 
     @Override
@@ -65,23 +72,27 @@ public class DuelCommand extends BaseCommand {
         if (isChild(args[0])) {
             return false;
         }
-
-        final Party party = partyManager.get(player);
-        final Collection<Player> players = party == null ? Collections.singleton(player) : party.getOnlineMembers();
- 
+        
+        final com.alessiodp.parties.api.interfaces.Party party = parties.getApi().getPartyOfPlayer(player.getUniqueId());
+        final Collection<Player> players = party == null ? Collections.singleton(player) : partyManager.getOnlinePlayers(party);
+        
         if (!ValidatorUtil.validate(validatorManager.getDuelSelfValidators(), player, party, players)) {
             return true;
         }
 
-        final Player target = Bukkit.getPlayerExact(args[0]);
+        Player target = Bukkit.getPlayerExact(args[0]);
+        final com.alessiodp.parties.api.interfaces.Party targetParty = target == null ? parties.getApi().getParty(args[0]) : parties.getApi().getPartyOfPlayer(target.getUniqueId());
+
+        if (target == null && targetParty != null && targetParty.getLeader() != null) {
+            target = Bukkit.getPlayer(targetParty.getLeader());
+        }
 
         if (target == null || !player.canSee(target)) {
             lang.sendMessage(sender, "ERROR.player.not-found", "name", args[0]);
             return true;
         }
 
-        final Party targetParty = partyManager.get(target);
-        final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : targetParty.getOnlineMembers();
+        final Collection<Player> targetPlayers = targetParty == null ? Collections.singleton(target) : partyManager.getOnlinePlayers(targetParty);
 
         if (!ValidatorUtil.validate(validatorManager.getDuelTargetValidators(), new Pair<>(player, target), targetParty, targetPlayers)) {
             return true;

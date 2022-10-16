@@ -5,7 +5,7 @@ import lombok.Getter;
 import me.realized.duels.api.arena.Arena;
 import me.realized.duels.api.kit.Kit;
 import me.realized.duels.api.request.Request;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.setting.Settings;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;

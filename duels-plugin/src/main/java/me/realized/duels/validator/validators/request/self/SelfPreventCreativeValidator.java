@@ -8,7 +8,7 @@ import org.bukkit.GameMode;
 
 import me.realized.duels.validator.BaseTriValidator;
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 
 public class SelfPreventCreativeValidator extends BaseTriValidator<Player, Party, Collection<Player>> {
     

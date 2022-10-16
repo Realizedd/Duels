@@ -70,40 +70,23 @@ ERROR:
     in-blacklisted-world: '{PREFIX} &cYou or your party member is in a blacklisted world.'
     is-tagged: '{PREFIX} &cYou or your party member is currently combat tagged.'
     not-in-duelzone: '{PREFIX} &cYou or your party member is currently not in one of the following regions: %regions%'
-    already-has-request: '{PREFIX} &cYou already have a request sent to %name%''s party.'
-    no-request: '{PREFIX} &cYou do not have a request from %name%''s party.'
+    already-has-request: '{PREFIX} &cYou already have a request sent to %name%'
+    no-request: '{PREFIX} &cYou do not have a request from %name%'
     already-in-match:
       sender: '{PREFIX} &cYou cannot do this while your party in a duel.'
-      target: '{PREFIX} &c%name%''s party is already in a duel.'
+      target: '{PREFIX} &c%name% is already in a duel.'
     already-spectating:
       sender: '{PREFIX} &cYou cannot do this while you or your party member is in spectator mode.'
-      target: '{PREFIX} &cA member of %name%''s party is in spectator mode.'
-    option-unavailable: '{PREFIX} &cItem/Money Betting is currently not available for party duels.'
-  party:
-    is-self: '{PREFIX} &cYou cannot create a party with yourself.'
-    is-not-owner: '{PREFIX} &cYou must be the owner of this party to do this.'
-    is-owner: '{PREFIX} &cYou cannot leave this party as you are the owner. You must either transfer the ownership of the party using ''/party transfer'' or disband the party using ''/party disband''.'
-    requests-disabled: '{PREFIX} &c%name% is currently not accepting party requests.'
-    already-has-invite: '{PREFIX} &cYou already have a invite sent to %name%.'
-    no-invite: '{PREFIX} &cYou do not have an invite from %name%.'
-    not-found: '{PREFIX} &cThat party no longer exists.'
-    already-in-party:
-      sender: '{PREFIX} &cYou cannot do this while in a party.'
-      target: '{PREFIX} &c%name% is already in a party.'
+      target: '{PREFIX} &cA member of %name% is in spectator mode.'
     not-in-party:
       sender: '{PREFIX} &cYou must be in a party to do this.'
       target: '{PREFIX} &c%name% is not in a party.'
-    not-a-member: '{PREFIX} &c%name% is not a member of your party.'
-    in-same-party: '{PREFIX} &c%name% is in your party.'
-    kick-self: '{PREFIX} &cYou cannot kick yourself from the party.'
-    is-not-same-size: '{PREFIX} &cParty sizes must match to do this.'
     is-not-online:
       sender: '{PREFIX} &cAll members of your party must be online!'
-      target: '{PREFIX} &cAll members of %name%''s party must be online!'
-    max-size-reached:
-      sender: '{PREFIX} &cYour party has reached the maximum number of members!'
-      target: '{PREFIX} &c%name%''s Party has reached the maximum number of members!'
-    cannot-friendly-fire: '{PREFIX} &cFriendly fire is not allowed.'
+      target: '{PREFIX} &cAll members of %name% must be online!'
+    option-unavailable: '{PREFIX} &cItem/Money Betting is currently not available for party duels.'
+    in-same-party: '{PREFIX} &c%name% is in your party.'
+    is-not-same-size: '{PREFIX} &cParty sizes must match to do this.'
   setting:
     disabled-option: '{PREFIX} &c%option% is currently disabled.'
     arena-not-applicable: '{PREFIX} &cYou cannot use kit %kit% on arena %arena%.'
@@ -131,7 +114,6 @@ ERROR:
     not-enough-money: '{PREFIX} &cYou do not have enough money to bet!'
     lobby-save-failure: '{PREFIX} &cCould not save lobby location. Please check the console for more information.'
     name-not-alphanumeric: '{PREFIX} &c''%name%'' is not alphanumeric.'
-
 
 COMMAND:
   duel:
@@ -186,14 +168,16 @@ COMMAND:
       send:
         sender-party:
         - '{LINE}'
-        - '&f%owner% &7has sent a duel request sent to &f%name%''s Party&7.'
+        - '&fSent a duel request sent to &f%name%&7.'
+        - '&6- &7Opponent(s): &3%opponents%'
         - '&6- &7Kit: &3%kit%'
         - '&6- &7Own Inventory: &r%own_inventory%'
         - '&6- &7Arena: &e%arena%'
         - '{LINE}'
         receiver-party:
         - '{LINE}'
-        - '&7Duel request received from &f%name%''s Party&7.'
+        - '&7Duel request received from &f%name%&7.'
+        - '&6- &7Opponent(s): &3%opponents%'
         - '&6- &7Kit: &3%kit%'
         - '&6- &7Own Inventory: &r%own_inventory%'
         - '&6- &7Arena: &e%arena%'
@@ -211,22 +195,22 @@ COMMAND:
             text: '{LINE}'
             hover-text: ''
       accept:
-        sender-party: 
+        sender-party:
         - '{LINE}'
-        - '{PREFIX} &f%name%''s Party &7has accepted &f%owner%&7''s duel request.'
+        - '{PREFIX} &f%name% &7has accepted the duel request.'
         - '{LINE}'
-        receiver-party: 
+        receiver-party:
         - '{LINE}'
-        - '{PREFIX} &f%owner% &7has accepted the duel request from &f%name%''s Party&7.'
+        - '{PREFIX} &f%name% &7has accepted the duel request&7.'
         - '{LINE}'
       deny:
-        sender-party: 
+        sender-party:
         - '{LINE}'
-        - '{PREFIX} &f%name%''s Party &7has declined &f%owner%&7''s duel request.'
+        - '{PREFIX} &f%name% &7has declined the duel request.'
         - '{LINE}'
-        receiver-party: 
+        receiver-party:
         - '{LINE}'
-        - '{PREFIX} &7&f%owner%&7''s has declined the duel request from &f%name%''s Party&7.'
+        - '{PREFIX} &f%name%&7 has declined the duel request&7.'
         - '{LINE}'
     stats:
       displayed:
@@ -365,83 +349,6 @@ COMMAND:
     - '{LINE}'
     start-spectate: '{PREFIX} &7Now spectating &f%name%&7 vs &f%opponent%&7 in arena &e%arena%&7. Type &f/spectate &7to stop spectating.'
     stop-spectate: '{PREFIX} &7You are no longer spectating &f%name%&7.'
-
-  party:
-    usage:
-      - '{LINE}'
-      - '&f/%command% toggle &e- &7Enable or disable receiving party invites.'
-      - '&f/%command% [player] &e- &7Sends a party invite to a player.'
-      - '&f/%command% list &e- &7Lists the current party''s members.'
-      - '&f/%command% accept [player] &e- &7Accepts a party invite.'
-      - '&f/%command% leave &e- &7Leaves the current party.'
-      - '&f/%command% kick [player] &e- &7Kicks a player from your party.'
-      - '&f/%command% friendlyfire &e- &7Enable or disable friendly fire for your party.'
-      - '&f/%command% transfer [player] &e- &7Transfers the ownership of your party to player.'
-      - '&f/%command% disband &e- &7Disbands the current party.'
-      - '{LINE}'
-    toggle:
-      enabled: '{PREFIX} &aYou are now receiving party requests.'
-      disabled: '{PREFIX} &cYou are no longer accepting party requests.'
-    list:
-      - '{LINE}'
-      - '&7Leader: &f%owner%'
-      - '&7Members (&r%members_count%&7): &r%members%'
-      - '&7Online (&r%online_count%&7): &r%online_members%'
-      - '{LINE}'
-    invite:
-      send:
-        receiver: 
-        - '{LINE}'
-        - '{PREFIX} &7Party invite received from &f%name%&7. Type &f/party accept %name% &7to join the party.'
-        - '{LINE}'
-        members: 
-        - '{LINE}'
-        - '{PREFIX} &f%owner% &7has invited &f%name% &7to the party!'
-        - '{LINE}'
-      accept:
-        receiver: 
-        - '{LINE}'
-        - '{PREFIX} &7Accepted the party invite from &f%name%&7.'
-        - '{LINE}'
-        members: 
-        - '{LINE}'
-        - '{PREFIX} &f%name% &7has joined the party!'
-        - '{LINE}'
-    leave:
-      sender: 
-      - '{LINE}'
-      - '{PREFIX} &7You have left &f%name%''s Party&7.'
-      - '{LINE}'
-      members: 
-      - '{LINE}'
-      - '{PREFIX} &f%name% &7has left the party!'
-      - '{LINE}'
-    kick:
-      receiver: 
-      - '{LINE}'
-      - '{PREFIX} &f%owner% &7has kicked you from the party!'
-      - '{LINE}'
-      members: 
-      - '{LINE}'
-      - '{PREFIX} &f%owner% &7has kicked &f%name% &7from the party!'
-      - '{LINE}'
-    friendly-fire:
-      enabled:
-       - '{LINE}'
-       - '{PREFIX} &cFriendly fire &7is now &aenabled&7!'
-       - '{LINE}'
-      disabled:
-       - '{LINE}'
-       - '{PREFIX} &cFriendly fire &7is now &cdisabled&7!'
-       - '{LINE}'
-    transfer:
-    - '{LINE}'
-    - '{PREFIX} &f%owner% &7has transferred the party to &f%name%&7.'
-    - '{LINE}'
-    disband:
-    - '{LINE}'
-    - '{PREFIX} &f%owner% &7has disbanded the party.'
-    - '{LINE}'
   
   sub-command-usage: '{PREFIX} &f/%command% %usage% &e- &7%description%'
 
@@ -483,7 +390,7 @@ DUEL:
     tie: '{PREFIX} &7Tie Game!'
     plugin-disable: '{PREFIX} &cPlugin is disabling! Ending match automatically.'
     opponent-defeat: '{PREFIX} &f%winner% &a(%winner_rating%) (+%change%) &7defeated &f%loser% &c(%loser_rating%) (-%change%) &7with kit &3%kit% &7on arena &e%arena%&7.'
-    party-opponent-defeat: '{PREFIX} &f%winners% &7defeated &f%losers% &7with kit &3%kit% &7on arena &e%arena%&7.'
+    party-opponent-defeat: '{PREFIX} &f%winner% &7defeated &f%loser% &7with kit &3%kit% &7on arena &e%arena%&7.'
   inventories:
     message: '&7Inventories (click on the name to view): '
     name-color: '&b'
@@ -533,7 +440,7 @@ GUI:
       details:
         name: '&9Request Details'
         lore:
-        - '&7Opponent: &f%opponent%'
+        - '&7Opponent(s): &f%opponent%'
         - '&7Kit: &3%kit%'
         - '&7Own Inventory: &r%own_inventory%'
         - '&7Arena: &e%arena%'
@@ -542,7 +449,7 @@ GUI:
         - ' '
         - '&7To change the bet'
         - '&7amount, please type'
-        - '&b/duel %opponent% [amount]'
+        - '&b/duel %opponent_cmd% [amount]'
       kit-selector:
         name: '&9Kit Selection'
         lore:

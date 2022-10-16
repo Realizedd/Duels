@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alessiodp.parties.api.interfaces.Party;
 import com.google.common.collect.ImmutableList;
 
 import org.bukkit.entity.Player;
 
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.function.Pair;
@@ -123,8 +123,8 @@ public class ValidatorManager implements Loadable {
             new BlacklistedWorldValidator(plugin),
             new CheckMoveValidator(plugin),
             new CombatTagValidator(plugin),
-            new DuelZoneValidator(plugin),
-            new PartyValidator(plugin)
+            new DuelZoneValidator(plugin)
+//            new PartyValidator(plugin)
         );
     }
 

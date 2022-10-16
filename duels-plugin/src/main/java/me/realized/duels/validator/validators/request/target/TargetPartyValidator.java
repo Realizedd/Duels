@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.bukkit.entity.Player;
 
 import me.realized.duels.DuelsPlugin;
-import me.realized.duels.party.Party;
+import com.alessiodp.parties.api.interfaces.Party;
 import me.realized.duels.util.function.Pair;
 import me.realized.duels.validator.BaseTriValidator;
 
@@ -29,23 +29,23 @@ public class TargetPartyValidator extends BaseTriValidator<Pair<Player, Player>,
         }
 
         if (senderParty == null) {
-            lang.sendMessage(pair.getKey(), "ERROR.party.not-in-party.sender", "name", pair.getKey().getName());
+            lang.sendMessage(pair.getKey(), "ERROR.party-duel.not-in-party.sender", "name", pair.getKey().getName());
             return false;
         }
 
         // If sender is in the same party as target
         if (senderParty.equals(party)) {
-            lang.sendMessage(pair.getKey(), "ERROR.party.in-same-party", "name", pair.getValue().getName());
+            lang.sendMessage(pair.getKey(), "ERROR.party-duel.in-same-party", "name", pair.getValue().getName());
             return false;
         }
         
-        if (config.isPartySameSizeOnly() && senderParty.size() != party.size()) {
-            lang.sendMessage(pair.getKey(), "ERROR.party.is-not-same-size");
+        if (config.isPartySameSizeOnly() && senderParty.getMembers().size() != party.getMembers().size()) {
+            lang.sendMessage(pair.getKey(), "ERROR.party-duel.is-not-same-size");
             return false;
         }
 
-        if (players.size() != party.size()) {
-            lang.sendMessage(pair.getKey(), "ERROR.party.is-not-online.target", "name", pair.getValue().getName());
+        if (players.size() != party.getOnlineMembers().size()) {
+            lang.sendMessage(pair.getKey(), "ERROR.party-duel.is-not-online.target", "name", party.getName());
             return false;
         }
         
