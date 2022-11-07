@@ -1,0 +1,19 @@
+# This workflow will build and deploy a package using gradle
+name: Gradle Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  build:
+    uses: LemonGamingLtd/workflows/.github/workflows/gradle-build.yml@main
+    secrets:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
+    with:
+      artifact_folders: |
+        out
