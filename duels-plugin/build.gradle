@@ -1,5 +1,9 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+plugins {
+    id 'org.ajoberstar.grgit' version '5.0.0'
+}
+
 clean.doFirst {
     delete "$rootDir/out/"
 }
@@ -9,7 +13,7 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.yml'
-        filter(ReplaceTokens, tokens: [VERSION: project.version])
+        filter(ReplaceTokens, tokens: [VERSION: project.version, GIT_HASH: grgit.head().abbreviatedId])
     }
 }
 

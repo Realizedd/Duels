@@ -10,6 +10,9 @@ author: Realized
 website: https://www.spigotmc.org/resources/duels.20171/
 description: An ultimate solution to server owners wanting to create a duel system.
 
+commit-hash: @GIT_HASH@
+git-repo: LemonGamingLtd/Duels
+
 commands:
    duel:
      description: Send, accept, or deny a duel request.
