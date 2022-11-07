@@ -7,6 +7,7 @@ import me.realized.duels.config.Config;
 import me.realized.duels.util.hook.PluginHook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class EssentialsHook extends PluginHook<DuelsPlugin> {
 
@@ -19,14 +20,16 @@ public class EssentialsHook extends PluginHook<DuelsPlugin> {
         this.config = plugin.getConfiguration();
     }
 
+    public boolean isVanished(@NotNull Player player) {
+        return getEssentials().getUser(player).isVanished();
+    }
+
     public void tryUnvanish(final Player player) {
         if (!config.isAutoUnvanish()) {
             return;
         }
 
-        final Essentials plugin = (Essentials) getPlugin();
-        final User user = plugin.getUser(player);
-
+        final User user = getEssentials().getUser(player);
         if (user != null && user.isVanished()) {
             user.setVanished(false);
         }
@@ -37,11 +40,13 @@ public class EssentialsHook extends PluginHook<DuelsPlugin> {
             return;
         }
 
-        final Essentials plugin = (Essentials) getPlugin();
-        final User user = plugin.getUser(player);
-
+        final User user = getEssentials().getUser(player);
         if (user != null) {
             user.setLastLocation(location);
         }
+    }
+
+    private Essentials getEssentials() {
+        return (Essentials) getPlugin();
     }
 }
