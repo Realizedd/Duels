@@ -23,6 +23,7 @@ import me.realized.duels.arena.ArenaManagerImpl;
 import me.realized.duels.arena.MatchImpl;
 import me.realized.duels.config.Config;
 import me.realized.duels.config.Lang;
+import me.realized.duels.hook.hooks.EssentialsHook;
 import me.realized.duels.hook.hooks.MyPetHook;
 import me.realized.duels.player.PlayerInfo;
 import me.realized.duels.player.PlayerInfoManager;
@@ -65,6 +66,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
 
     private Teleport teleport;
     private MyPetHook myPet;
+    private EssentialsHook essentials;
 
     public SpectateManagerImpl(final DuelsPlugin plugin) {
         this.plugin = plugin;
@@ -81,6 +83,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         // Late-init since SpectateManager is loaded before below variables are loaded
         this.teleport = plugin.getTeleport();
         this.myPet = plugin.getHookManager().getHook(MyPetHook.class);
+        this.essentials = plugin.getHookManager().getHook(EssentialsHook.class);
     }
 
     @Override
@@ -136,7 +139,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         final MatchImpl match = arena.getMatch();
 
         // Hide from players in match
-        if (match != null) {
+        if (match != null && (essentials == null || !essentials.isVanished(player))) {
             match.getAllPlayers()
                 .stream()
                 .filter(arenaPlayer -> arenaPlayer.isOnline() && arenaPlayer.canSee(player))
@@ -221,7 +224,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         final MatchImpl match = spectator.getArena().getMatch();
 
         // Show to players in match
-        if (match != null) {
+        if (match != null && (essentials == null || !essentials.isVanished(player))) {
             match.getAllPlayers()
                 .stream()
                 .filter(Player::isOnline)
