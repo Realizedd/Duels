@@ -144,6 +144,12 @@ request:
     # default: true
     enabled: true
 
+    # Minimum amount a player can bet
+    min-amount: 10000
+
+    # Maximum amount a player can bet
+    max-amount: 1000000
+
     # If set to 'true', players without the permission 'duels.use.money-betting' will not be able to bet money on their duel.
     # default: false
     use-permission: false

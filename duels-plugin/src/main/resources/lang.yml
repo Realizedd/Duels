@@ -92,6 +92,7 @@ ERROR:
     invalid-option: '{PREFIX} &c''%option%'' is not a valid option. Available options are: %available_options%'
     invalid-action: '{PREFIX} &c''%action%'' is not a valid action. Available actions are: %available_actions%'
     not-enough-money: '{PREFIX} &cYou do not have enough money to bet!'
+    insufficient-amount: '{PREFIX} &cInsufficient amount. Must be between $%min% and $%max%!'
     lobby-save-failure: '{PREFIX} &cCould not save lobby location. Please check the console for more information.'
     name-not-alphanumeric: '{PREFIX} &c''%name%'' is not alphanumeric.'
 

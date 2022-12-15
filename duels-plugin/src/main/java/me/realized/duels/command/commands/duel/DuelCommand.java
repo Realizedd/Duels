@@ -173,6 +173,11 @@ public class DuelCommand extends BaseCommand {
                     return true;
                 }
 
+                if (amount < config.getMoneyBettingMinAmount() || amount > config.getMoneyBettingMaxAmount()) {
+                    lang.sendMessage(sender, "ERROR.command.insufficient-amount", "min", config.getMoneyBettingMinAmount(), "max", config.getMoneyBettingMaxAmount());
+                    return true;
+                }
+
                 if (!vault.getEconomy().has(player, amount)) {
                     lang.sendMessage(sender, "ERROR.command.not-enough-money");
                     return true;
