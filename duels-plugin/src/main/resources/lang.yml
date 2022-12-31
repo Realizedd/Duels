@@ -48,6 +48,7 @@ ERROR:
   duel:
     is-self: '{PREFIX} &cYou cannot duel yourself.'
     inventory-not-empty: '{PREFIX} &cYou must have a cleared inventory to use this command.'
+    wearing-elytra: '{PREFIX} &cYou cannot start a duel while wearing an elytra.'
     in-creative-mode: '{PREFIX} &cYou cannot duel in creative mode.'
     in-blacklisted-world: '{PREFIX} &cYou cannot duel in this world.'
     is-tagged: '{PREFIX} &cYou cannot duel while combat tagged.'
@@ -295,6 +296,7 @@ DUEL:
     is-tagged: '{FAIL_PREFIX} You or your opponent is in combat!'
     player-moved: '{FAIL_PREFIX} You or your opponent moved after sending/accepting the request!'
     not-in-duelzone: '{FAIL_PREFIX} You or your opponent moved out of the duelzone sending/accepting the request!'
+    wearing-elytra: '{FAIL_PREFIX} You or your opponent is wearing an elytra!'
     in-creative-mode: '{FAIL_PREFIX} You or your opponent is in creative mode!'
     no-arena-available: '{FAIL_PREFIX} No arenas are currently available. Please try again later.'
     arena-in-use: '{FAIL_PREFIX} That arena is already in use. Please select a different arena.'

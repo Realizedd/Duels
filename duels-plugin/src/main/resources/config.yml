@@ -98,6 +98,9 @@ request:
   # default: false
   requires-cleared-inventory: false
 
+  # Require not wearing an elytra when requesting to duel or starting a duel.
+  requires-no-wearing-elytra: false
+
   # If set to 'true', players in creative mode will be prohibited from dueling.
   # default: false
   prevent-creative-mode: false

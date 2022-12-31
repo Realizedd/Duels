@@ -356,6 +356,11 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
             return false;
         }
 
+        if (config.isRequiresNoElytra() && InventoryUtil.wearingElytra(player)) {
+            lang.sendMessage(player, "ERROR.duel.wearing-elytra");
+            return false;
+        }
+
         if (config.isPreventCreativeMode() && player.getGameMode() == GameMode.CREATIVE) {
             lang.sendMessage(player, "ERROR.duel.in-creative-mode");
             return false;

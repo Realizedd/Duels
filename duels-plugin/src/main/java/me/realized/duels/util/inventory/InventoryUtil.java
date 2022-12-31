@@ -67,6 +67,18 @@ public final class InventoryUtil {
         return false;
     }
 
+    public static boolean wearingElytra(final Player player) {
+        final PlayerInventory inventory = player.getInventory();
+
+        if (inventory.getChestplate() == null) return false;
+
+        if (inventory.getChestplate().getType() == Material.AIR) return false;
+
+        if (inventory.getChestplate().getType() == Material.ELYTRA) return true;
+
+        return false;
+    }
+
     public static boolean addOrDrop(final Player player, final Collection<ItemStack> items) {
         if (items.isEmpty()) {
             return false;

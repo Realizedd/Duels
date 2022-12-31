@@ -65,6 +65,8 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     @Getter
     private boolean requiresClearedInventory;
     @Getter
+    private boolean requiresNoElytra;
+    @Getter
     private boolean preventCreativeMode;
     @Getter
     private boolean ownInventoryEnabled;
@@ -287,6 +289,7 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         lhLossesTitle = configuration.getString("supported-plugins.LeaderHeads.losses.menu.title", "Duel Losses");
 
         requiresClearedInventory = configuration.getBoolean("request.requires-cleared-inventory", true);
+        requiresNoElytra = configuration.getBoolean("request.requires-no-wearing-elytra", false);
         preventCreativeMode = configuration.getBoolean("request.prevent-creative-mode", false);
         ownInventoryEnabled = configuration.getBoolean("request.use-own-inventory.enabled", true);
         ownInventoryUsePermission = configuration.getBoolean("request.use-own-inventory.use-permission", false);
