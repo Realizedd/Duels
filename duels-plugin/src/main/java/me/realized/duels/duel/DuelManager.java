@@ -255,6 +255,10 @@ public class DuelManager implements Loadable {
             mcMMO.enableSkills(player);
         }
 
+        if (opponent != null) {
+            teleport.tryTeleport(opponent, playerManager.getLobby());
+        }
+
         final PlayerInfo info = playerManager.get(player);
         final List<ItemStack> items = match.getItems();
 
@@ -568,6 +572,9 @@ public class DuelManager implements Loadable {
 
                 final Player winner = arena.first();
                 inventoryManager.create(winner, false);
+
+                PlayerUtil.reset(winner);
+                PlayerUtil.reset(player);
 
                 if (config.isSpawnFirework()) {
                     final Firework firework = (Firework) winner.getWorld().spawnEntity(winner.getEyeLocation(), EntityType.FIREWORK);

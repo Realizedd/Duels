@@ -1,6 +1,7 @@
 package me.realized.duels.util;
 
 import me.realized.duels.util.compat.CompatUtil;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public final class PlayerUtil {
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
         setMaxHealth(player);
         player.setFoodLevel(DEFAULT_MAX_FOOD_LEVEL);
-        player.setItemOnCursor(null);
+        player.setItemOnCursor(new ItemStack(Material.AIR));
 
         final Inventory top = player.getOpenInventory().getTopInventory();
 
