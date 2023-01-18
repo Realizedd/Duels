@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 import lombok.Getter;
 import me.realized.duels.DuelsPlugin;
+import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.config.Config;
 import me.realized.duels.data.LocationData;
 import me.realized.duels.data.PlayerData;
@@ -198,15 +199,13 @@ public class PlayerInfoManager implements Loadable {
         public void on(final PlayerJoinEvent event) {
             final Player player = event.getPlayer();
 
-            if (player.isDead()) {
-                return;
-            }
+            if (player.isDead()) return;
 
             final PlayerInfo info = remove(player);
+            if (info == null) return;
 
-            if (info == null) {
-                return;
-            }
+            final ArenaImpl arena = DuelsPlugin.getInstance().getArenaManager().get(player);
+            if (arena == null) return;
 
             teleport.tryTeleport(player, info.getLocation());
             info.restore(player);
@@ -215,11 +214,12 @@ public class PlayerInfoManager implements Loadable {
         @EventHandler(priority = EventPriority.HIGHEST)
         public void on(final PlayerRespawnEvent event) {
             final Player player = event.getPlayer();
-            final PlayerInfo info = get(player);
 
-            if (info == null) {
-                return;
-            }
+            final PlayerInfo info = get(player);
+            if (info == null) return;
+
+            final ArenaImpl arena = DuelsPlugin.getInstance().getArenaManager().get(player);
+            if (arena == null) return;
 
             event.setRespawnLocation(info.getLocation());
 
