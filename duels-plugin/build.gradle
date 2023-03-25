@@ -1,5 +1,11 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
 clean.doFirst {
     delete "$rootDir/out/"
 }
@@ -14,35 +20,36 @@ processResources {
 }
 
 dependencies {
-    compileOnly 'org.jetbrains:annotations-java5:22.0.0'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
-    implementation 'com.mojang:authlib:1.5.21'
-    implementation 'me.clip:placeholderapi:2.11.1'
-    implementation 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
-    implementation ('net.essentialsx:EssentialsX:2.19.2') {
+    compileOnly 'org.jetbrains:annotations:24.0.1'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    compileOnly 'com.mojang:authlib:1.5.21'
+    compileOnly 'me.clip:placeholderapi:2.11.1'
+    compileOnly 'com.github.sirblobman.api:core:2.7-SNAPSHOT'
+    compileOnly 'com.github.sirblobman.combatlogx:api:11.2-SNAPSHOT'
+    compileOnly ('net.essentialsx:EssentialsX:2.19.7') {
         transitive = false
     }
-    implementation (name: 'MVdWPlaceholderAPI-3.1.1') {
+    compileOnly (name: 'MVdWPlaceholderAPI-3.1.1') {
         transitive = false
     }
-    implementation name: 'Vault-1.6.7'
-    implementation name: 'CombatTagPlus'
-    implementation name: 'PvPManager-3.7.16'
-    implementation name: 'Factions-1.6.9.5-U0.1.14'
-    implementation name: 'MassiveCore'
-    implementation name: 'Factions'
-    implementation name: 'MyPet-2.3.4'
-    implementation name: 'BountyHunters-2.2.6'
-    implementation name: 'SimpleClans-2.14.4.1'
-    implementation name: 'LeaderHeadsAPI'
+    compileOnly name: 'Vault-1.6.7'
+    compileOnly name: 'CombatTagPlus'
+    compileOnly name: 'PvPManager-3.7.16'
+    compileOnly name: 'Factions-1.6.9.5-U0.1.14'
+    compileOnly name: 'MassiveCore'
+    compileOnly name: 'Factions'
+    compileOnly name: 'MyPet-2.3.4'
+    compileOnly name: 'BountyHunters-2.2.6'
+    compileOnly name: 'SimpleClans-2.14.4.1'
+    compileOnly name: 'LeaderHeadsAPI'
 
     implementation project(':duels-api')
     implementation project(':duels-worldguard')
     implementation project(':duels-worldguard-v6')
     implementation project(':duels-worldguard-v7')
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
 }
 
 shadowJar {
