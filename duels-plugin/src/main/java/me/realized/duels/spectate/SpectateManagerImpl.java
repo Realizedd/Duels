@@ -65,7 +65,9 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
     private final Multimap<Arena, SpectatorImpl> arenas = HashMultimap.create();
 
     private Teleport teleport;
+    @Nullable
     private MyPetHook myPet;
+    @Nullable
     private EssentialsHook essentials;
 
     public SpectateManagerImpl(final DuelsPlugin plugin) {
@@ -139,7 +141,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         final MatchImpl match = arena.getMatch();
 
         // Hide from players in match
-        if (match != null && !essentials.isVanished(player)) {
+        if (match != null && !(essentials != null && essentials.isVanished(player))) {
             match.getAllPlayers()
                 .stream()
                 .filter(arenaPlayer -> arenaPlayer.isOnline() && arenaPlayer.canSee(player))
@@ -224,7 +226,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         final MatchImpl match = spectator.getArena().getMatch();
 
         // Show to players in match
-        if (match != null && !essentials.isVanished(player)) {
+        if (match != null && !(essentials != null && essentials.isVanished(player))) {
             match.getAllPlayers()
                 .stream()
                 .filter(Player::isOnline)
