@@ -1,12 +1,6 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
-    }
+plugins {
+    id 'java'
+    id 'maven-publish'
 }
 
 allprojects {
@@ -15,13 +9,8 @@ allprojects {
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'com.github.johnrengelman.shadow'
-    apply plugin: 'maven-publish'
-
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
         mavenCentral()
@@ -59,6 +48,11 @@ subprojects {
         maven {
             name 'essentialsx-repo'
             url 'https://repo.essentialsx.net/releases/'
+        }
+
+        maven {
+            name 'sirblobman-repo'
+            url 'https://nexus.sirblobman.xyz/public/'
         }
 
         flatDir {
