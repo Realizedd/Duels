@@ -9,6 +9,7 @@ import me.realized.duels.config.Config;
 import me.realized.duels.config.Lang;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.Loadable;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.TextBuilder;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
@@ -62,13 +63,13 @@ public class RequestManager implements Loadable, Listener {
         final String kit = settings.getKit() != null ? settings.getKit().getName() : lang.getMessage("GENERAL.not-selected");
         final String ownInventory = settings.isOwnInventory() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
         final String arena = settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random");
-        final int betAmount = settings.getBet();
+        final double bet = settings.getBet();
         final String itemBetting = settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
 
         lang.sendMessage(sender, "COMMAND.duel.request.send.sender",
-            "name", target.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
+            "name", target.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena, "bet_amount", NumberUtil.formatDouble(bet), "item_betting", itemBetting);
         lang.sendMessage(target, "COMMAND.duel.request.send.receiver",
-            "name", sender.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena, "bet_amount", betAmount, "item_betting", itemBetting);
+            "name", sender.getName(), "kit", kit, "own_inventory", ownInventory, "arena", arena, "bet_amount", NumberUtil.formatDouble(bet), "item_betting", itemBetting);
 
         final String path = "COMMAND.duel.request.send.clickable-text.";
 

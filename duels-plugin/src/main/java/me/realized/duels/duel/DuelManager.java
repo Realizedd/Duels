@@ -241,11 +241,11 @@ public class DuelManager implements Loadable {
         final String opponentName = opponent != null ? opponent.getName() : lang.getMessage("GENERAL.none");
 
         if (vault != null && match.getBet() > 0) {
-            final int amount = match.getBet() * 2;
+            final double amount = match.getBet() * 2;
             vault.add(amount, player);
-            lang.sendMessage(player, "DUEL.reward.money.message", "name", opponentName, "money", amount);
+            lang.sendMessage(player, "DUEL.reward.money.message", "name", opponentName, "money", NumberUtil.formatDouble(amount));
 
-            final String title = lang.getMessage("DUEL.reward.money.title", "name", opponentName, "money", amount);
+            final String title = lang.getMessage("DUEL.reward.money.title", "name", opponentName, "money", NumberUtil.formatDouble(amount));
 
             if (title != null) {
                 Titles.send(player, title, null, 0, 20, 50);
@@ -338,11 +338,12 @@ public class DuelManager implements Loadable {
             return;
         }
 
-        final int bet = settings.getBet();
+        final double bet = settings.getBet();
 
         if (bet > 0 && vault != null && vault.getEconomy() != null) {
             if (!vault.has(bet, first, second)) {
-                lang.sendMessage(Arrays.asList(first, second), "DUEL.start-failure.not-enough-money", "bet_amount", bet);
+                lang.sendMessage(Arrays.asList(first, second), "DUEL.start-failure.not-enough-money",
+                        "bet_amount", NumberUtil.formatDouble(bet));
                 refundItems(items, first, second);
                 return;
             }
@@ -591,7 +592,7 @@ public class DuelManager implements Loadable {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command
                                     .replace("%winner%", winner.getName()).replace("%loser%", player.getName())
                                     .replace("%kit%", kitName).replace("%arena%", arena.getName())
-                                    .replace("%bet_amount%", String.valueOf(match.getBet()))
+                                    .replace("%bet_amount%", NumberUtil.formatDouble(match.getBet()))
                                 );
                             }
                         } catch (Exception ex) {

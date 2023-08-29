@@ -57,7 +57,7 @@ public interface Match {
      *
      * @return bet Bet amount for this {@link Match} or 0 if no bet was specified.
      */
-    int getBet();
+    double getBet();
 
 
     /**

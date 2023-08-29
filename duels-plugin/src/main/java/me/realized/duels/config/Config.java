@@ -89,6 +89,10 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     @Getter
     private boolean moneyBettingUsePermission;
     @Getter
+    private double moneyBettingMinimumBetAmount;
+    @Getter
+    private double moneyBettingMaximumBetAmount;
+    @Getter
     private int expiration;
 
     @Getter
@@ -297,6 +301,8 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         itemBettingUsePermission = configuration.getBoolean("request.item-betting.use-permission", false);
         moneyBettingEnabled = configuration.getBoolean("request.money-betting.enabled", true);
         moneyBettingUsePermission = configuration.getBoolean("request.money-betting.use-permission", false);
+        moneyBettingMinimumBetAmount = configuration.getDouble("request.money-betting.minimum-bet-amount", 0.001);
+        moneyBettingMaximumBetAmount = configuration.getDouble("request.money-betting.maximum-bet-amount", 10000000000.0);
         expiration = Math.max(configuration.getInt("request.expiration", 30), 0);
 
         maxDuration = configuration.getInt("duel.match.max-duration", -1);

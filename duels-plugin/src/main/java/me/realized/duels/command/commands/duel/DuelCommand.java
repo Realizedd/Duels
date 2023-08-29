@@ -160,9 +160,9 @@ public class DuelCommand extends BaseCommand {
         boolean sendRequest = false;
 
         if (args.length > 1) {
-            final int amount = NumberUtil.parseInt(args[1]).orElse(0);
+            final double amount = NumberUtil.parseDouble(args[1]).orElse(0.0);
 
-            if (amount > 0 && config.isMoneyBettingEnabled()) {
+            if (amount >= config.getMoneyBettingMinimumBetAmount() && config.isMoneyBettingEnabled()) {
                 if (config.isMoneyBettingUsePermission() && !player.hasPermission(Permissions.MONEY_BETTING) && !player.hasPermission(Permissions.SETTING_ALL)) {
                     lang.sendMessage(player, "ERROR.no-permission", "permission", Permissions.MONEY_BETTING);
                     return true;
@@ -170,6 +170,11 @@ public class DuelCommand extends BaseCommand {
 
                 if (vault == null || vault.getEconomy() == null) {
                     lang.sendMessage(sender, "ERROR.setting.disabled-option", "option", lang.getMessage("GENERAL.betting"));
+                    return true;
+                }
+
+                if (amount > config.getMoneyBettingMaximumBetAmount()) {
+                    lang.sendMessage(sender, "ERROR.command.exceeding-maximum-betting-amount");
                     return true;
                 }
 

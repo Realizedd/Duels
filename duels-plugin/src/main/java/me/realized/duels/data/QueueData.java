@@ -6,7 +6,7 @@ import me.realized.duels.queue.Queue;
 public class QueueData {
 
     private String kit;
-    private int bet;
+    private double bet;
 
     private QueueData() {}
 

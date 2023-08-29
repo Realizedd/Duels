@@ -7,6 +7,7 @@ import me.realized.duels.arena.ArenaImpl;
 import me.realized.duels.arena.MatchImpl;
 import me.realized.duels.command.BaseCommand;
 import me.realized.duels.spectate.SpectatorImpl;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.inventory.InventoryUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -79,7 +80,7 @@ public class SpectateCommand extends BaseCommand {
                     "opponent", arena.getOpponent(target).getName(),
                     "kit", kit,
                     "arena", arena.getName(),
-                    "bet_amount", match.getBet()
+                    "bet_amount", NumberUtil.formatDouble(match.getBet())
                 );
         }
     }

@@ -26,7 +26,7 @@ public interface DQueueManager {
      * @return DQueue with the given kit and bet if found, otherwise null.
      */
     @Nullable
-    DQueue get(@Nullable final Kit kit, final int bet);
+    DQueue get(@Nullable final Kit kit, final double bet);
 
 
     /**
@@ -48,16 +48,16 @@ public interface DQueueManager {
      * @return The newly created DQueue or null if a queue with given kit and bet already exists
      */
     @Nullable
-    DQueue create(@Nullable final CommandSender source, @Nullable final Kit kit, final int bet);
+    DQueue create(@Nullable final CommandSender source, @Nullable final Kit kit, final double bet);
 
 
     /**
-     * Calls {@link #create(CommandSender, Kit, int)} with source being null.
+     * Calls {@link #create(CommandSender, Kit, double)} with source being null.
      *
-     * @see #create(CommandSender, Kit, int)
+     * @see #create(CommandSender, Kit, double)
      */
     @Nullable
-    DQueue create(@Nullable final Kit kit, final int bet);
+    DQueue create(@Nullable final Kit kit, final double bet);
 
 
     /**
@@ -70,16 +70,16 @@ public interface DQueueManager {
      * @see DQueue#isRemoved()
      */
     @Nullable
-    DQueue remove(@Nullable final CommandSender source, @Nullable final Kit kit, final int bet);
+    DQueue remove(@Nullable final CommandSender source, @Nullable final Kit kit, final double bet);
 
 
     /**
-     * Calls {@link #remove(CommandSender, Kit, int)} with source being null.
+     * Calls {@link #remove(CommandSender, Kit, double)} with source being null.
      *
-     * @see #remove(CommandSender, Kit, int)
+     * @see #remove(CommandSender, Kit, double)
      */
     @Nullable
-    DQueue remove(@Nullable final Kit kit, final int bet);
+    DQueue remove(@Nullable final Kit kit, final double bet);
 
 
     /**

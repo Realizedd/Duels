@@ -60,5 +60,5 @@ public interface Request {
      *
      * @return Bet amount for this {@link Request} or 0 if not specified.
      */
-    int getBet();
+    double getBet();
 }

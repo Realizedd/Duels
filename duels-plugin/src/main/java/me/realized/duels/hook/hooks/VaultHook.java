@@ -31,6 +31,7 @@ public class VaultHook extends PluginHook<DuelsPlugin> {
         Log.info("Using Economy Provider: " + economy.getClass().getName());
     }
 
+    @Deprecated
     public boolean has(final int amount, final Player... players) {
         if (economy == null) {
             return false;
@@ -45,15 +46,55 @@ public class VaultHook extends PluginHook<DuelsPlugin> {
         return true;
     }
 
+    @Deprecated
     public void add(final int amount, final Player... players) {
         if (economy != null) {
             Arrays.stream(players).forEach(player -> economy.depositPlayer(player, amount));
         }
     }
 
+    @Deprecated
     public void remove(final int amount, final Player... players) {
         if (economy != null) {
             Arrays.stream(players).forEach(player -> economy.withdrawPlayer(player, amount));
+        }
+    }
+
+    public boolean has(final double amount, final Player... players) {
+        if (economy == null) {
+            return false;
+        }
+
+        boolean result = true;
+
+        for (final Player player : players) {
+            if (economy.has(player, amount)) {
+                continue;
+            }
+            result = false;
+            break;
+        }
+
+        return result;
+    }
+
+    public void add(final double amount, final Player... players) {
+        if (economy == null) {
+            return;
+        }
+
+        for (Player player : players) {
+            economy.depositPlayer(player, amount);
+        }
+    }
+
+    public void remove(final double amount, final Player... players) {
+        if (economy == null) {
+            return;
+        }
+
+        for (Player player : players) {
+            economy.withdrawPlayer(player, amount);
         }
     }
 }

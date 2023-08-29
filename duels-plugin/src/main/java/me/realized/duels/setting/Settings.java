@@ -26,7 +26,7 @@ public class Settings {
     private ArenaImpl arena;
     @Getter
     @Setter
-    private int bet;
+    private double bet;
     @Getter
     @Setter
     private boolean itemBetting;

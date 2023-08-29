@@ -25,7 +25,7 @@ public interface DQueue {
      *
      * @return Bet amount for this {@link DQueue} or 0 if no bet was specified.
      */
-    int getBet();
+    double getBet();
 
 
     /**
@@ -50,7 +50,7 @@ public interface DQueue {
      * Whether or not this {@link DQueue} has been removed.
      *
      * @return True if this {@link DQueue} has been removed. False otherwise.
-     * @see DQueueManager#remove(Kit, int)
+     * @see DQueueManager#remove(Kit, double)
      */
     boolean isRemoved();
 }

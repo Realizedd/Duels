@@ -4,6 +4,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.kit.KitImpl;
 import me.realized.duels.queue.Queue;
 import me.realized.duels.queue.sign.QueueSignImpl;
+import me.realized.duels.util.NumberUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -12,7 +13,7 @@ public class QueueSignData {
 
     private LocationData location;
     private String kit;
-    private int bet;
+    private double bet;
 
     private QueueSignData() {}
 
@@ -45,6 +46,9 @@ public class QueueSignData {
             queue = plugin.getQueueManager().get(kit, bet);
         }
 
-        return new QueueSignImpl(location, plugin.getLang().getMessage("SIGN.format", "kit", this.kit != null ? this.kit : plugin.getLang().getMessage("GENERAL.none"), "bet_amount", bet), queue);
+        return new QueueSignImpl(location, plugin.getLang().getMessage("SIGN.format",
+                "kit", this.kit != null ? this.kit : plugin.getLang().getMessage("GENERAL.none"),
+                "bet_amount", NumberUtil.formatDouble(bet)
+        ), queue);
     }
 }
