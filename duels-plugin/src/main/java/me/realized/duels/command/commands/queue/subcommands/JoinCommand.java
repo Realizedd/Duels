@@ -35,11 +35,11 @@ public class JoinCommand extends BaseCommand {
         }
 
         final String kitName = kit != null ? kit.getName() : lang.getMessage("GENERAL.none");
-        final int bet = args.length > 2 ? NumberUtil.parseInt(args[args.length - 1]).orElse(0) : 0;
+        final double bet = args.length > 2 ? NumberUtil.parseDouble(args[args.length - 1]).orElse(0) : 0;
         final Queue queue = args[1].equals("-r") ? queueManager.randomQueue() : queueManager.get(kit, bet);
 
         if (queue == null) {
-            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", bet, "kit", kitName);
+            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", NumberUtil.formatDouble(bet), "kit", kitName);
             return;
         }
 

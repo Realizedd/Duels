@@ -18,7 +18,7 @@ public class DeletequeueCommand extends BaseCommand {
 
     @Override
     protected void execute(final CommandSender sender, final String label, final String[] args) {
-        final int bet = NumberUtil.parseInt(args[1]).orElse(0);
+        final double bet = NumberUtil.parseDouble(args[1]).orElse(0.0);
         KitImpl kit = null;
 
         if (!args[2].equals("-")) {
@@ -34,11 +34,11 @@ public class DeletequeueCommand extends BaseCommand {
         final String kitName = kit != null ? kit.getName() : lang.getMessage("GENERAL.none");
 
         if (queueManager.remove(sender, kit, bet) == null) {
-            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", bet, "kit", kitName);
+            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", NumberUtil.formatDouble(bet), "kit", kitName);
             return;
         }
 
-        lang.sendMessage(sender, "COMMAND.duels.delete-queue", "kit", kitName, "bet_amount", bet);
+        lang.sendMessage(sender, "COMMAND.duels.delete-queue", "kit", kitName, "bet_amount", NumberUtil.formatDouble(bet));
     }
 
     @Override

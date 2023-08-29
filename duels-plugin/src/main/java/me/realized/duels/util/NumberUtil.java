@@ -1,5 +1,6 @@
 package me.realized.duels.util;
 
+import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
 public final class NumberUtil {
@@ -67,6 +68,33 @@ public final class NumberUtil {
 
         return OptionalInt.of(negative ? result : -result);
     }
+
+    /**
+     * Parses with the same behavior as {@link NumberUtil#parseInt(String)} but then with a double.
+     * @param string the String to parse
+     * @return an optional double
+     */
+    public static OptionalDouble parseDouble(final String string) {
+        if (string == null) {
+            return OptionalDouble.empty();
+        }
+
+        try {
+            return OptionalDouble.of(Double.parseDouble(string));
+        } catch (NumberFormatException e) {
+            return OptionalDouble.empty();
+        }
+    }
+
+    /**
+     * Formats a double to a human friendly number
+     * @param value double to format
+     * @return the formatted double as a String
+     */
+    public static String formatDouble(final double value) {
+        return String.format("%,.2f", value);
+    }
+
 
     public static int getChange(final int k, final int winnerRating, final int loserRating) {
         final double wr = r(winnerRating);

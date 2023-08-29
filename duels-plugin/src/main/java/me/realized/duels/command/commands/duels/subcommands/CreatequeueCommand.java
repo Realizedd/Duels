@@ -18,7 +18,7 @@ public class CreatequeueCommand extends BaseCommand {
 
     @Override
     protected void execute(final CommandSender sender, final String label, final String[] args) {
-        final int bet = NumberUtil.parseInt(args[1]).orElse(0);
+        final double bet = NumberUtil.parseDouble(args[1]).orElse(0.0);
         KitImpl kit = null;
 
         if (!args[2].equals("-")) {
@@ -34,11 +34,11 @@ public class CreatequeueCommand extends BaseCommand {
         final String kitName = kit != null ? kit.getName() : lang.getMessage("GENERAL.none");
 
         if (queueManager.create(sender, kit, bet) == null) {
-            lang.sendMessage(sender, "ERROR.queue.already-exists", "kit", kitName, "bet_amount", bet);
+            lang.sendMessage(sender, "ERROR.queue.already-exists", "kit", kitName, "bet_amount", NumberUtil.formatDouble(bet));
             return;
         }
 
-        lang.sendMessage(sender, "COMMAND.duels.create-queue", "kit", kitName, "bet_amount", bet);
+        lang.sendMessage(sender, "COMMAND.duels.create-queue", "kit", kitName, "bet_amount", NumberUtil.formatDouble(bet));
     }
 
     @Override

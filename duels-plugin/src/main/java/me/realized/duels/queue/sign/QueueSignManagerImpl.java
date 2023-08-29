@@ -29,6 +29,7 @@ import me.realized.duels.queue.Queue;
 import me.realized.duels.queue.QueueManager;
 import me.realized.duels.util.Loadable;
 import me.realized.duels.util.Log;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.io.FileUtil;
 import me.realized.duels.util.json.JsonUtil;
 import org.bukkit.Bukkit;
@@ -137,7 +138,10 @@ public class QueueSignManagerImpl implements Loadable, QueueSignManager, Listene
 
         final QueueSignImpl created;
         final String kitName = queue.getKit() != null ? queue.getKit().getName() : lang.getMessage("GENERAL.none");
-        signs.put(location, created = new QueueSignImpl(location, lang.getMessage("SIGN.format", "kit", kitName, "bet_amount", queue.getBet()), queue));
+        signs.put(location, created = new QueueSignImpl(location, lang.getMessage("SIGN.format",
+                "kit", kitName,
+                "bet_amount", NumberUtil.formatDouble(queue.getBet())
+        ), queue));
         signs.values().stream().filter(sign -> sign.equals(created)).forEach(QueueSignImpl::update);
         saveQueueSigns();
 

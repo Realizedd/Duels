@@ -6,6 +6,7 @@ import me.realized.duels.command.BaseCommand;
 import me.realized.duels.queue.Queue;
 import me.realized.duels.queue.sign.QueueSignImpl;
 import me.realized.duels.util.BlockUtil;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.StringUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -43,6 +44,6 @@ public class DeletesignCommand extends BaseCommand {
         final Queue queue = queueSign.getQueue();
         final Kit kit = queue.getKit();
         final String kitName = kit != null ? kit.getName() : lang.getMessage("GENERAL.none");
-        lang.sendMessage(sender, "COMMAND.duels.del-sign", "location", StringUtil.parse(location), "kit", kitName, "bet_amount", queue.getBet());
+        lang.sendMessage(sender, "COMMAND.duels.del-sign", "location", StringUtil.parse(location), "kit", kitName, "bet_amount", NumberUtil.formatDouble(queue.getBet()));
     }
 }

@@ -31,7 +31,7 @@ public class AddsignCommand extends BaseCommand {
             return;
         }
 
-        final int bet = NumberUtil.parseInt(args[1]).orElse(0);
+        final double bet = NumberUtil.parseDouble(args[1]).orElse(0.0);
         KitImpl kit = null;
 
         if (!args[2].equals("-")) {
@@ -48,7 +48,7 @@ public class AddsignCommand extends BaseCommand {
         final Queue queue = queueManager.get(kit, bet);
 
         if (queue == null) {
-            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", bet, "kit", kitName);
+            lang.sendMessage(sender, "ERROR.queue.not-found", "bet_amount", NumberUtil.formatDouble(bet), "kit", kitName);
             return;
         }
 
@@ -58,7 +58,7 @@ public class AddsignCommand extends BaseCommand {
         }
 
         final Location location = sign.getLocation();
-        lang.sendMessage(sender, "COMMAND.duels.add-sign", "location", StringUtil.parse(location), "kit", kitName, "bet_amount", bet);
+        lang.sendMessage(sender, "COMMAND.duels.add-sign", "location", StringUtil.parse(location), "kit", kitName, "bet_amount", NumberUtil.formatDouble(bet));
     }
 
     @Override

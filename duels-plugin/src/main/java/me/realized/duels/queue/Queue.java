@@ -13,6 +13,7 @@ import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.kit.Kit;
 import me.realized.duels.api.queue.DQueue;
 import me.realized.duels.gui.BaseButton;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,20 +24,20 @@ public class Queue extends BaseButton implements DQueue {
     @Getter
     private final Kit kit;
     @Getter
-    private final int bet;
+    private final double bet;
     @Getter
     private final List<QueueEntry> players = new LinkedList<>();
     @Getter
     @Setter(value = AccessLevel.PACKAGE)
     private boolean removed;
 
-    public Queue(final DuelsPlugin plugin, final Kit kit, final int bet) {
+    public Queue(final DuelsPlugin plugin, final Kit kit, final double bet) {
         super(plugin, ItemBuilder
             .of((plugin.getConfiguration().isInheritKitItemType() && kit != null) ? kit.getDisplayed().clone() : ItemBuilder.of(Material.DIAMOND_SWORD).build())
             .name(plugin.getLang().getMessage("GUI.queues.buttons.queue.name",
-                "kit", kit != null ? kit.getName() : plugin.getLang().getMessage("GENERAL.none"), "bet_amount", bet, "in_queue", 0, "in_match", 0))
+                "kit", kit != null ? kit.getName() : plugin.getLang().getMessage("GENERAL.none"), "bet_amount", NumberUtil.formatDouble(bet), "in_queue", 0, "in_match", 0))
             .lore(plugin.getLang().getMessage("GUI.queues.buttons.queue.lore",
-                "kit", kit != null ? kit.getName() : plugin.getLang().getMessage("GENERAL.none"), "bet_amount", bet, "in_queue", 0, "in_match", 0).split("\n"))
+                "kit", kit != null ? kit.getName() : plugin.getLang().getMessage("GENERAL.none"), "bet_amount", NumberUtil.formatDouble(bet), "in_queue", 0, "in_match", 0).split("\n"))
             .build());
         this.kit = kit;
         this.bet = bet;
@@ -86,9 +87,9 @@ public class Queue extends BaseButton implements DQueue {
         int inQueue = players.size();
         long inMatch = getPlayersInMatch();
         setDisplayName(lang.getMessage("GUI.queues.buttons.queue.name",
-            "kit", kit != null ? kit.getName() : lang.getMessage("GENERAL.none"), "bet_amount", bet, "in_queue", inQueue, "in_match", inMatch));
+            "kit", kit != null ? kit.getName() : lang.getMessage("GENERAL.none"), "bet_amount", NumberUtil.formatDouble(bet), "in_queue", inQueue, "in_match", inMatch));
         setLore(lang.getMessage("GUI.queues.buttons.queue.lore",
-            "kit", kit != null ? kit.getName() : lang.getMessage("GENERAL.none"), "bet_amount", bet, "in_queue", inQueue, "in_match", inMatch).split("\n"));
+            "kit", kit != null ? kit.getName() : lang.getMessage("GENERAL.none"), "bet_amount", NumberUtil.formatDouble(bet), "in_queue", inQueue, "in_match", inMatch).split("\n"));
     }
 
     @Override

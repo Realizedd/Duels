@@ -160,9 +160,9 @@ public class DuelCommand extends BaseCommand {
         boolean sendRequest = false;
 
         if (args.length > 1) {
-            final int amount = NumberUtil.parseInt(args[1]).orElse(0);
+            final double amount = NumberUtil.parseDouble(args[1]).orElse(0.0);
 
-            if (amount > 0 && config.isMoneyBettingEnabled()) {
+            if (Double.compare(amount, config.getMoneyBettingMinimumBetAmount()) >= 0 && config.isMoneyBettingEnabled()) {
                 if (config.isMoneyBettingUsePermission() && !player.hasPermission(Permissions.MONEY_BETTING) && !player.hasPermission(Permissions.SETTING_ALL)) {
                     lang.sendMessage(player, "ERROR.no-permission", "permission", Permissions.MONEY_BETTING);
                     return true;

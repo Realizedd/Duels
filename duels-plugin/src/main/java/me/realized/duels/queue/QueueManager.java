@@ -187,8 +187,8 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
                         setting.getCache().put(other.getUniqueId(), opponent.getInfo());
 
                         final String kit = queue.getKit() != null ? queue.getKit().getName() : lang.getMessage("GENERAL.none");
-                        lang.sendMessage(player, "QUEUE.found-opponent", "name", other.getName(), "kit", kit, "bet_amount", queue.getBet());
-                        lang.sendMessage(other, "QUEUE.found-opponent", "name", player.getName(), "kit", kit, "bet_amount", queue.getBet());
+                        lang.sendMessage(player, "QUEUE.found-opponent", "name", other.getName(), "kit", kit, "bet_amount", NumberUtil.formatDouble(queue.getBet()));
+                        lang.sendMessage(other, "QUEUE.found-opponent", "name", player.getName(), "kit", kit, "bet_amount", NumberUtil.formatDouble(queue.getBet()));
                         duelManager.startMatch(player, other, setting, null, queue);
                         break;
                     }
@@ -233,7 +233,7 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
 
     @Nullable
     @Override
-    public Queue get(@Nullable final Kit kit, final int bet) {
+    public Queue get(@Nullable final Kit kit, final double bet) {
         return queues.stream().filter(queue -> Objects.equals(kit, queue.getKit()) && queue.getBet() == bet).findFirst().orElse(null);
     }
 
@@ -251,7 +251,7 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
 
     @Nullable
     @Override
-    public Queue create(@Nullable final CommandSender source, @Nullable final Kit kit, final int bet) {
+    public Queue create(@Nullable final CommandSender source, @Nullable final Kit kit, final double bet) {
         final Queue queue = new Queue(plugin, kit, bet);
 
         if (queues.contains(queue)) {
@@ -269,19 +269,19 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
 
     @Nullable
     @Override
-    public Queue create(@Nullable final Kit kit, final int bet) {
+    public Queue create(@Nullable final Kit kit, final double bet) {
         return create(null, kit, bet);
     }
 
     @Nullable
     @Override
-    public Queue remove(@Nullable final CommandSender source, @Nullable final Kit kit, final int bet) {
+    public Queue remove(@Nullable final CommandSender source, @Nullable final Kit kit, final double bet) {
         return remove(source, get(kit, bet));
     }
 
     @Nullable
     @Override
-    public Queue remove(@Nullable final Kit kit, final int bet) {
+    public Queue remove(@Nullable final Kit kit, final double bet) {
         return remove(null, kit, bet);
     }
 
@@ -374,7 +374,7 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
         }
 
         if (queue.getBet() > 0 && vault != null && !vault.has(queue.getBet(), player)) {
-            lang.sendMessage(player, "ERROR.queue.not-enough-money", "bet_amount", queue.getBet());
+            lang.sendMessage(player, "ERROR.queue.not-enough-money", "bet_amount", NumberUtil.formatDouble(queue.getBet()));
             return false;
         }
 
@@ -388,7 +388,7 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
         queue.addPlayer(new QueueEntry(player, player.getLocation().clone(), duelzone));
 
         final String kit = queue.getKit() != null ? queue.getKit().getName() : lang.getMessage("GENERAL.none");
-        lang.sendMessage(player, "QUEUE.add", "kit", kit, "bet_amount", queue.getBet());
+        lang.sendMessage(player, "QUEUE.add", "kit", kit, "bet_amount", NumberUtil.formatDouble(queue.getBet()));
         return true;
     }
 

@@ -154,6 +154,10 @@ request:
     # default: false
     use-permission: false
 
+    # The minimum acceptable amount to be used for betting.
+    # default: 0.001
+    minimum-bet-amount: 0.001
+
   # Request expiration, in seconds.
   # default: 30
   expiration: 30

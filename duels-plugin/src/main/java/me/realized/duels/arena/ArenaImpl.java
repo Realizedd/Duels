@@ -150,7 +150,7 @@ public class ArenaImpl extends BaseButton implements Arena {
         return !isDisabled() && !isUsed() && getPosition(1) != null && getPosition(2) != null;
     }
 
-    public MatchImpl startMatch(final KitImpl kit, final Map<UUID, List<ItemStack>> items, final int bet, final Queue source) {
+    public MatchImpl startMatch(final KitImpl kit, final Map<UUID, List<ItemStack>> items, final double bet, final Queue source) {
         this.match = new MatchImpl(this, kit, items, bet, source);
         refreshGui(false);
         return match;

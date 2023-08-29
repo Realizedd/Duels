@@ -45,7 +45,7 @@ public class RequestImpl implements Request {
     }
 
     @Override
-    public int getBet() {
+    public double getBet() {
         return settings.getBet();
     }
 }

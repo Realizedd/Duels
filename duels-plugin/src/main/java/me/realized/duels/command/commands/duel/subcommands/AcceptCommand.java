@@ -9,6 +9,7 @@ import me.realized.duels.hook.hooks.PvPManagerHook;
 import me.realized.duels.hook.hooks.worldguard.WorldGuardHook;
 import me.realized.duels.request.RequestImpl;
 import me.realized.duels.setting.Settings;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.inventory.InventoryUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -107,9 +108,9 @@ public class AcceptCommand extends BaseCommand {
         final double bet = settings.getBet();
         final String itemBetting = settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled");
         lang.sendMessage(player, "COMMAND.duel.request.accept.receiver",
-            "name", target.getName(), "kit", kit, "arena", arena, "bet_amount", bet, "item_betting", itemBetting);
+            "name", target.getName(), "kit", kit, "arena", arena, "bet_amount", NumberUtil.formatDouble(bet), "item_betting", itemBetting);
         lang.sendMessage(target, "COMMAND.duel.request.accept.sender",
-            "name", player.getName(), "kit", kit, "arena", arena, "bet_amount", bet, "item_betting", itemBetting);
+            "name", player.getName(), "kit", kit, "arena", arena, "bet_amount", NumberUtil.formatDouble(bet), "item_betting", itemBetting);
 
         if (settings.isItemBetting()) {
             settings.setBaseLoc(player);

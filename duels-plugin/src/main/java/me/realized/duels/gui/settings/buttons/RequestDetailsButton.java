@@ -3,6 +3,7 @@ package me.realized.duels.gui.settings.buttons;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.gui.BaseButton;
 import me.realized.duels.setting.Settings;
+import me.realized.duels.util.NumberUtil;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -32,7 +33,7 @@ public class RequestDetailsButton extends BaseButton {
             "own_inventory", settings.isOwnInventory() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled"),
             "arena", settings.getArena() != null ? settings.getArena().getName() : lang.getMessage("GENERAL.random"),
             "item_betting", settings.isItemBetting() ? lang.getMessage("GENERAL.enabled") : lang.getMessage("GENERAL.disabled"),
-            "bet_amount", settings.getBet()
+            "bet_amount", NumberUtil.formatDouble(settings.getBet())
         );
         setLore(lore.split("\n"));
     }
