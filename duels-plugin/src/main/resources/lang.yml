@@ -88,6 +88,7 @@ ERROR:
   sound:
     not-found: '{PREFIX} &cNo sound exists with the name ''%name%''.'
   command:
+    exceeding-maximum-betting-amount: '{PREFIX} &cThe chosen betting amount is too high, as it exceeds the maximum amount.'
     invalid-sub-command: '{PREFIX} &c''%argument%'' is not a valid sub command. Please type ''/%command%'' for help.'
     invalid-option: '{PREFIX} &c''%option%'' is not a valid option. Available options are: %available_options%'
     invalid-action: '{PREFIX} &c''%action%'' is not a valid action. Available actions are: %available_actions%'
