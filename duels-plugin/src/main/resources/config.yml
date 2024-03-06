@@ -165,14 +165,17 @@ duel:
     # default: -1
     max-duration: -1
 
+    # If set to 'true', start commands will run only for matches started through the queue system.
+    # default: false
+    queue-matches-only: false
+
     start-commands:
       # If set to 'true', the commands listed below will run FOR EACH player at the start of a match.
       # default: false
       enabled: false
 
-      # If set to 'true', start commands will run only for matches started through the queue system.
-      # default: false
-      queue-matches-only: false
+      # If player y value smaller than this value, player has been killed.
+      min-y: -100
 
       # Available placeholders:
       # %player% - Name of the player entering the match
@@ -194,6 +197,22 @@ duel:
       commands:
       - 'give %winner% diamond 1'
       - 'give %loser% dirt 1'
+
+    tie-commands:
+      # If set to 'true', the commands listed below will run at the end of a match.
+      # default: false
+      enabled: false
+
+      # If set to 'true', end commands will run only for matches started through the queue system.
+      # default: false
+      queue-matches-only: false
+
+      # Available placeholders:
+      # %winner% - Name of the winner of the match
+      # %loser% - Name of the loser of the match
+      commands:
+        - 'give %winner% diamond 1'
+        - 'give %loser% dirt 1'
 
   projectile-hit-message:
     # If set to 'true', a message from lang.yml will be sent to the shooter of the projectile.
@@ -258,6 +277,9 @@ duel:
   # If set to 'true', players in duel will not be able to drop items.
   # default: false
   prevent-item-drop: false
+
+  # If set to 'true', items drop on duel will be removed from map.
+  clear-items-after-duel: false
 
   # If set to 'true', players in duel will not be able to pickup items on the ground.
   # default: false
@@ -370,7 +392,6 @@ duel:
 queue:
   # List of commands to block while in a queue.
   blacklisted-commands: []
-
 
 rating:
   # If set to 'true', player's rating will change after match based on their opponent.

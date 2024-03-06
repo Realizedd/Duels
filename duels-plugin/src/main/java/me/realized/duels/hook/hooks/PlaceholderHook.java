@@ -2,6 +2,9 @@ package me.realized.duels.hook.hooks;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.realized.duels.DuelsPlugin;
+import me.realized.duels.api.arena.ArenaManager;
+import me.realized.duels.arena.ArenaImpl;
+import me.realized.duels.arena.ArenaManagerImpl;
 import me.realized.duels.data.UserData;
 import me.realized.duels.data.UserManagerImpl;
 import me.realized.duels.util.hook.PluginHook;
@@ -60,6 +63,31 @@ public class PlaceholderHook extends PluginHook<DuelsPlugin> {
                     return String.valueOf(user.getLosses());
                 case "can_request":
                     return String.valueOf(user.canRequest());
+
+                case "hits": {
+                    final ArenaManagerImpl arenaManager = plugin.getArenaManager();
+                    final ArenaImpl arena = arenaManager.get(player);
+
+                    // Only activate when winner is undeclared
+                    if (arena == null || !arenaManager.isInMatch(player) || arena.isEndGame()) {
+                        return "-1";
+                    }
+
+                    return String.valueOf(arena.getMatch().getHits(player));
+                }
+
+                case "hits_opponent": {
+                    final ArenaManagerImpl arenaManager = plugin.getArenaManager();
+                    final ArenaImpl arena = arenaManager.get(player);
+
+                    // Only activate when winner is undeclared
+                    if (arena == null || !arenaManager.isInMatch(player) || arena.isEndGame()) {
+                        return "-1";
+                    }
+
+                    return String.valueOf(arena.getMatch().getHits(arena.getOpponent(player)));
+                }
+
             }
 
             return null;

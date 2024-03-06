@@ -28,6 +28,7 @@ import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -164,6 +165,11 @@ public class ArenaImpl extends BaseButton implements Arena {
 
         final Queue source = match.getSource();
         match.setFinished();
+
+        if(config.isClearItemsAfterMatch()) {
+            match.droppedItems.forEach(Entity::remove);
+        }
+
         match = null;
 
         if (source != null) {
@@ -192,18 +198,18 @@ public class ArenaImpl extends BaseButton implements Arena {
     @Override
     public boolean has(@NotNull final Player player) {
         Objects.requireNonNull(player, "player");
-        return isUsed() && !match.getPlayerMap().getOrDefault(player, true);
+        return isUsed() && !match.getPlayerMap().getOrDefault(player, new MatchImpl.PlayerStatus(true)).isDead;
     }
 
     public void add(final Player player) {
         if (isUsed()) {
-            match.getPlayerMap().put(player, false);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(false));
         }
     }
 
     public void remove(final Player player) {
         if (isUsed() && match.getPlayerMap().containsKey(player)) {
-            match.getPlayerMap().put(player, true);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(true));
         }
     }
 

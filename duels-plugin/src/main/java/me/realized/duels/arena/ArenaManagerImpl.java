@@ -42,11 +42,15 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -230,19 +234,22 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
     private class ArenaListener implements Listener {
 
-        @EventHandler(ignoreCancelled = true)
+        @EventHandler
         public void on(final PlayerInteractEvent event) {
-            if (!event.hasBlock() || !config.isPreventInteract()) {
+            if(event.getAction() != Action.RIGHT_CLICK_AIR && event.isCancelled() || !config.isPreventInteract()) {
                 return;
             }
 
-            final ArenaImpl arena = get(event.getPlayer());
+            Player player = event.getPlayer();
+
+            final ArenaImpl arena = get(player);
 
             if (arena == null || !arena.isCounting()) {
                 return;
             }
 
             event.setCancelled(true);
+            player.updateInventory();
         }
 
         @EventHandler(ignoreCancelled = true)
@@ -274,7 +281,7 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
             final ArenaImpl arena = get((Player) shooter);
 
-            if (arena == null || !arena.isCounting()) {
+            if (arena == null || !arena.isCounting() || event.getEntity().getClass().getName().contains("Potion")) {
                 return;
             }
 
@@ -283,12 +290,16 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
         @EventHandler(ignoreCancelled = true)
         public void on(final PlayerMoveEvent event) {
+            final Location to = event.getTo();
+            if(to.getBlockY() < config.getMinY()) {
+                event.getPlayer().damage(99999);
+            }
+
             if (!config.isPreventMovement()) {
                 return;
             }
 
             final Location from = event.getFrom();
-            final Location to = event.getTo();
 
             if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ()) {
                 return;

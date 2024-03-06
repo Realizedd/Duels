@@ -13,6 +13,7 @@ import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.metadata.MetadataUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -62,7 +63,7 @@ public class KitOptionsListener implements Listener {
         final Player player = (Player) event.getEntity();
         final ArenaImpl arena = arenaManager.get(player);
 
-        if (arena == null || !isEnabled(arena, Characteristic.SUMO)) {
+        if (arena == null || !isEnabled(arena, Characteristic.SUMO) && !isEnabled(arena, Characteristic.BOXING)) {
             return;
         }
 
@@ -75,6 +76,17 @@ public class KitOptionsListener implements Listener {
         final ArenaImpl arena = arenaManager.get(player);
 
         if (player.isDead() || arena == null || !isEnabled(arena, Characteristic.SUMO) || arena.isEndGame()) {
+            return;
+        }
+
+        final Location to = event.getTo(), from = event.getFrom();
+
+        if (from.getBlockX() !=
+                to.getBlockX() && from.getBlockY() != to.getBlockY() && from.getBlockZ() != to.getBlockZ()
+             && arena.getMatch().getDurationInMillis() < 5000) {
+            from.setPitch(player.getLocation().getPitch());
+            from.setYaw(player.getLocation().getYaw());
+            event.setTo(from);
             return;
         }
 

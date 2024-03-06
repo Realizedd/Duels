@@ -59,7 +59,7 @@ public interface Duels extends Plugin {
      */
     @NotNull
     DQueueManager getQueueManager();
-
+    
 
     /**
      * Gets the QueueSignManager singleton used by Duels.

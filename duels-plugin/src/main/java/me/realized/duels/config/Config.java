@@ -98,6 +98,8 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     @Getter
     private boolean startCommandsQueueOnly;
     @Getter
+    private int minY;
+    @Getter
     private List<String> startCommands;
     @Getter
     private boolean endCommandsEnabled;
@@ -105,6 +107,12 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     private boolean endCommandsQueueOnly;
     @Getter
     private List<String> endCommands;
+    @Getter
+    private boolean tieCommandsEnabled;
+    @Getter
+    private boolean tieCommandsQueueOnly;
+    @Getter
+    private List<String> tieCommands;
     @Getter
     private boolean projectileHitMessageEnabled;
     @Getter
@@ -135,6 +143,8 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     private boolean displayInventories;
     @Getter
     private boolean preventItemDrop;
+    @Getter
+    private boolean clearItemsAfterMatch;
     @Getter
     private boolean preventItemPickup;
     @Getter
@@ -300,12 +310,16 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         expiration = Math.max(configuration.getInt("request.expiration", 30), 0);
 
         maxDuration = configuration.getInt("duel.match.max-duration", -1);
+        minY = configuration.getInt("duel.match.min-y", -100);
         startCommandsEnabled = configuration.getBoolean("duel.match.start-commands.enabled", false);
         startCommandsQueueOnly = configuration.getBoolean("duel.match.start-commands.queue-matches-only", false);
         startCommands = configuration.getStringList("duel.match.start-commands.commands");
         endCommandsEnabled = configuration.getBoolean("duel.match.end-commands.enabled", false);
         endCommandsQueueOnly = configuration.getBoolean("duel.match.end-commands.queue-matches-only", false);
         endCommands = configuration.getStringList("duel.match.end-commands.commands");
+        tieCommandsEnabled = configuration.getBoolean("duel.match.tie-commands.enabled", false);
+        tieCommandsQueueOnly = configuration.getBoolean("duel.match.tie-commands.queue-matches-only", false);
+        tieCommands = configuration.getStringList("duel.match.tie-commands.commands");
         projectileHitMessageEnabled = configuration.getBoolean("duel.projectile-hit-message.enabled", true);
         projectileHitMessageTypes = configuration.getStringList("duel.projectile-hit-message.types");
         preventInventoryOpen = configuration.getBoolean("duel.prevent-inventory-open", true);
@@ -321,6 +335,7 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         arenaOnlyEndMessage = configuration.getBoolean("duel.arena-only-end-message", false);
         displayInventories = configuration.getBoolean("duel.display-inventories", true);
         preventItemDrop = configuration.getBoolean("duel.prevent-item-drop", false);
+        clearItemsAfterMatch = configuration.getBoolean("duel.clear-items-after-duel", false);
         preventItemPickup = configuration.getBoolean("duel.prevent-item-pickup", true);
         limitTeleportEnabled = configuration.getBoolean("duel.limit-teleportation.enabled", true);
         distanceAllowed = configuration.getDouble("duel.limit-teleportation.distance-allowed", 5.0);

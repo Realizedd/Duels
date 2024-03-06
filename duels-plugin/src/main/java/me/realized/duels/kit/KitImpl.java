@@ -1,10 +1,7 @@
 package me.realized.duels.kit;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,8 +36,8 @@ public class KitImpl extends BaseButton implements Kit {
     @Setter(value = AccessLevel.PACKAGE)
     private boolean removed;
 
-    public KitImpl(final DuelsPlugin plugin, final String name, final ItemStack displayed, final boolean usePermission, final boolean arenaSpecific,
-        final Set<Characteristic> characteristics) {
+    public KitImpl(final DuelsPlugin plugin, final String name, final ItemStack displayed, final boolean usePermission,
+                   final boolean arenaSpecific, final Set<Characteristic> characteristics) {
         super(plugin, displayed != null ? displayed : ItemBuilder
             .of(Material.DIAMOND_SWORD)
             .name("&7&l" + name)
@@ -148,10 +145,10 @@ public class KitImpl extends BaseButton implements Kit {
     }
 
     public enum Characteristic {
-
         SOUP,
         SUMO,
         UHC,
-        COMBO;
+        COMBO,
+        BOXING;
     }
 }

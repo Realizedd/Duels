@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public final class InventoryUtil {
-
     private static final String INVENTORY_IDENTIFIER = "INVENTORY";
     private static final String ARMOR_IDENTIFIER = "ARMOR";
 
