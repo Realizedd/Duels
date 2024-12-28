@@ -5,19 +5,19 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'com.gradleup.shadow:shadow-gradle-plugin:8.3.0'
     }
 }
 
 allprojects {
     group 'me.realized'
-    version '3.5.3'
+    version '3.5.4'
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
-    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'com.gradleup.shadow'
     apply plugin: 'maven-publish'
 
     sourceCompatibility = 1.8

@@ -15,11 +15,11 @@ processResources {
 
 dependencies {
     compileOnly 'org.jetbrains:annotations-java5:22.0.0'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
     implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
     implementation 'com.mojang:authlib:1.5.21'
-    implementation 'me.clip:placeholderapi:2.11.1'
+    implementation 'me.clip:placeholderapi:2.11.6'
     implementation 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
     implementation ('net.essentialsx:EssentialsX:2.19.2') {
         transitive = false
@@ -42,7 +42,7 @@ dependencies {
     implementation project(':duels-worldguard')
     implementation project(':duels-worldguard-v6')
     implementation project(':duels-worldguard-v7')
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
 }
 
 shadowJar {
@@ -60,7 +60,7 @@ shadowJar {
     }
 
     final String group = project.group.toString() + "." + parent.name.toLowerCase() + ".shaded."
-    relocate 'com.fasterxml.jackson.core', group + 'jackson-core'
+    relocate 'com.fasterxml.jackson', group + 'jackson'
 }
 
 // To build Duels plugin jar, run './gradlew clean build'.
