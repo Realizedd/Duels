@@ -19,7 +19,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
     implementation 'com.mojang:authlib:1.5.21'
-    implementation 'me.clip:placeholderapi:2.11.1'
+    implementation 'me.clip:placeholderapi:2.11.6'
     implementation 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
     implementation ('net.essentialsx:EssentialsX:2.19.2') {
         transitive = false
