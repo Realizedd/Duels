@@ -3,6 +3,7 @@ package me.realized.duels.command.commands.duel.subcommands;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.request.RequestAcceptEvent;
 import me.realized.duels.command.BaseCommand;
+import me.realized.duels.hook.hooks.AntiRelogHook;
 import me.realized.duels.hook.hooks.CombatLogXHook;
 import me.realized.duels.hook.hooks.CombatTagPlusHook;
 import me.realized.duels.hook.hooks.PvPManagerHook;
@@ -21,6 +22,7 @@ public class AcceptCommand extends BaseCommand {
     private final PvPManagerHook pvpManager;
     private final CombatLogXHook combatLogX;
     private final WorldGuardHook worldGuard;
+    private final AntiRelogHook antiRelog;
 
     public AcceptCommand(final DuelsPlugin plugin) {
         super(plugin, "accept", "accept [player]", "Accepts a duel request.", 2, true);
@@ -28,6 +30,7 @@ public class AcceptCommand extends BaseCommand {
         this.pvpManager = hookManager.getHook(PvPManagerHook.class);
         this.combatLogX = plugin.getHookManager().getHook(CombatLogXHook.class);
         this.worldGuard = hookManager.getHook(WorldGuardHook.class);
+        this.antiRelog = hookManager.getHook(AntiRelogHook.class);
     }
 
     @Override
@@ -44,9 +47,11 @@ public class AcceptCommand extends BaseCommand {
             return;
         }
 
-        if ((combatTagPlus != null && combatTagPlus.isTagged(player))
-            || (pvpManager != null && pvpManager.isTagged(player))
-            || (combatLogX != null && combatLogX.isTagged(player))) {
+        if ( (combatTagPlus != null && combatTagPlus.isTagged(player))
+                || (pvpManager != null && pvpManager.isTagged(player))
+                || (combatLogX != null && combatLogX.isTagged(player))
+                || (antiRelog != null && antiRelog.isTagged(player))
+        ) {
             lang.sendMessage(sender, "ERROR.duel.is-tagged");
             return;
         }

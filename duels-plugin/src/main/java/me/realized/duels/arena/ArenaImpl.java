@@ -192,18 +192,18 @@ public class ArenaImpl extends BaseButton implements Arena {
     @Override
     public boolean has(@NotNull final Player player) {
         Objects.requireNonNull(player, "player");
-        return isUsed() && !match.getPlayerMap().getOrDefault(player, true);
+        return isUsed() && !match.getPlayerMap().getOrDefault(player, new MatchImpl.PlayerStatus(true)).isDead;
     }
 
     public void add(final Player player) {
         if (isUsed()) {
-            match.getPlayerMap().put(player, false);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(false));
         }
     }
 
     public void remove(final Player player) {
         if (isUsed() && match.getPlayerMap().containsKey(player)) {
-            match.getPlayerMap().put(player, true);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(true));
         }
     }
 

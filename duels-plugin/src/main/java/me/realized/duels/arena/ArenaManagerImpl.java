@@ -42,11 +42,14 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,7 +91,8 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
         if (FileUtil.checkNonEmpty(file, true)) {
             try (final Reader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8)) {
-                final List<ArenaData> data = JsonUtil.getObjectMapper().readValue(reader, new TypeReference<List<ArenaData>>() {});
+                final List<ArenaData> data = JsonUtil.getObjectMapper().readValue(reader, new TypeReference<List<ArenaData>>() {
+                });
 
                 if (data != null) {
                     for (final ArenaData arenaData : data) {
@@ -230,19 +234,22 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
     private class ArenaListener implements Listener {
 
-        @EventHandler(ignoreCancelled = true)
+        @EventHandler(priority = EventPriority.MONITOR)
         public void on(final PlayerInteractEvent event) {
-            if (!event.hasBlock() || !config.isPreventInteract()) {
-                return;
-            }
-
             final ArenaImpl arena = get(event.getPlayer());
+            Player player = event.getPlayer();
+            ItemStack heldItem = player.getItemInHand();
 
-            if (arena == null || !arena.isCounting()) {
+            boolean actionIsClick = event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR;
+
+            boolean itemIsPearl = heldItem != null && heldItem.getType() == Material.ENDER_PEARL;
+
+            if (!config.isPreventInteract() || arena == null || !arena.isCounting() ||
+                    !event.hasBlock() && !(actionIsClick && itemIsPearl)) {
                 return;
             }
-
             event.setCancelled(true);
+            player.updateInventory();
         }
 
         @EventHandler(ignoreCancelled = true)
@@ -274,7 +281,7 @@ public class ArenaManagerImpl implements Loadable, ArenaManager {
 
             final ArenaImpl arena = get((Player) shooter);
 
-            if (arena == null || !arena.isCounting()) {
+            if (arena == null || !arena.isCounting() || event.getEntity().getClass().getName().contains("Potion")) {
                 return;
             }
 

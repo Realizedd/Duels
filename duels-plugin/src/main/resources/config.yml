@@ -18,6 +18,14 @@ supported-plugins:
     # If set to 'true', players will not be combat tagged while in duel.
     # default: true
     prevent-tag-in-duel: true
+  AntiRelog:
+    # If set to 'true', players will not be able to duel while combat tagged.
+    # default: true
+    prevent-duel-if-tagged: true
+
+    # If set to 'true', players will not be combat tagged while in duel.
+    # default: true
+    prevent-tag-in-duel: true
   PvPManager:
     # If set to 'true', players will not be able to duel while combat tagged.
     # default: true

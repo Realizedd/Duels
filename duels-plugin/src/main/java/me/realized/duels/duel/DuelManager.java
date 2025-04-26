@@ -70,6 +70,7 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -206,8 +207,11 @@ public class DuelManager implements Loadable {
         final List<ItemStack> items = match.getItems(player);
 
         if (alive) {
-            PlayerUtil.reset(player);
             playerManager.remove(player);
+
+            if (!(match.isOwnInventory() && config.isOwnInventoryDropInventoryItems())) {
+                PlayerUtil.reset(player);
+            }
 
             if (info != null) {
                 teleport.tryTeleport(player, info.getLocation());
@@ -618,6 +622,16 @@ public class DuelManager implements Loadable {
             }
 
             event.setCancelled(true);
+        }
+
+        @EventHandler
+        public void onInteract(PlayerInteractEvent event) {
+            Player player = event.getPlayer();
+            ArenaImpl arena = arenaManager.get(player);
+
+            if (arena != null && arena.isEndGame()) {
+                event.setCancelled(true);
+            }
         }
 
         @EventHandler

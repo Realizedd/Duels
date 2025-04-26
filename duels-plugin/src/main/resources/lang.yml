@@ -404,6 +404,8 @@ GUI:
   kit-selector:
     title: 'Kit Selection'
     buttons:
+      kit:
+        name: '&3%kit%'
       previous-page:
         name: '&aPrevious Page'
       next-page:

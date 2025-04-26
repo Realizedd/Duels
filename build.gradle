@@ -5,19 +5,19 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'com.gradleup.shadow:shadow-gradle-plugin:8.3.0'
     }
 }
 
 allprojects {
     group 'me.realized'
-    version '3.5.3'
+    version '3.6.4'
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
-    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'com.gradleup.shadow'
     apply plugin: 'maven-publish'
 
     sourceCompatibility = 1.8
@@ -43,7 +43,7 @@ subprojects {
 
         maven {
             name 'clip-repo'
-            url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+            url 'https://repo.extendedclip.com/releases/'
         }
 
         maven {
@@ -59,6 +59,11 @@ subprojects {
         maven {
             name 'essentialsx-repo'
             url 'https://repo.essentialsx.net/releases/'
+        }
+
+        maven {
+            name = 'sirblobman-public'
+            url = 'https://nexus.sirblobman.xyz/public/'
         }
 
         flatDir {

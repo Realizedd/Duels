@@ -63,8 +63,12 @@ public final class Skulls {
 
         // Caching is only used for MC versions 1.8 - 1.15.1.
         try {
-            final GameProfile cached = cache.get(player);
-            PROFILE.set(meta, cached);
+            if(CompatUtil.isModernVersion()){
+                meta.setOwningPlayer(player);
+            }else {
+                final GameProfile cached = cache.get(player);
+                PROFILE.set(meta, cached);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

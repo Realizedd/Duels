@@ -26,6 +26,10 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
     @Getter
     private boolean ctpPreventTag;
     @Getter
+    private boolean arPreventDuel;
+    @Getter
+    private boolean arPreventTag;
+    @Getter
     private boolean pmPreventDuel;
     @Getter
     private boolean pmPreventTag;
@@ -265,6 +269,8 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
 
         ctpPreventDuel = configuration.getBoolean("supported-plugins.CombatTagPlus.prevent-duel-if-tagged", true);
         ctpPreventTag = configuration.getBoolean("supported-plugins.CombatTagPlus.prevent-tag-in-duel", true);
+        arPreventDuel = configuration.getBoolean("supported-plugins.AntiRelog.prevent-duel-if-tagged", true);
+        arPreventTag = configuration.getBoolean("supported-plugins.AntiRelog.prevent-tag-in-duel", true);
         pmPreventDuel = configuration.getBoolean("supported-plugins.PvPManager.prevent-duel-if-tagged", true);
         pmPreventTag = configuration.getBoolean("supported-plugins.PvPManager.prevent-tag-in-duel", true);
         clxPreventDuel = configuration.getBoolean("supported-plugins.CombatLogX.prevent-duel-if-tagged", true);

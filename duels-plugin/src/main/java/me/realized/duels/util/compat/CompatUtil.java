@@ -32,6 +32,10 @@ public final class CompatUtil {
         return ReflectionUtil.getMajorVersion() < 13;
     }
 
+    public static boolean isModernVersion() {
+        return ReflectionUtil.getMajorVersion() > 13;
+    }
+
     public static boolean isPre1_12() {
         return ReflectionUtil.getMajorVersion() < 12;
     }

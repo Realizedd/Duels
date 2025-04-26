@@ -10,7 +10,7 @@ import org.bukkit.Location;
 
 public final class StringUtil {
 
-    private static final Pattern ALPHANUMERIC = Pattern.compile("^[a-zA-Z0-9_]+$");
+    private static final Pattern ALPHANUMERIC = Pattern.compile("^[a-zA-Z0-9_а-яА-ЯёЁ\\s()\\-]+$");
     private static final TreeMap<Integer, String> ROMAN_NUMERALS = new TreeMap<>();
     private static final boolean COMMONS_LANG3;
 

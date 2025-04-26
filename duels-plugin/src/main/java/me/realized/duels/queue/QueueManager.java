@@ -202,7 +202,7 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
             if (update) {
                 gui.calculatePages();
             }
-        }, 20L, 40L).getTaskId();
+        }, 20L, 10L).getTaskId();
     }
 
     @Override
@@ -337,8 +337,9 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
                 return false;
             }
 
-            lang.sendMessage(player, "ERROR.queue.already-in");
-            return false;
+            //lang.sendMessage(player, "ERROR.queue.already-in");
+            found.removePlayer(player);
+            lang.sendMessage(player, "QUEUE.remove");
         }
 
         if (spectateManager.isSpectating(player)) {
