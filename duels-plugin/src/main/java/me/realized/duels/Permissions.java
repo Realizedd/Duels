@@ -3,6 +3,7 @@ package me.realized.duels;
 public final class Permissions {
 
     public static final String DUEL = "duels.duel";
+    public static final String DUEL_BOT = "duels.duel.bot";
     public static final String STATS = "duels.stats";
     public static final String STATS_OTHERS = STATS + ".others";
     public static final String TOGGLE = "duels.toggle";

@@ -27,7 +27,11 @@ import me.realized.duels.util.function.Pair;
 import me.realized.duels.util.inventory.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +49,7 @@ public class ArenaImpl extends BaseButton implements Arena {
     private final Map<Integer, Location> positions = new HashMap<>();
     @Getter
     private MatchImpl match;
-    @Getter(value = AccessLevel.PACKAGE)
+    @Getter
     @Setter(value = AccessLevel.PACKAGE)
     private Countdown countdown;
     @Getter
@@ -164,6 +168,48 @@ public class ArenaImpl extends BaseButton implements Arena {
 
         final Queue source = match.getSource();
         match.setFinished();
+
+        for(Block block : match.placedBlocks) {
+            block.setType(Material.AIR);
+        }
+
+        for(Map.Entry<Location, BlockData> map : match.brokenBlocks.entrySet()) {
+            map.getKey().getBlock().setBlockData(map.getValue());
+        }
+
+        for (Block block : match.liquids) {
+            Location loc = block.getLocation();
+            int radius = 1;
+
+            while (true) {
+                boolean waterFound = false;
+
+                for (int x = -radius; x <= radius; x++) {
+                    for (int y = -radius; y <= radius; y++) {
+                        for (int z = -radius; z <= radius; z++) {
+                            Block findBlock = loc.clone().add(x, y, z).getBlock();
+                            String type = findBlock.getType().name().toLowerCase();
+
+                            if (type.contains("water") || type.contains("lava") || type.contains("cobblestone") || type.contains("obsidian")) {
+                                waterFound = true;
+                                findBlock.setType(Material.AIR);
+                            }
+                        }
+                    }
+                }
+
+                if (!waterFound) {
+                    break;
+                }
+
+                radius++;
+            }
+        }
+
+        if(config.isClearItemsAfterMatch()) {
+            match.droppedItems.forEach(Entity::remove);
+        }
+
         match = null;
 
         if (source != null) {
@@ -192,18 +238,18 @@ public class ArenaImpl extends BaseButton implements Arena {
     @Override
     public boolean has(@NotNull final Player player) {
         Objects.requireNonNull(player, "player");
-        return isUsed() && !match.getPlayerMap().getOrDefault(player, true);
+        return isUsed() && !match.getPlayerMap().getOrDefault(player, new MatchImpl.PlayerStatus(true)).isDead;
     }
 
     public void add(final Player player) {
         if (isUsed()) {
-            match.getPlayerMap().put(player, false);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(false));
         }
     }
 
     public void remove(final Player player) {
         if (isUsed() && match.getPlayerMap().containsKey(player)) {
-            match.getPlayerMap().put(player, true);
+            match.getPlayerMap().put(player, new MatchImpl.PlayerStatus(true));
         }
     }
 

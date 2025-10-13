@@ -43,7 +43,7 @@ public class PlayerInfo {
         if (excludeInventory) {
             return;
         }
-        
+
         InventoryUtil.addToMap(player.getInventory(), items);
     }
 

@@ -33,9 +33,7 @@ class Countdown extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (finished) {
-            return;
-        }
+        if (finished) return;
 
         final String rawMessage = messages.remove(0);
         final String message = StringUtil.color(rawMessage);
@@ -44,7 +42,7 @@ class Countdown extends BukkitRunnable {
         arena.getPlayers().forEach(player -> {
             config.playSound(player, rawMessage);
 
-            final  Pair<String, Integer> info = this.info.get(player.getUniqueId());
+            final Pair<String, Integer> info = this.info.get(player.getUniqueId());
 
             if (info != null) {
                 player.sendMessage(message

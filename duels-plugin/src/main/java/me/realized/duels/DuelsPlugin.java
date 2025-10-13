@@ -15,6 +15,7 @@ import me.realized.duels.api.command.SubCommand;
 import me.realized.duels.arena.ArenaManagerImpl;
 import me.realized.duels.betting.BettingManager;
 import me.realized.duels.command.commands.SpectateCommand;
+import me.realized.duels.command.commands.bot.BotDuelCommand;
 import me.realized.duels.command.commands.duel.DuelCommand;
 import me.realized.duels.command.commands.duels.DuelsCommand;
 import me.realized.duels.command.commands.queue.QueueCommand;
@@ -228,6 +229,7 @@ public class DuelsPlugin extends JavaPlugin implements Duels, LogSource {
     private boolean load() {
         registerCommands(
             new DuelCommand(this),
+            new BotDuelCommand(this),
             new QueueCommand(this),
             new SpectateCommand(this),
             new DuelsCommand(this)

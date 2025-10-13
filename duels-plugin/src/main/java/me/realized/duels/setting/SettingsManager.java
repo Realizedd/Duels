@@ -30,8 +30,13 @@ public class SettingsManager implements Loadable, Listener {
     }
 
     // Only one Settings instance stays in memory while player is online; no need for manual removal of gui from GuiListener
+    public Settings getSafely(final Player player, boolean bot) {
+        return cache.computeIfAbsent(player.getUniqueId(), result -> new Settings(plugin, player, bot));
+    }
+
+    // Only one Settings instance stays in memory while player is online; no need for manual removal of gui from GuiListener
     public Settings getSafely(final Player player) {
-        return cache.computeIfAbsent(player.getUniqueId(), result -> new Settings(plugin, player));
+        return getSafely(player, false);
     }
 
     @EventHandler

@@ -14,12 +14,15 @@ processResources {
 }
 
 dependencies {
+    compileOnly('net.citizensnpcs:citizens-main:2.0.33-SNAPSHOT') {
+        exclude group: '*', module: '*'
+    }
     compileOnly 'org.jetbrains:annotations-java5:22.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
     implementation 'com.mojang:authlib:1.5.21'
-    implementation 'me.clip:placeholderapi:2.11.1'
+    implementation 'me.clip:placeholderapi:2.11.6'
     implementation 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
     implementation ('net.essentialsx:EssentialsX:2.19.2') {
         transitive = false
@@ -29,6 +32,7 @@ dependencies {
     }
     implementation name: 'Vault-1.6.7'
     implementation name: 'CombatTagPlus'
+    implementation name: 'AntiRelog-3.0.11'
     implementation name: 'PvPManager-3.7.16'
     implementation name: 'Factions-1.6.9.5-U0.1.14'
     implementation name: 'MassiveCore'

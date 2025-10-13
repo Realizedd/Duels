@@ -2,6 +2,7 @@ package me.realized.duels.gui.settings.buttons;
 
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.gui.BaseButton;
+import me.realized.duels.kit.KitImpl;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.inventory.ItemBuilder;
@@ -35,8 +36,15 @@ public class RequestSendButton extends BaseButton {
 
         if (!settings.isOwnInventory() && settings.getKit() == null) {
             player.closeInventory();
-            lang.sendMessage(player, "ERROR.duel.mode-unselected");
-            return;
+
+            KitImpl kit = settings.getArena().getKits().stream().findAny().orElse(null);
+
+            if (kit == null) {
+                lang.sendMessage(player, "ERROR.duel.mode-unselected");
+                return;
+            }
+
+            settings.setKit(kit);
         }
 
         player.closeInventory();

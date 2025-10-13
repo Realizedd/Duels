@@ -337,8 +337,9 @@ public class QueueManager implements Loadable, DQueueManager, Listener {
                 return false;
             }
 
-            lang.sendMessage(player, "ERROR.queue.already-in");
-            return false;
+            //lang.sendMessage(player, "ERROR.queue.already-in");
+            found.removePlayer(player);
+            lang.sendMessage(player, "QUEUE.remove");
         }
 
         if (spectateManager.isSpectating(player)) {

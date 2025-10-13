@@ -76,7 +76,6 @@ ERROR:
   queue:
     not-found: '{PREFIX} &cNo queue exists with kit %kit% and bet $%bet_amount%.'
     already-exists: '{PREFIX} &cA queue with kit ''%kit%'' and bet $%bet_amount% already exists.'
-    already-in: '{PREFIX} &cYou are already in a queue!'
     not-in-queue: '{PREFIX} &cYou are not in a queue.'
     not-enough-money: '{PREFIX} &cYou need $%bet_amount% to join that queue.'
     no-queues-available: '{PREFIX} &cNo queues are available.'

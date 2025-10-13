@@ -20,6 +20,9 @@ commands:
    spectate:
      description: Spectate a duel.
      aliases: [spec]
+   botduel:
+     description: Spectate a duel.
+     aliases: [botfight, pvpbot, "bot", "duelbot"]
    duels:
      description: Administrative command of Duels.
      aliases: [ds]

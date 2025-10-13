@@ -7,15 +7,17 @@ import lombok.Getter;
 import lombok.Setter;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.arena.ArenaImpl;
+import me.realized.duels.gui.settings.SettingsBotGui;
 import me.realized.duels.gui.settings.SettingsGui;
 import me.realized.duels.kit.KitImpl;
+import me.realized.duels.util.gui.SinglePageGui;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class Settings {
 
     private final DuelsPlugin plugin;
-    private final SettingsGui gui;
+    private final SinglePageGui<DuelsPlugin> gui;
 
     @Getter
     private UUID target;
@@ -35,15 +37,16 @@ public class Settings {
     @Getter
     private Map<UUID, CachedInfo> cache = new HashMap<>();
 
-    public Settings(final DuelsPlugin plugin, final Player player) {
+    public Settings(final DuelsPlugin plugin, final Player player, boolean bot) {
         this.plugin = plugin;
-        this.gui = player != null ? plugin.getGuiListener().addGui(player, new SettingsGui(plugin)) : null;
+        this.gui = player != null ? plugin.getGuiListener().addGui(player, bot?
+                new SettingsBotGui(plugin) : new SettingsGui(plugin)) : null;
         // If kits are disabled, then ownInventory is enabled by default.
         this.ownInventory = !plugin.getConfiguration().isKitSelectingEnabled();
     }
 
     public Settings(final DuelsPlugin plugin) {
-        this(plugin, null);
+        this(plugin, null, false);
     }
 
     public void reset() {

@@ -13,16 +13,19 @@ import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.metadata.MetadataUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -62,11 +65,99 @@ public class KitOptionsListener implements Listener {
         final Player player = (Player) event.getEntity();
         final ArenaImpl arena = arenaManager.get(player);
 
-        if (arena == null || !isEnabled(arena, Characteristic.SUMO)) {
+        if (arena == null || !isEnabled(arena, Characteristic.SUMO) && !isEnabled(arena, Characteristic.BOXING)) {
             return;
         }
 
         event.setDamage(0);
+    }
+
+    @EventHandler
+    public void on(final FoodLevelChangeEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+
+        final Player player = (Player) event.getEntity();
+        final ArenaImpl arena = arenaManager.get(player);
+
+        if (arena == null || !isEnabled(arena, Characteristic.HUNGER)) {
+            return;
+        }
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInteractLiquid(PlayerInteractEvent event) {
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK || !event.hasBlock()) {
+            return;
+        }
+
+        ArenaImpl arena = arenaManager.get(event.getPlayer());
+
+        if (arena == null || !isEnabled(arena, Characteristic.PLACE)) {
+            return;
+        }
+
+        ItemStack item = event.getItem();
+
+        if (item == null) {
+            return;
+        }
+
+        String itemType = item.getType().name().toLowerCase();
+
+        if (!itemType.contains("water") && !itemType.contains("lava")) {
+            return;
+        }
+
+        arena.getMatch().liquids.add(event.getClickedBlock());
+    }
+
+    @EventHandler
+    public void on(BlockPlaceEvent event) {
+        final Player player = event.getPlayer();
+        final ArenaImpl arena = arenaManager.get(player);
+
+        if (arena == null) {
+            return;
+        }
+
+        if(isEnabled(arena, Characteristic.PLACE)) {
+            Material blockType = event.getBlockReplacedState().getType();
+            if(blockType == Material.AIR || blockType == Material.WATER || blockType == Material.LAVA) {
+                arena.getMatch().placedBlocks.add(event.getBlock());
+                return;
+            }
+        }
+
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void on(BlockBreakEvent event) {
+        final Player player = event.getPlayer();
+        final ArenaImpl arena = arenaManager.get(player);
+
+        if (arena == null || arena.getMatch() == null) {
+            return;
+        }
+
+        if(arena.getMatch().placedBlocks.contains(event.getBlock())) {
+            return;
+        }
+
+        if(isEnabled(arena, Characteristic.BREAK)) {
+            if(arena.getMatch().brokenBlocks.containsKey(event.getBlock().getLocation())) {
+                return;
+            }
+
+            arena.getMatch().brokenBlocks.put(event.getBlock().getLocation(), event.getBlock().getBlockData().clone());
+            return;
+        }
+
+        event.setCancelled(true);
     }
 
     @EventHandler
@@ -75,6 +166,17 @@ public class KitOptionsListener implements Listener {
         final ArenaImpl arena = arenaManager.get(player);
 
         if (player.isDead() || arena == null || !isEnabled(arena, Characteristic.SUMO) || arena.isEndGame()) {
+            return;
+        }
+
+        final Location to = event.getTo(), from = event.getFrom();
+
+        if ((from.getBlockX() !=
+                to.getBlockX() || from.getBlockY() != to.getBlockY() || from.getBlockZ() != to.getBlockZ())
+             && arena.getCountdown() != null) {
+            from.setPitch(player.getLocation().getPitch());
+            from.setYaw(player.getLocation().getYaw());
+            event.setTo(from);
             return;
         }
 
